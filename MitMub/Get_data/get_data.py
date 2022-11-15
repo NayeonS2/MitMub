@@ -1,9 +1,9 @@
+import json
 import urllib.request
 from pprint import pprint
-import json
-from decouple import config
 
-API_KEY = config('API_KEY')
+
+API_KEY = '812e384969b0b5de7cadaa5e861f286d'
 HOST = "https://api.themoviedb.org"
 MOVIE_LIST_URI = "/3/movie/popular"
 MOVIE_INFO_URI = "/3/movie/"
@@ -235,3 +235,4 @@ with open('now_movies.json', 'w', encoding='UTF-8') as file:
 
 with open('upcoming_movies.json', 'w', encoding='UTF-8') as file:
     file.write(json.dumps(upcoming_movie_list, ensure_ascii=False))
+
