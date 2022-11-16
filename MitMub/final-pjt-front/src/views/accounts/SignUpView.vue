@@ -28,6 +28,19 @@ export default {
             password1: null,
             password2: null,
         }
+    },
+    methods: {
+        signUp() {
+            const username = this.username
+            const password1 = this.password1
+            const password2 = this.password2
+
+            const payload = {
+                username, password1, password2
+            }
+
+            this.$store.dispatch('signUp', payload)
+        }
     }
 }
 </script>
