@@ -45,7 +45,7 @@ export default new Vuex.Store({
           password1: payload.password1,
           password2: payload.password2,
         },
-        withCredentials: true,
+
       })
         .then((res) => {
           console.log(res)
@@ -63,7 +63,7 @@ export default new Vuex.Store({
           username: payload.username,
           password: payload.password,
         },
-        withCredentials: true,
+
       })
         .then((res) => {
           // console.log(res)
@@ -77,9 +77,10 @@ export default new Vuex.Store({
         method: 'get',
         url: `${API_URL}/api/v1/movies/`,
         headers: {
-          Authorization: `Token ${context.state.token}`
+          Authorization: `Token ${ context.state.token }`,
+         
         },
-        withCredentials: true,
+        
       })
         .then(res => {
           context.commit('GET_MOVIES', res.data)
