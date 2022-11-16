@@ -10,7 +10,7 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-from bs4 import BeautifulSoup as bs
+#from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen
 from urllib.parse import quote_plus
 import random
@@ -38,3 +38,22 @@ def signup(request):
         user.set_password(request.data.get('password'))
         user.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+def get_user(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def profile(request, username):
+    person = get_object_or_404(get_user_model(),username=username)
+    serializer = UserFollowSerializer(person)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def follow(request, username):
+    pass

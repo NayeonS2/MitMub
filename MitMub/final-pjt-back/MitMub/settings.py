@@ -41,9 +41,48 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework', 
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    'imagekit', 
     'corsheaders',
+
+
+    # registration
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
 ]
+
+SITE_ID = 1
+
+
+REST_FRAMEWORK = {
+    # Authentication
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+
+    # permission
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+    ],
+
+    # spectacular Settings
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -62,7 +101,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080', # 특정 origin의 요청만 허용, Vue의 로컬호스트만 요청 허용.
 ]
 
-ROOT_URLCONF = 'Final_PJT.urls'
+ROOT_URLCONF = 'MitMub.urls'
 
 TEMPLATES = [
     {
@@ -80,7 +119,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Final_PJT.wsgi.application'
+WSGI_APPLICATION = 'MitMub.wsgi.application'
 
 
 # Database
