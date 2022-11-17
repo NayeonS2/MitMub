@@ -5,6 +5,7 @@ import LogInView from '@/views/accounts/LogInView'
 import HomeView from '@/views/movies/HomeView'
 
 
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -23,6 +24,7 @@ const routes = [
     name: 'LogInView',
     component: LogInView
   },
+
 ]
 
 const router = new VueRouter({

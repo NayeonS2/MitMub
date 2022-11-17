@@ -40,6 +40,7 @@ export default {
             }
             if (password1 === password2) {
                 this.$store.dispatch('signUp', payload)
+                this.$router.push({ name: 'LogInView' })
             } else {
                 alert("비밀번호가 일치하지 않습니다!")
             }
