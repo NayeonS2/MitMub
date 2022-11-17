@@ -1,48 +1,28 @@
 <template>
-  <div id="app">
-    
-   
-
+  <div id="app" class="container-lg">
     <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header">
         <div class="card-header"><h5><b>{{user}}님의 프로필</b></h5></div>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-              <ProfileView :user="user"/>
+        <ProfileView :user="user"/>
       </div>
     </div>
     <nav class="navbar bg-white">
-      <div class="container-fluid">
-        <img id="logo-image" src="@/assets/images/RowLogo.png" style="width:120px; height:80px;"/>
-        <div class="d-flex col justify-content-end me-4">
-          
-          <div class="me-3 mb-2">
-            
-             <router-link :to="{ name: 'HomeView' }">Home</router-link> 
-       
-          </div>
-          <div class="me-3">
-              <router-link :to="{ name: 'SignUpView' }">SignUp</router-link> 
-          </div>
-          <div class="me-3">
-              <router-link :to="{ name: 'LogInView' }">LogIn</router-link> 
-          </div>
-        
-    
+      <div class="container-lg">
+        <router-link :to="{ name: 'HomeView' }">
+          <img id="logo-image" 
+            src="@/assets/images/RowLogo.png" 
+            style="width:160px; height:80px;"/>
+        </router-link>
+        <div>
+          <router-link class="text-decoration-none" :to="{ name: 'LogInView' }">LogIn</router-link> |
+          <router-link class="text-decoration-none" :to="{ name: 'SignUpView' }">SignUp</router-link> |
+          <button class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">{{user}} 님 환영합니다👋</button>
         </div>
-        
-       
- 
-        <div class="d-flex justify-content-end">
-       <button class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">{{user}} 님 환영합니다👋</button>
-    </div>
       </div>
-      
     </nav>
-    
-    
-    
     <router-view/>
   </div>
 </template>
@@ -144,11 +124,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
+  min-width: 992px;
 }
 
 nav {
   padding: 30px;
+  min-width: 992px;
 }
 
 nav a {
