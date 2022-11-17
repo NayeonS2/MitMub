@@ -38,8 +38,13 @@ export default {
             const payload = {
                 username, password1, password2
             }
+            if (password1 === password2) {
+                this.$store.dispatch('signUp', payload)
+            } else {
+                alert("비밀번호가 일치하지 않습니다!")
+            }
 
-            this.$store.dispatch('signUp', payload)
+            
         }
     }
 }
