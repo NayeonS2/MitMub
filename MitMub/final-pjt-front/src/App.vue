@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link :to="{ name: 'HomeView' }">Home</router-link> |
-      <router-link :to="{ name: 'SignUpView' }">SignUp</router-link> |
-      <router-link :to="{ name: 'LogInView' }">LogIn</router-link>
+    <nav class="navbar bg-light">
+      <div class="container-fluid">
+        <router-link :to="{ name: 'HomeView' }"><img id="logo-image" src="@/assets/images/RowLogo.png" style="width:120px; height:80px;"/>Home</router-link> |
+        <router-link :to="{ name: 'SignUpView' }">SignUp</router-link> |
+        <router-link :to="{ name: 'LogInView' }">LogIn</router-link>
+         
+      </div>
+      
     </nav>
     <router-view/>
   </div>

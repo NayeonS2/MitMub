@@ -1,32 +1,15 @@
 <template>
   <div class="col-mb-6 movie-item">
-    <v-dialog
-      v-model="dialog"
-      fullscreen
-      hide-overlay
-      transition="dialog-bottom-transition"
-    >
-      <template v-slot:activator="{ on, attrs }">
-      <v-img
-        :src="imgSrc" alt="포스터 없음"
-        v-bind="attrs"
-        v-on="on"
-      >
-      </v-img>
-    </template>
+    
+     
     <div class="movie-detail-card">
       <div class="movie-detail-toolbar">
-        <v-btn
-          icon
-          dark
-          @click="dialog = false">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-        <img id="logo-image" src="@/assets/images/RowLogo.png"/>
+       
+        
       </div>
       <div class="movie-detail-body">
         <div class="movie-detail-poster">
-          <img :src="imgSrc" alt="포스터 없음">
+          <img :src="imgSrc" alt="포스터 없음" style="width:500px; height:1000px;">
         </div>
         <div class="movie-detail-info">
           <!-- info header -->
@@ -50,7 +33,7 @@
                 <div class="movie-vote">
                   {{ movie.vote_average }}
                 </div>
-                <img id="movie-star" src="@/assets/images/RowLogo.png">
+                
               </div>
             </div>
             <!-- info overview -->
@@ -75,7 +58,7 @@
         </div>
       </div>
     </div>
-    </v-dialog>
+ 
   </div>
 </template>
 
