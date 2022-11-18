@@ -1,68 +1,10 @@
 <template>
-  <div class="movie-item p-0">
-    <div class="movie-poster">
-      <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 300px; height: 430px;"/>
-      <!-- button은 안 보이다가 hover 되면 보이게 -->
-      <button
-        type="button"
-        class="detail-btn btn btn-primary text-align-center" 
-        data-bs-toggle="modal" 
-        :data-bs-target='id2'>
-        상세보기
-      </button>
+  <div class="movie-item p-0 d-flex justify-content-center">
+    <div class="movie-poster d-flex justify-content-center row" style="width: 212px;">
+      <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 212px; height: 300px;"/>
+      <!-- <p class="d-flex justify-content-start">평점 : {{this.movie.vote_average}}</p> -->
     </div>
-    <!-- 모달 디테일 페이지 작업 -->
-    <div class="modal fade" :id='id' tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="movie-detail-info modal-dialog modal-dialog-centered ">
-        <!-- info header -->
-        <div class="modal-content">
-          <div class="modal-header">
-            <img src="@/assets/images/RowLogo.png" 
-              style="
-              width: 120px;
-              height: 60px;">
-            <div type="button" data-bs-dismiss="modal">
-              ❌
-            </div>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col">
-                  <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 300px; height: 430px;" />
-                </div>
-                <div class="col">
-                  <h4 class="movie-detail-title">
-                    Title : {{ movie.title }}
-                  </h4>
-                  <div v-if="movie.release_date">
-                    개봉 : {{ movie.release_date }}
-                  </div>
-                  <div v-if="movie.genres">
-                    <!-- {{ movie.genre_ids }} -->
-                  </div>
-                  <div class="movie-vote">
-                    평점 : {{ movie.vote_average }}
-                  </div>
-                  <hr>
-                  <!-- info over view -->
-                  <div class="movie-detail-overview-header">
-                    줄거리
-                  </div>
-                  <hr>
-                  <div v-if="movie.overview" class="movie-detail-overview-body">
-                    {{ movie.overview }}
-                  </div>
-                  <div v-else class="movie-detail-overview-body">
-                    해당 영화는 줄거리가 제공되지 않습니다.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <p class="detail fs-1 text-white" style="text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;">{{idSrc}}</p>
   </div>
 </template>
 
@@ -79,6 +21,9 @@ export default {
       type: Object,
       required: true
     },
+    idx: {
+      type: Number,
+    }
   },
   data() {
     return {
@@ -92,12 +37,9 @@ export default {
     imgSrc () {
       return "https://image.tmdb.org/t/p/original" + this.movie.poster_path
     },
-    id () {
-      return `detailModal${this.movie.id}`
-    }
-    ,
-    id2() {
-      return `#detailModal${this.movie.id}`
+    idSrc() {
+      const idx = this.idx + 1
+      return idx
     }
   },
   methods: {
@@ -106,26 +48,20 @@ export default {
 </script>
 
 <style>
-.detail-btn {
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+p {
+  font-family: 'Black Ops One', cursive;
+}
+.detail {
   position: absolute;
-  width: 100px;
-  height: 35px;
   z-index: auto;
-  left: calc(50% - 50px);
-  bottom: 37%;
+  left: 20%;
+  top: 1%;
   transition: all 0.5s;
-  opacity: 0;
+  opacity: 1;
   }
 
 .movie-poster {
   position: relative;
-}
-.movie-poster:hover .detail-btn {
-    transition: all 0.5s;
-    opacity: 1;
-  }
-
-.modal-content{
-  min-width: 768px;
 }
 </style>
