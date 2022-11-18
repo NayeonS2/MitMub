@@ -17,10 +17,13 @@ export default new Vuex.Store({
     username: '',
     users: [],
     profile: [],
+  
     token: null,
     movies: [],
     high_rate_movies: [],
     new_movies: [],
+    upcoming_movies: [],
+    long_movies: [],
   },
   getters: {
     isLogin(state) {
@@ -34,6 +37,12 @@ export default new Vuex.Store({
     },
     newMovies(state) {
       return state.new_movies
+    },
+    upcomingMovies(state) {
+      return state.upcoming_movies
+    },
+    longMovies(state) {
+      return state.long_movies
     }
   },
   mutations: {
@@ -50,6 +59,12 @@ export default new Vuex.Store({
     },
     NEW_MOVIES(state, movies) {
       state.new_movies = movies
+    },
+    UPCOMING_MOVIES(state, movies) {
+      state.upcoming_movies = movies
+    },
+    LONG_MOVIES(state, movies) {
+      state.long_movies = movies
     },
     
     GET_USER(state,users) {
@@ -86,7 +101,8 @@ export default new Vuex.Store({
         })
     },
     logIn(context, payload) {
-
+      context.commit('GET_USERNAME', payload.username)
+      console.log(payload)
       axios({
         method: 'post',
         url: `${API_URL}/accounts/login/`,
@@ -97,9 +113,11 @@ export default new Vuex.Store({
 
       })
         .then((res) => {
-          // console.log(res)
+          console.log(res)
+  
           context.commit('SAVE_TOKEN', res.data.key)
-          context.commit('GET_USERNAME', payload.username)
+          
+          this.$router.push({name:'HomeView'})
         })
     },
 
@@ -151,6 +169,40 @@ export default new Vuex.Store({
       })
         .then(res => {
           context.commit('NEW_MOVIES', res.data)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    upcomingMovies(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/movies/upcoming/`,
+        headers: {
+          Authorization: `Token ${ context.state.token }`,
+         
+        },
+        
+      })
+        .then(res => {
+          context.commit('UPCOMING_MOVIES', res.data)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    longMovies(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/movies/long/`,
+        headers: {
+          Authorization: `Token ${ context.state.token }`,
+         
+        },
+        
+      })
+        .then(res => {
+          context.commit('LONG_MOVIES', res.data)
         })
         .catch(err => {
           console.error(err)

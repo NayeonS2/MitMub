@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <h2>🔥Hot Movies</h2>
+      <h2><b>WATCHME.md 👾</b></h2>
       <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-4 mt-5">
 
         <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked @click="popularMovies">
@@ -13,10 +13,10 @@
         <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" @click="newMovies">
         <label class="btn btn-outline-secondary me-md-1" for="option3">최신순</label>
 
-        <input type="radio" class="btn-check" name="options" id="option4" autocomplete="off">
+        <input type="radio" class="btn-check" name="options" id="option4" autocomplete="off" @click="upcomingMovies">
         <label class="btn btn-outline-secondary me-md-1" for="option4">상영예정작</label>
 
-        <input type="radio" class="btn-check" name="options" id="option5" autocomplete="off">
+        <input type="radio" class="btn-check" name="options" id="option5" autocomplete="off" @click="longMovies">
         <label class="btn btn-outline-secondary me-md-1" for="option5">킬링타임용</label>
 
       </div>
@@ -24,7 +24,7 @@
     <div class="card p-0 m-0">
       <div class="popular-list card-body row row-cols-3 gy-3">
         <MovieCard
-          v-for="(movie, idx) in movies.slice(0,10)"
+          v-for="(movie, idx) in nowMovies.slice(0,10)"
           :key="idx"
           :movie="movie"
         />
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+
 import MovieCard from '@/components/movies/MovieCard'
 
 export default {
@@ -48,9 +48,7 @@ export default {
     MovieCard,
   },
   computed: {
-    ...mapGetters([
-      'movies',
-  ]), 
+   
   isLogin() {
     return this.$store.getters.isLogin
   }
@@ -72,8 +70,17 @@ export default {
       this.nowMovies = this.$store.getters.highRateMovies
     },
     newMovies() {
-      this.nowMovies = this.$store.getters.newMovies
+      const newMoviesList = this.$store.getters.newMovies
+      const newDesc = newMoviesList.sort((a, b) => new Date(b.release_date) - new Date(a.release_date))
+      this.nowMovies = newDesc
+
     },
+    upcomingMovies() {
+      this.nowMovies = this.$store.getters.upcomingMovies
+    },
+    longMovies() {
+      this.nowMovies = this.$store.getters.longMovies
+    }
       
   }
 }

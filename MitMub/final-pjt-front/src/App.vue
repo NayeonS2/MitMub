@@ -17,9 +17,9 @@
             style="width:160px; height:80px;"/>
         </router-link>
         <div>
-          <router-link class="text-decoration-none" :to="{ name: 'LogInView' }">LogIn</router-link> |
-          <router-link class="text-decoration-none" :to="{ name: 'SignUpView' }">SignUp</router-link> |
-          <button class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">{{user}} 님 환영합니다👋</button>
+          <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'LogInView' }">LogIn </router-link><span v-if="isLogin === false"> | </span> 
+          <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'SignUpView' }">SignUp </router-link><span v-if="isLogin === false"> | </span>  
+          <button v-if="isLogin === true" class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">{{user}} 님 환영합니다👋</button>
         </div>
       </div>
     </nav>
@@ -92,21 +92,35 @@ export default {
     highRateMovies() {
           this.$store.dispatch('highRateMovies')
     },
+    newMovies() {
+        this.$store.dispatch('newMovies')
+    },
+    upcomingMovies() {
+        this.$store.dispatch('upcomingMovies')
+    },
+    longMovies() {
+        this.$store.dispatch('longMovies')
+    },
   },
   created() {
     if (this.isLogin) {
       this.login = true
-    }
+    } 
     this.getUser()
     this.getProfile()
     this.getMovies()
     this.highRateMovies()
+    this.newMovies()
+    this.upcomingMovies()
+    this.longMovies()
+  
     
   },
   watch: {
     login: function() {
       this.user = this.$store.state.username
       this.getProfile()
+      this.getUser()
      
     }
   }
