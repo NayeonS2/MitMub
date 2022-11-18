@@ -40,9 +40,13 @@ export default {
             }
             if (password1 === password2) {
                 this.$store.dispatch('signUp', payload)
+                alert("회원가입이 완료되었습니다.")
                 this.$router.push({ name: 'LogInView' })
             } else {
                 alert("비밀번호가 일치하지 않습니다!")
+                this.username = null
+                this.password1 = null
+                this.password2 = null
             }
 
             

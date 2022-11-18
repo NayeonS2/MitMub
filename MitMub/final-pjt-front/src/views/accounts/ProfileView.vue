@@ -4,7 +4,7 @@
         <img :src=img_url alt="" style="width:200px; height:20  0px;" class="rounded-circle"><br>
     </div>
     
-    <h5>닉네임 : {{ profile.username }}</h5>
+    <h5>닉네임 : {{ user }}</h5>
     
     
   </div>
@@ -24,7 +24,7 @@ export default {
     data() {
         return {
             profile: [],
-            img_url : `https://avatars.dicebear.com/api/identicon/${this.user}.svg`,
+            img_url : `https://avatars.dicebear.com/api/identicon/${this.$store.state.profile.username}.svg`,
    
         }
     },

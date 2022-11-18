@@ -18,7 +18,7 @@ from django.db.models import Q
 
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def movies_cr(request):
     if request.method == 'GET':
         movies = Movie.objects.all()
@@ -32,7 +32,7 @@ def movies_cr(request):
 
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def high_rate_movies(request):
     if request.method == 'GET':
         movies = Movie.objects.order_by('-vote_average')
@@ -50,19 +50,19 @@ def high_rate_movies(request):
 
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def new_movies(request):
     if request.method == 'GET':
-        
+        now = datetime.datetime.now()
+        #print(datetime.date(now.year, now.month, now.day))
+
         new = [] 
         movies = Movie.objects.all()
 
-        for i in range(1,981):
-            Movie.objects.filter
         for movie in movies:
             r_y,r_m,r_d = movie.release_date.split('-')
-            print(datetime.date(int(r_y), int(r_m), int(r_d)))
-            if datetime.date(int(r_y), int(r_m), int(r_d)) >= datetime.date(2022, 9, 17):
+            #print(datetime.date(int(r_y), int(r_m), int(r_d)))
+            if datetime.date(now.year, now.month, now.day) >= datetime.date(int(r_y), int(r_m), int(r_d)):
                 new.append(movie)
        
        
@@ -74,3 +74,47 @@ def new_movies(request):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
+@api_view(['GET', 'POST'])
+#@permission_classes([IsAuthenticated])
+def upcoming_movies(request):
+    if request.method == 'GET':
+        now = datetime.datetime.now()
+        #print(datetime.date(now.year, now.month, now.day))
+
+        upcoming = [] 
+        movies = Movie.objects.all()
+
+        for movie in movies:
+            r_y,r_m,r_d = movie.release_date.split('-')
+            #print(datetime.date(int(r_y), int(r_m), int(r_d)))
+            if datetime.date(now.year, now.month, now.day) < datetime.date(int(r_y), int(r_m), int(r_d)):
+                upcoming.append(movie)
+       
+       
+        serializer = MovieSerializer(upcoming, many=True)
+        return Response(serializer.data)
+    else:
+        serializer = MovieSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET', 'POST'])
+#@permission_classes([IsAuthenticated])
+def long_movies(request):
+    if request.method == 'GET':
+        movies = Movie.objects.filter(runtime__gte=120)
+        
+        for movie in movies:
+            print(movie.runtime)
+
+        serializer = MovieSerializer(movies, many=True)
+
+        return Response(serializer.data)
+    else:
+        serializer = MovieSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
