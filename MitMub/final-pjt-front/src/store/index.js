@@ -18,6 +18,7 @@ export default new Vuex.Store({
     users: [],
     profile: [],
   
+    // 추천 알고리즘
     token: null,
     movies: [],
     high_rate_movies: [],
@@ -118,6 +119,9 @@ export default new Vuex.Store({
           context.commit('SAVE_TOKEN', res.data.key)
           
           this.$router.push({name:'HomeView'})
+        })
+        .catch(err => {
+          console.error(err)
         })
     },
 

@@ -107,8 +107,8 @@ def long_movies(request):
     if request.method == 'GET':
         movies = Movie.objects.filter(runtime__gte=120)
         
-        for movie in movies:
-            print(movie.runtime)
+        # for movie in movies:
+        #     print(movie.runtime)
 
         serializer = MovieSerializer(movies, many=True)
 
