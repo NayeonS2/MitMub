@@ -1,27 +1,40 @@
 <template>
-  <div>
-    <h1>리뷰 작성</h1>
-    <form @submit.prevent="createReview">
-      <p>영화 제목 : {{ movie.title }}</p>
-      <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 318px; height: 450px;" />
-      
-      <label for="title">제목 : </label>
-      <input type="text" id="title" v-model.trim="title"><br>
+  <div class="container">
+    <h2>리뷰 작성✍</h2>
+    <div class="row mt-5">
+        <div class="col-4">
+            <p>영화 제목 : {{ movie.title }}</p>
+            <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 318px; height: 450px;" />
+        </div>
+        
+        <div class="col-8">
+            <form @submit.prevent="createReview">
+                <label for="title">제목 : </label>
+                <input type="text" id="title" class="form-control" v-model.trim="title"><br>
 
-      <label for="rank">평점 : </label>
-      <!-- <select v-model="rank" multiple>
-            <option :value="{rank: 1}">1</option>
-            <option :value="{rank: 2}">2</option>
-            <option :value="{rank: 3}">3</option>
-            <option :value="{rank: 4}">4</option>
-            <option :value="{rank: 5}">5</option>
-      </select> -->
-       <input type="text" id="rank" v-model.trim="rank"><br>
-      <label for="content">리뷰 : </label>
-      <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
-      <input type="submit" id="submit">
-    </form>
+                <label for="rank">평점 : </label>
+                <!-- <select v-model="rank" multiple>
+                        <option :value="{rank: 1}">1</option>
+                        <option :value="{rank: 2}">2</option>
+                        <option :value="{rank: 3}">3</option>
+                        <option :value="{rank: 4}">4</option>
+                        <option :value="{rank: 5}">5</option>
+                </select> -->
+                <input type="text" id="rank" class="form-control" v-model.trim="rank"><br>
+                <div class="input-group">
+                    <span class="input-group-text">리뷰 :</span>
+                    <textarea id="content" cols="30" rows="10" v-model="content" class="form-control" aria-label="With textarea"></textarea>
+                </div>
+                <!-- <label for="content">리뷰 : </label>
+                <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br> -->
+                <!-- <input type="submit" id="submit" class="form-control"> -->
+                <button class="btn btn-primary form-control mt-4" type="submit">제출</button>
+            </form>
 
+        </div>
+    </div>
+    
+    
   </div>
 </template>
 
