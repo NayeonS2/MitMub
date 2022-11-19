@@ -1,9 +1,10 @@
 <template>
   <div class="movie-item p-0">
     <div id="movie-poster">
-      <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 204px; height: 298px;" data-bs-toggle="modal" 
+      <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 204px; height: 298px;" data-bs-toggle="modal" 
         :data-bs-target='id2'/>
-      <h1 id="fingerP">🙏🙏🙏</h1>
+      <h3 id="fingerP" class="text-light" data-bs-toggle="modal" 
+        :data-bs-target='id2'>$ mit status</h3>
         <!-- button은 안 보이다가 hover 되면 보이게 -->
         <!-- <button
           type="button"
@@ -60,6 +61,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div>
+            <p>모달 푸터 : 유튜브 영상 넣을 곳</p>
           </div>
         </div>
       </div>
@@ -126,7 +130,7 @@ export default {
   transition: all 0.5s;
   opacity: 1;
   } */
-#movie-poster:hover {
+#movie-poster:hover #movie-id{
   filter: brightness(0.5);
   transform: scale(1.1);
   }
