@@ -42,7 +42,7 @@ export default {
                         this.$store.dispatch('getProfile', res.data)
                         this.profile = this.$store.state.profile
 
-                        console.log(this.profile)
+                        // console.log(this.profile)
                     })
                     .catch(err => {
                         console.error(err)
