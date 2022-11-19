@@ -1,10 +1,8 @@
 <template>
   <div class="movie-item p-0">
     <div id="movie-poster">
-      <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 204px; height: 298px;" data-bs-toggle="modal" 
-        :data-bs-target='id2'/>
-      <h3 id="fingerP" class="text-light" data-bs-toggle="modal" 
-        :data-bs-target='id2'>$ mit status</h3>
+      <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 204px; height: 298px;" @click="toDetail(movie.id)"/>
+      <h3 id="fingerP" class="text-light" @click="toDetail(movie.id)">$ mit status</h3>
         <!-- button은 안 보이다가 hover 되면 보이게 -->
         <!-- <button
           type="button"
@@ -13,7 +11,7 @@
           상세보기
         </button> -->
       </div>
-    <!-- 모달 디테일 페이지 작업 -->
+    <!-- 모달 디테일 페이지 작업 // 죽은 코드 // 필요하면 갖다 쓰기 !-->
     <div class="modal fade" :id='id' tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="movie-detail-info modal-dialog modal-dialog-centered ">
         <!-- info header -->
@@ -106,6 +104,9 @@ export default {
     }
   },
   methods: {
+    toDetail(id){
+      this.$router.push({name:'DetailView', params: {id}})
+    }
   }
 }
 </script>
@@ -151,7 +152,7 @@ export default {
   opacity: 1;
   }
 
-.modal-content{
+/* .modal-content{
   min-width: 768px;
-}
+} */
 </style>

@@ -13,9 +13,9 @@
     <!-- navbar LOGO는 누르면 새로고침되면서 메인으로 이동 router 이동 x -->
     <nav class="navbar bg-white">
       <div class="container-lg">
-        <a href=""><img id="logo-image" 
+        <a href="http://localhost:8080/"><img id="logo-image" 
           src="@/assets/images/RowLogo.png" 
-          style="width:160px; height:80px;"
+          style="width:170px; height:80px;"
         />
         </a>
         <div>
@@ -141,8 +141,9 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

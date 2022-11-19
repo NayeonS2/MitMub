@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import SignUpView from '@/views/accounts/SignUpView'
 import LogInView from '@/views/accounts/LogInView'
 import HomeView from '@/views/movies/HomeView'
-
-
+import DetailView from '@/views/movies/DetailView'
+import NotFound404 from '@/views/NotFound404'
 
 Vue.use(VueRouter)
 
@@ -24,6 +24,16 @@ const routes = [
     name: 'LogInView',
     component: LogInView
   },
+  {
+    path: '404-not-found',
+    name: 'NotFound404',
+    component: NotFound404
+  },
+  {
+    path: '/:id',
+    name: 'DetailView',
+    component: DetailView
+  }
 
 ]
 
