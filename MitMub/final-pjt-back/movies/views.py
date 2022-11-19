@@ -11,8 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .serializers import MovieSerializer
-from .models import Movie
+from .serializers import MovieSerializer, MovieCommentSerializer, GetMovieCommentSerializer, ReviewSerializer, ReviewCommentSerializer, GetReviewSerializer, GetReviewCommentSerializer
+from .models import Movie, MovieComment, Review, ReviewComment
 from django.db.models import Q
 # Create your views here.
 
@@ -29,6 +29,14 @@ def movies_cr(request):
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+#@permission_classes([IsAuthenticated])
+def movie_detail(request, movieId):
+    if request.method == 'GET':
+        movie = Movie.objects.get(id=movieId)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
 
 
 @api_view(['GET', 'POST'])
@@ -118,3 +126,45 @@ def long_movies(request):
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+# review 관련 함수
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def movie_review_cr(request, movie_pk):
+    if request.method == 'GET':
+        reviews = Review.objects.filter(movie=movie_pk)
+        serializer = GetReviewSerializer(reviews, many=True)
+        return Response(serializer.data)
+    else:
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def movie_review_ud(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.method == 'DELETE':
+        if not request.user.user_reviews.filter(pk=review_pk).exists():
+            return Response({'detail': '권한이 없습니다.'})
+        review.delete()
+        return Response({ 'id': review_pk })
+    else:
+        serializer = ReviewSerializer(review, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def movie_review_list(request):
+    if request.method == 'GET':
+        reviews = Review.objects.all()
+        serializer = GetReviewSerializer(reviews, many=True)
+        return Response(serializer.data)
+   

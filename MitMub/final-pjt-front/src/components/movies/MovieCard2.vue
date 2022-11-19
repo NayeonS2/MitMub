@@ -56,6 +56,7 @@
                   <div v-else class="movie-detail-overview-body">
                     해당 영화는 줄거리가 제공되지 않습니다.
                   </div>
+                  
                 </div>
               </div>
             </div>

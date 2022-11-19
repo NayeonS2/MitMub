@@ -6,6 +6,9 @@ import HomeView from '@/views/movies/HomeView'
 import DetailView from '@/views/movies/DetailView'
 import NotFound404 from '@/views/NotFound404'
 
+import CreateReviewView from '@/views/movies/CreateReviewView'
+import ReviewView from '@/views/movies/ReviewView'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -33,7 +36,17 @@ const routes = [
     path: '/:id',
     name: 'DetailView',
     component: DetailView
-  }
+  },
+  {
+    path: '/movies/review',
+    name: 'ReviewView',
+    component: ReviewView
+  },
+  {
+    path: '/movies/:movieId/review',
+    name: 'CreateReviewView',
+    component: CreateReviewView
+  },
 
 ]
 

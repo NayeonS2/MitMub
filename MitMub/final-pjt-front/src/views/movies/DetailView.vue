@@ -50,6 +50,9 @@
           <div>
             <div>유튜브 영상 넣을 곳</div>
           </div>
+          <div class="d-flex justify-content-end ">
+            <router-link :to="{ name: 'CreateReviewView', params: { movieId: movie.id } }">리뷰쓰러 가기✏</router-link>
+          </div>
         </div>
       </div>
     </div>

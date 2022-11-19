@@ -1,13 +1,14 @@
 <template>
   <div id="app" class="container-lg">
     <!-- offcanvas == 옆에 뭐 띄우는 거 -->
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div v-if="isLogin === true" class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header">
-        <div class="card-header"><h5><b>{{user}}님의 프로필</b></h5></div>
+        <div class="card-header"><h5><b>{{profile?.username}}님의 프로필</b></h5></div>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ProfileView :user="user"/>
+        <a href="#" @click.prevent="logOut" v-if="isLogin === true" class="text-decoration-none">LogOut</a>
       </div>
     </div>
     <!-- navbar LOGO는 누르면 새로고침되면서 메인으로 이동 router 이동 x -->
@@ -23,7 +24,9 @@
           <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'LogInView' }">LogIn </router-link><span v-if="isLogin === false"> | </span> 
           <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'SignUpView' }">SignUp </router-link><span v-if="isLogin === false"> | </span>  
           <!-- 로그인 된 사용자 용 ui -->
-          <button v-if="isLogin === true" class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">{{user}} 님 환영합니다👋</button>
+          <router-link v-if="isLogin === true" class="text-decoration-none me-4 fs-5" :to="{ name: 'ReviewView' }">Reviews </router-link>
+          <button v-if="isLogin === true" class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">{{profile.username}} 님 환영합니다👋</button>
+
         </div>
       </div>
     </nav>
@@ -56,6 +59,16 @@ export default {
     },
   },
   methods: {
+    logOut() {
+      
+      this.$store.dispatch('logOut')
+      
+    },
+
+    getUserName() {
+        this.$store.dispatch('getUserName')
+      
+      },
     getUser() {
       axios({
         method: 'get',
@@ -109,6 +122,10 @@ export default {
     longMovies() {
         this.$store.dispatch('longMovies')
     },
+
+    getReviews() {
+      this.$store.dispatch('getReviews')
+    }
   },
 
   // 인스턴스 생성 시에 로그인 된 상태면 불러올 메서드들 정의
@@ -116,6 +133,8 @@ export default {
     if (this.isLogin) {
       this.login = true
     } 
+    this.getUserName()
+
     this.getUser()
     this.getProfile()
     this.getMovies()
@@ -123,14 +142,16 @@ export default {
     this.newMovies()
     this.upcomingMovies()
     this.longMovies()
+    this.getReviews()
   },
 
   // login 할 때  
   watch: {
     login: function() {
-      this.user = this.$store.state.username
       this.getProfile()
       this.getUser()
+
+      this.user = this.$store.state.username
     }
   }
 

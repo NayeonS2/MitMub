@@ -15,6 +15,29 @@ export default new Vuex.Store({
   ],
   state: {
     username: '',
+
+    genre: {
+      28: "액션",
+      12: "모험",
+      16: "애니메이션",
+      35: "코미디",
+      80: "범죄",
+      99: "다큐멘터리",
+      18: "드라마",
+      10751: "가족",
+      14: "판타지",
+      36: "역사",
+      27: "공포",
+      10402: "음악",
+      9648: "미스터리",
+      10749: "로맨스",
+      878: "SF",
+      10770: "TV 영화",
+      53: "스릴러",
+      10752: "전쟁",
+      37: "서부"
+    },
+
     users: [],
     profile: [],
   
@@ -25,6 +48,9 @@ export default new Vuex.Store({
     new_movies: [],
     upcoming_movies: [],
     long_movies: [],
+
+
+    reviews: [],
   },
   getters: {
     isLogin(state) {
@@ -50,6 +76,13 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({name: 'HomeView'})
+    },
+
+    LOGOUT(state) {
+      state.token = null  
+      state.username = ''
+      state.profile = []
+      router.push({name:'LogInView'})
     },
 
     GET_MOVIES(state, movies) {
@@ -78,9 +111,38 @@ export default new Vuex.Store({
     
     GET_USERNAME(state, username) {
       state.username = username
+    },
+
+    CREATE_USER(state, payload) {
+      state.username = payload.username
+
+    },
+
+
+    GET_REVIEWS(state, reviews) {
+      state.reviews = reviews
     }
+
   },
   actions: {
+    getUserName(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Token ${ context.state.token }`,
+         
+        },
+
+      })
+        .then((res) => {
+          console.log(res)
+  
+          context.commit('GET_USERNAME', res.username)
+          
+        })
+    },
+
     signUp(context, payload) {
       axios({
         method: 'post',
@@ -95,6 +157,7 @@ export default new Vuex.Store({
         .then((res) => {
           console.log(res)
           context.commit('SAVE_TOKEN', res.data.key)
+          context.commit('CREATE_USER',payload)
           
         })
         .catch((err) => {
@@ -104,6 +167,7 @@ export default new Vuex.Store({
     logIn(context, payload) {
       context.commit('GET_USERNAME', payload.username)
       console.log(payload)
+      let success = false
       axios({
         method: 'post',
         url: `${API_URL}/accounts/login/`,
@@ -115,15 +179,46 @@ export default new Vuex.Store({
       })
         .then((res) => {
           console.log(res)
+          alert("로그인이 완료되었습니다!")
+          success = true
   
           context.commit('SAVE_TOKEN', res.data.key)
           
           this.$router.push({name:'HomeView'})
         })
-        .catch(err => {
-          console.error(err)
+        .catch((err) => {
+          console.log(err)
+          if (success === false) {
+            alert("아이디와 비밀번호를 확인해주세요.")
+          router.go()
+          }
+          
+          
         })
     },
+
+
+    logOut(context) {
+  
+      axios({
+        method: 'post',
+        url: `${API_URL}/accounts/logout/`,
+        headers: {
+          Authorization: `Token ${ context.state.token }`,
+         
+        },
+
+      })
+        .then((res) => {
+          console.log(res)
+  
+          context.commit('LOGOUT')
+          
+          router.push({name:'LogInView'})
+        })
+    },
+
+
 
     // movies actions
     getMovies(context) {
@@ -221,6 +316,26 @@ export default new Vuex.Store({
     getProfile(context, profile) {
       context.commit('GET_PROFILE', profile)
     },
+
+
+    getReviews(context) {
+          axios({
+              method: 'get',
+              url: `${API_URL}/api/v1/movies/review/`,
+              headers: {
+                      Authorization: `Token ${context.state.token}`
+                  }
+          })
+          .then(res => {
+            console.log(res)
+
+            context.commit('GET_REVIEWS', res.data)
+            
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      },
 
 
   },
