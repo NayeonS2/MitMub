@@ -7,7 +7,8 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">영화 제목 : {{ title }}</h5>
+            <h5 class="card-title">영화 : {{ movie.title }}</h5><br>
+            <h5 class="card-title">리뷰제목 : {{ title }}</h5>
             <p class="card-text"><p>평점 : {{ rank }}</p>
             <p class="card-text">내용 : {{ content }}</p>
             <p class="card-text"><small class="text-muted">Created at {{created_at}}</small></p>
