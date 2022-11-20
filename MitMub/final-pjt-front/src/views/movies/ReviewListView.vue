@@ -52,6 +52,9 @@ export default {
          movies(){
             return this.$store.state.movies
         },
+        refreshCnt() {
+          return this.$store.state.refresh
+        }
     },
     methods: {
       getMovieById(){
@@ -74,9 +77,14 @@ export default {
     watch: {
       review: function() {
         this.$store.dispatch('getReviews')
+        
+      },
+      refreshCnt: function(new_val,old_val) {
+            console.log(new_val,old_val)
 
-     
-      }
+            this.$router.go(this.$router.currentRoute)
+        },
+
   }
     
 }

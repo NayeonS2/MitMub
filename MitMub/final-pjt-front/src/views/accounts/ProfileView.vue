@@ -40,6 +40,7 @@ export default {
                     })
                     .then(res => {
                         this.$store.dispatch('getProfile', res.data)
+                        this.$router.go(this.$router.currentRoute)
                       
 
                         console.log(this.profile)
@@ -53,12 +54,17 @@ export default {
     created() {
         this.getProfile()
         this.profile = this.$store.state.profile
+        //this.$router.go(this.$router.currentRoute)
 
+    },
+    mounted() {
+        //this.$router.go(this.$router.currentRoute)
     },
     watch: {
         user: function() {
             this.getProfile()
             this.profile = this.$store.state.profile
+            
         }
     }
 }

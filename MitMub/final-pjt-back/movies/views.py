@@ -195,4 +195,17 @@ def review_comment_d(request, comment_pk):
         return Response({'detail': '권한이 없습니다.'})
     comment.delete()
     return Response({ 'id': comment_pk })
+
+
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def like_review(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if review.like_users.filter(pk=request.user.pk).exists():
+        review.like_users.remove(request.user)
+    else:
+        review.like_users.add(request.user)
+    return Response(status=status.HTTP_201_CREATED)
    

@@ -76,7 +76,8 @@ export default {
         },
         now_review() {
             return this.review
-        }
+        },
+        
     },
     methods: {
         // movieInfo() {
@@ -149,13 +150,17 @@ export default {
                     }
                 })
                 .then((res) => {
+                    this.$store.commit('ADD_REFRESH')
+                    //this.$store.state.refresh ++ 
                     console.log(res)
                     //this.$emit('refresh_emit')
                     window.alert("리뷰 수정이 완료되었습니다.")
                     // this.title = ''
                     // this.content = ''
                     // this.rank = []
-                    this.$router.push({ name: 'ReviewView' })
+                    this.$store.dispatch('getReviews')
+                    this.$router.go(this.$router.currentRoute)
+                    
                 })
                 .catch((err) => {
                 console.log(err)

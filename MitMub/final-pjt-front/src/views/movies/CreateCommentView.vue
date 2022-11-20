@@ -51,6 +51,8 @@ export default {
                     }
                 })
                 .then(() => {
+                    this.$store.commit('ADD_REFRESH')
+                    //this.$store.state.refresh ++
                     //this.$emit('refresh')
                     alert("댓글 작성 완료!")
                     this.comment = ''

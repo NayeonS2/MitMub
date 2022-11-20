@@ -11,6 +11,14 @@ import UpdateReviewView from '@/views/movies/UpdateReviewView'
 import ReviewView from '@/views/movies/ReviewView'
 import ReviewDetailView from '@/views/movies/ReviewDetailView'
 
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(() => {
+        return window.location.reload()
+    })
+};
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -30,7 +38,7 @@ const routes = [
     component: LogInView
   },
   {
-    path: '404-not-found',
+    path: '/404-not-found',
     name: 'NotFound404',
     component: NotFound404
   },

@@ -29,27 +29,56 @@ export default {
             password2: null,
         }
     },
+    computed: {
+        isLogin() {
+            return this.$store.getters.isLogin
+        }
+    },
     methods: {
         signUp() {
             const username = this.username
             const password1 = this.password1
             const password2 = this.password2
 
+            let unique = true
+            for (const user of this.$store.state.users) {
+                if (user.username === username) {
+                    unique = false
+                }
+            }
+
             const payload = {
                 username, password1, password2
             }
-            if (password1 === password2) {
-                this.$store.dispatch('signUp', payload)
-                alert("회원가입이 완료되었습니다.")
-                this.$router.push({ name: 'LogInView' })
+            
+            if (unique === true) {
+                if (password1 === password2) {
+                    this.$store.dispatch('signUp', payload)
+                    alert("회원가입이 완료되었습니다.")
+                    
+            
+                    
+                } else {
+                    alert("비밀번호가 일치하지 않습니다!")
+                    this.username = null
+                    this.password1 = null
+                    this.password2 = null
+                }
+
             } else {
-                alert("비밀번호가 일치하지 않습니다!")
+                alert("중복된 아이디입니다!")
                 this.username = null
                 this.password1 = null
                 this.password2 = null
             }
 
             
+        }
+    },
+    created() {
+      
+        if (this.isLogin) {
+            this.$router.push({name:'HomeView'})
         }
     }
 }

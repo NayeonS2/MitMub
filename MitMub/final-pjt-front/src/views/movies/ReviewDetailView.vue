@@ -9,13 +9,15 @@
         <div class="col-4">
           <div class="card-body">
             <h5 class="card-title">영화 : {{ movie?.title }}</h5><br>
-            <h5 class="card-title">리뷰제목 : {{ review?.title }}</h5>
-            <p class="card-text"><p>평점 : {{ review?.rank }}</p>
-            <p class="card-text">내용 : {{ review?.content }}</p>
+            <h5 class="card-title">리뷰제목 : {{ nowReview?.title }}</h5>
+            <p class="card-text"><p>평점 : {{ nowReview?.rank }}</p>
+            <p class="card-text">내용 : {{ nowReview?.content }}</p>
             <p class="card-text"><small class="text-muted">Created at {{created_at}}</small></p>
             <p class="card-text"><small class="text-muted">Last updated at {{updated_at}}</small></p>
 
             <span class="row ms-4"><CommentListView :review="review"/></span>
+            <span class="row ms-4"><ReviewLikeView :review="review"/></span>
+            <span>LIKE {{review.like_users.length}}</span>
             <span class="row ms-4"><CreateCommentView :review="review"/></span>
           </div>
 
@@ -25,10 +27,10 @@
             <div class="position-absolute bottom-0 end-5">
                 
                     <div class="row">
-                        <router-link v-if="review.user === this.nowUser" :to="{ name: 'UpdateReviewView', params: { reviewId: review.id } }">수정하기</router-link>
+                        <router-link v-if="user === this.nowUser" :to="{ name: 'UpdateReviewView', params: { reviewId: review.id } }">수정하기</router-link>
                     </div>
                     <div class="row">
-                        <a href="#" v-if="review.user === this.nowUser" @click.prevent="deleteReview">삭제하기</a>
+                        <a href="#" v-if="user === this.nowUser" @click.prevent="deleteReview">삭제하기</a>
                     </div>
             
             </div>
@@ -49,6 +51,7 @@ import axios from 'axios'
 
 import CreateCommentView from '@/views/movies/CreateCommentView'
 import CommentListView from '@/views/movies/CommentListView'
+import ReviewLikeView from '@/views/movies/ReviewLikeView'
 
 const API_URL = 'http://127.0.0.1:8000'
 export default {
@@ -56,11 +59,13 @@ export default {
     components: {
         CreateCommentView,
         CommentListView,
+        ReviewLikeView,
     },
     data() {
         return {
             movie: null,
             review: null,
+            user: null,
 
             // user: this.review.user,
             // rank: this.review.rank,
@@ -70,6 +75,15 @@ export default {
           
             created_at: null,
             updated_at: null,
+
+            config: {
+                nowTitle: '',
+                nowRank: '',
+                nowContent: '', 
+            }
+            
+
+
         }
     },
     computed: {
@@ -84,6 +98,15 @@ export default {
         },
         nowUser() {
             return this.$store.state.profile.username
+        },
+        nowReview() {
+            return this.review
+        },
+        reviewNum() {
+            return this.$store.state.reviews.length
+        },
+        refreshCnt() {
+            return this.$store.state.refresh
         }
     },
     methods: {
@@ -126,12 +149,15 @@ export default {
                     }
                 })
                 .then((res) => {
+                    this.$store.commit('ADD_REFRESH')
+                    //this.$store.state.refresh ++
                     console.log(res)
                     //this.$emit('refresh_emit')
                     window.alert("리뷰 삭제가 완료되었습니다.")
                     // this.title = ''
                     // this.content = ''
                     // this.rank = []
+                    this.$store.dispatch('getReviews')
                     this.$router.push({ name: 'ReviewView' })
                 })
                 .catch((err) => {
@@ -144,6 +170,38 @@ export default {
       this.getReviewById()
       this.getMovieById()
       
+    },
+    mounted() {
+    this.user = this.review.user
+
+    console.log(this.user, this.review.user)
+
+    this.config.nowTitle = this.review.title
+    this.config.nowRank  = this.review.rank
+    this.config.nowContent = this.review.content
+    //this.$router.go(this.$router.currentRoute)
+    },
+    updated() {
+        
+    },
+
+    watch: {
+        reviewNum: function(new_val,old_val) {
+            console.log(new_val,old_val)
+
+            this.$router.go(this.$router.currentRoute)
+        },
+        refreshCnt: function(new_val,old_val) {
+            console.log(new_val,old_val)
+
+            this.$router.go(this.$router.currentRoute)
+        },
+         config: function (val, oldVal) {
+            this.$router.push({name:'ReviewDetailView'})
+            console.log(val, oldVal)
+            
+            
+         }
     }
     
 }

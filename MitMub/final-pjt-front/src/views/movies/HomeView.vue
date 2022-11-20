@@ -58,6 +58,8 @@ export default {
   data() {
     return {
       nowMovies: [],
+      token: '',
+ 
     }
   },
   components: {
@@ -74,10 +76,16 @@ export default {
   created() {
     // 기본값 === popularMovies
     if (this.isLogin === true) {
+     
+      this.login = true
       this.popularMovies()
     } else {
+      this.login = false
       this.$router.push({ name: 'LogInView'})
+      
     }
+    this.token = this.$store.state.token
+
       
   },
   methods: {
@@ -102,7 +110,17 @@ export default {
     longMovies() {
       this.nowMovies = this.$store.getters.longMovies
     },
+  },
+  watch: {
+    isLogin() {
+      this.$router.push({name:'HomeView'})
+    }
   }
+
+
+
+
+   
 }
 </script>
 

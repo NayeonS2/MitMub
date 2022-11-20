@@ -53,6 +53,8 @@ export default {
             title: '',
             content: '',
 
+  
+
         }
     },
     computed: {
@@ -122,13 +124,19 @@ export default {
                     }
                 })
                 .then((res) => {
+                    this.$store.commit('ADD_REFRESH')
+                    //this.$store.state.refresh ++
                     console.log(res)
                     //this.$emit('refresh_emit')
                     window.alert("글작성이 완료되었습니다.")
                     this.title = ''
                     this.content = ''
                     this.rank = ''
-                    this.$router.push({ name: 'ReviewView' })
+                    
+                    this.$store.dispatch('getReviews')
+                    this.$router.push({name:'ReviewView'})
+                    
+
                 })
                 .catch((err) => {
                 console.log(err)
@@ -143,7 +151,12 @@ export default {
 
     created() {
         this.getMovieById()
-    }
+    },
+    mounted() {
+        
+    },
+    
+  
 
 }
 </script>

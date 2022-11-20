@@ -25,7 +25,7 @@
           <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'SignUpView' }">SignUp </router-link><span v-if="isLogin === false"> | </span>  
           <!-- 로그인 된 사용자 용 ui -->
           <router-link v-if="isLogin === true" class="text-decoration-none me-4 fs-5" :to="{ name: 'ReviewView' }">Reviews </router-link>
-          <button v-if="isLogin === true" class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">{{profile.username}} 님 환영합니다👋</button>
+          <button v-if="isLogin === true" class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">{{profile?.username}} 님 환영합니다👋</button>
 
         </div>
       </div>
@@ -48,8 +48,9 @@ export default {
   data() {
     return {
       login: false,
+      refresh: 0,
       user: '',
-      profile: this.$store.state.profile,
+      profile: null,
 
     }
   },
@@ -66,6 +67,7 @@ export default {
     },
 
     getUserName() {
+      
         this.$store.dispatch('getUserName')
       
       },
@@ -87,6 +89,7 @@ export default {
     },
     
     getProfile() {
+      
       if (this.user) {
         axios({
           method: 'get',
@@ -101,6 +104,8 @@ export default {
             // acounts serializers에 정의된 프로필 데이터 받아옴.
             this.$store.dispatch('getProfile', res.data)
             this.profile = this.$store.state.profile
+            
+            
           })
           .catch(err => {
             console.error(err)
@@ -125,14 +130,22 @@ export default {
 
     getReviews() {
       this.$store.dispatch('getReviews')
+    },
+    refresher() {
+ 
+      
+  
     }
   },
 
   // 인스턴스 생성 시에 로그인 된 상태면 불러올 메서드들 정의
   created() {
+    
     if (this.isLogin) {
       this.login = true
-    } 
+    } else {
+      this.login = false
+    }
     this.getUserName()
 
     this.getUser()
@@ -143,16 +156,50 @@ export default {
     this.upcomingMovies()
     this.longMovies()
     this.getReviews()
+
+    //this.refresh = this.refresh + 1
+    //this.refresher()
+
+  },
+  update() {
+    
+  },
+  mounted() {
+    // const refreshing = setInterval('location.reload()', 1000)
+      
+
+    // if (this.refresh > 0) {
+    //   clearInterval(refreshing)
+    //   this.refresh = 0
+    // }
+    
+    // this.refresh = this.refresh +1
   },
 
   // login 할 때  
   watch: {
     login: function() {
+      
       this.getProfile()
       this.getUser()
-
+      this.profile = this.$store.state.profile
       this.user = this.$store.state.username
-    }
+
+      
+     
+
+      //this.$router.push({name:'HomeView'})
+    },
+
+    profile: {
+      handler: function (val) {
+        console.log("val", val); // {title: '', contens: '변경'}
+        //this.$router.push({name:'HomeView'})
+     
+      },
+      deep: true,
+    },
+
   }
 
 

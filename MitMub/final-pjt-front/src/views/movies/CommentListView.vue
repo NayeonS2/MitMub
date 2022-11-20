@@ -76,7 +76,7 @@ export default {
                     }
                 })
                 .then((res) => {
-              
+                    this.$store.state.refresh ++
                     console.log(res)
                
                     window.alert("댓글 삭제 완료!")

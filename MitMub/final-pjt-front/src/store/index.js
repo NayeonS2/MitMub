@@ -40,6 +40,8 @@ export default new Vuex.Store({
 
     users: [],
     profile: [],
+
+    refresh: 0,
   
     // 추천 알고리즘
     token: null,
@@ -74,9 +76,25 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SAVE_TOKEN(state, token) {
+
+    ADD_REFRESH(state) {
+      state.refresh ++
+    },
+
+    SAVE_TOKEN_LOGIN(state, token) {
       state.token = token
-      router.push({name: 'HomeView'})
+      //router.go(router.currentRoute)
+      router.go(router.currentRoute)
+      //router.push({ name: 'HomeView' })
+      
+    },
+
+    SAVE_TOKEN_SIGNUP(state, token) {
+      state.token = token
+      router.go(router.currentRoute)
+      
+      //router.push({ name: 'HomeView' })
+      
     },
 
     LOGOUT(state) {
@@ -122,10 +140,12 @@ export default new Vuex.Store({
 
     GET_REVIEWS(state, reviews) {
       state.reviews = reviews
+      
     }
 
   },
   actions: {
+
     getUserName(context) {
       axios({
         method: 'get',
@@ -157,7 +177,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           console.log(res)
-          context.commit('SAVE_TOKEN', res.data.key)
+          context.commit('SAVE_TOKEN_SIGNUP', res.data.key)
           context.commit('CREATE_USER',payload)
           
         })
@@ -183,9 +203,9 @@ export default new Vuex.Store({
           alert("로그인이 완료되었습니다!")
           success = true
   
-          context.commit('SAVE_TOKEN', res.data.key)
+          context.commit('SAVE_TOKEN_LOGIN', res.data.key)
           
-          this.$router.push({name:'HomeView'})
+          //router.push({name:'HomeView'})
         })
         .catch((err) => {
           console.log(err)
