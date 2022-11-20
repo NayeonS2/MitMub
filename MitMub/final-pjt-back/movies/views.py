@@ -167,4 +167,32 @@ def movie_review_list(request):
         reviews = Review.objects.all()
         serializer = GetReviewSerializer(reviews, many=True)
         return Response(serializer.data)
+
+
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def review_comment_cr(request, review_pk):
+    if request.method == 'GET':
+        comments = ReviewComment.objects.filter(review=review_pk)
+        serializer = GetReviewCommentSerializer(comments, many=True)
+        return Response(serializer.data)
+    else:
+        serializer = ReviewCommentSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def review_comment_d(request, comment_pk):
+    print(comment_pk)
+    comment = get_object_or_404(ReviewComment, pk=comment_pk)
+
+    if not request.user.review_comments.filter(pk=comment_pk).exists():
+        return Response({'detail': '권한이 없습니다.'})
+    comment.delete()
+    return Response({ 'id': comment_pk })
    

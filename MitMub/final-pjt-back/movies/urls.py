@@ -8,7 +8,12 @@ urlpatterns = [
     path('movies/<int:movieId>/', views.movie_detail),
 
     path('movies/create_review/<int:movie_pk>/', views.movie_review_cr),
+    path('movies/update_review/<int:review_pk>/', views.movie_review_ud),
     path('movies/review/', views.movie_review_list),
+
+    path('movies/create_comment/<int:review_pk>/', views.review_comment_cr),
+    path('movies/delete_comment/<int:comment_pk>/', views.review_comment_d),
+
 
     path('movies/highrate/', views.high_rate_movies),
     path('movies/new/', views.new_movies),

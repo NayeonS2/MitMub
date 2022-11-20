@@ -53,7 +53,8 @@ export default {
     },
     created() {
         this.getReviews()
-    }
+        
+    },
 }
 </script>
 

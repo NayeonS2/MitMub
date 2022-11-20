@@ -7,7 +7,9 @@ import DetailView from '@/views/movies/DetailView'
 import NotFound404 from '@/views/NotFound404'
 
 import CreateReviewView from '@/views/movies/CreateReviewView'
+import UpdateReviewView from '@/views/movies/UpdateReviewView'
 import ReviewView from '@/views/movies/ReviewView'
+import ReviewDetailView from '@/views/movies/ReviewDetailView'
 
 Vue.use(VueRouter)
 
@@ -46,6 +48,16 @@ const routes = [
     path: '/movies/:movieId/review',
     name: 'CreateReviewView',
     component: CreateReviewView
+  },
+  {
+    path: '/movies/reviewUpdate/:reviewId',
+    name: 'UpdateReviewView',
+    component: UpdateReviewView
+  },
+  {
+    path: '/movies/reviewDetail/:reviewId/',
+    name: 'ReviewDetailView',
+    component: ReviewDetailView
   },
 
 ]

@@ -51,6 +51,7 @@ export default new Vuex.Store({
 
 
     reviews: [],
+    comments: [],
   },
   getters: {
     isLogin(state) {
@@ -336,6 +337,7 @@ export default new Vuex.Store({
             console.log(err)
           })
       },
+
 
 
   },
