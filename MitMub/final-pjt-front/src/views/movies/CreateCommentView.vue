@@ -59,6 +59,9 @@ export default {
                     console.log(err)
                 })
             }
+            else {
+                window.alert("내용을 입력해주세요.")
+            }
         },
 
         
