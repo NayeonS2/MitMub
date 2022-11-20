@@ -89,11 +89,4 @@ p {
   transition: all 0.5s;
   opacity: 1;
 }  
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48
-}
 </style>
