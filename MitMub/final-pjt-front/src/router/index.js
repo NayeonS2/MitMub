@@ -30,7 +30,7 @@ const routes = [
     component: LogInView
   },
   {
-    path: '404-not-found',
+    path: '/404-not-found',
     name: 'NotFound404',
     component: NotFound404
   },

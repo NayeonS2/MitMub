@@ -12,7 +12,7 @@
                 <label for="title">제목 : </label>
                 <input type="text" id="title" class="form-control" v-model.trim="title"><br>
 
-                <label for="rank">평점 : </label>
+                <label for="rank" placeholder="1 ~ 10까지의 숫자를 입력해주세요.">평점 : </label>
                 <!-- <select v-model="rank" multiple>
                         <option :value="{rank: 1}">1</option>
                         <option :value="{rank: 2}">2</option>
