@@ -13,7 +13,7 @@
     </div>
     <!-- navbar LOGO는 누르면 새로고침되면서 메인으로 이동 router 이동 x -->
     <nav class="navbar bg-white">
-      <div class="container-lg">
+      <div class="container-lg justify-content-between">
         <a href="http://localhost:8080/"><img id="logo-image" 
           src="@/assets/images/RowLogo.png" 
           style="width:170px; height:80px;"
@@ -217,6 +217,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   min-width: 992px;
+  
 }
 
 nav {

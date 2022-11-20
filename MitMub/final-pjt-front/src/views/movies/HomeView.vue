@@ -34,7 +34,7 @@
         />
       </carousel>
     </div>
-    <div class="card p-0 m-0">
+    <div class="card p-0 m-0 bg-dark text-white">
       <div class="popular-list card-body row row-cols-5 gy-3">
         <MovieCard2
           v-for="(movie, idx) in nowMovies.slice(0,50)"

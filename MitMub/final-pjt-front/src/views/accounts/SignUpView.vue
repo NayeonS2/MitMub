@@ -71,8 +71,6 @@ export default {
                 this.password1 = null
                 this.password2 = null
             }
-
-            
         }
     },
     created() {

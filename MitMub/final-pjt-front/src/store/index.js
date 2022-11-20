@@ -176,8 +176,13 @@ export default new Vuex.Store({
 
       })
         .then((res) => {
+<<<<<<< HEAD
           console.log(res)
           context.commit('SAVE_TOKEN_SIGNUP', res.data.key)
+=======
+          // console.log(res)
+          context.commit('SAVE_TOKEN', res.data.key)
+>>>>>>> f98dd7a0f64a7ef1f0ec7fbeb6206a7f788e07d1
           context.commit('CREATE_USER',payload)
           
         })
@@ -187,7 +192,7 @@ export default new Vuex.Store({
     },
     logIn(context, payload) {
       context.commit('GET_USERNAME', payload.username)
-      console.log(payload)
+      // console.log(payload)
       let success = false
       axios({
         method: 'post',
