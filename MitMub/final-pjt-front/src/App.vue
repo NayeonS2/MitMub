@@ -213,18 +213,6 @@ export default {
       this.user = this.$store.state.username
 
       
-     
-
-    //   //this.$router.push({name:'HomeView'})
-    // },
-
-    // profile: {
-    //   handler: function (val) {
-    //     console.log("val", val); // {title: '', contens: '변경'}
-    //     //this.$router.push({name:'HomeView'})
-     
-    //   },
-    //   deep: true,
     },
 
   }
@@ -242,19 +230,20 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #ffffff;
+  color: #eeeeee;
   min-width: 992px;
   background: #141414;
 }
 
 nav {
+  margin: 0;
   padding: 30px;
   min-width: 992px;
 }
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #eeeeee;
 }
 
 nav a.router-link-exact-active {
