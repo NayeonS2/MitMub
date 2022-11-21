@@ -1,6 +1,7 @@
 <template>
   <div>
     <header>
+      <!-- <meta http-equiv='refresh' content='10; url=http://localhost:8080/'> -->
       <h2><b>WATCHME.md 👾</b></h2>
       <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-4 mt-5">
 
@@ -59,6 +60,7 @@ export default {
     return {
       nowMovies: [],
       token: '',
+      nowMoviesLength: 0,
  
     }
   },
@@ -75,6 +77,10 @@ export default {
   refreshHomeCnt() {
             return this.$store.state.refresh_home
         },
+    
+  nowMoviesLen() {
+    return this.nowMovies.length
+  }
   },
   created() {
     // 기본값 === popularMovies
@@ -89,8 +95,44 @@ export default {
     }
     this.token = this.$store.state.token
 
+    
+
+    
+
       
   },
+  mounted() {
+    // if (localStorage.getItem('reloaded')) {
+    //     // The page was just reloaded. Clear the value from local storage
+    //     // so that it will reload the next time this page is visited.
+    //     localStorage.removeItem('reloaded');
+    // } else {
+    //     // Set a flag so that we know not to reload the page twice.
+    //     localStorage.setItem('reloaded', '2');
+    //     window.location.reload();
+    // }
+    var myTimer = setTimeout( function() {
+
+    location.reload();
+
+    }, 7000);
+
+    //this.popularMovies()
+    if (this.nowMovies.length != 0) {
+      clearTimeout(myTimer);
+    }
+   
+    
+  },
+
+  updated() {
+    this.popularMovies()
+    if (this.nowMovies.length != 0) {
+      this.$router.go()
+    }
+  },
+
+
   methods: {
     // 각각 추천 알고리즘에 따라 getters 통해서 받아옴.
     popularMovies() {
@@ -120,7 +162,10 @@ export default {
     },
     refreshHomeCnt() {
       this.$router.go(this.$router.currentRoute)
-    }
+    },
+    // nowMoviesLen() {
+    //   //this.$router.go(this.$router.currentRoute)
+    // }
   }
 
 

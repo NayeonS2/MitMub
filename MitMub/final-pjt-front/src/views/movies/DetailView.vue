@@ -75,7 +75,7 @@ import axios from 'axios'
 import YoutubeList from '@/components/YoutubeList'
 import YoutubeDetail from '@/components/YoutubeDetail'
 
-const API_KEY = 'AIzaSyDuvPIf-TDC2fzov6I904vrJq32bB6vltA'
+const API_KEY = 'AIzaSyCzV5aiqbmMpV8r7Xwdi8yGjm3MFD-MDok'
 const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 export default {

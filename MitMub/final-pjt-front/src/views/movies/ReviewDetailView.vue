@@ -17,7 +17,7 @@
 
             <span class="row ms-4"><CommentListView :review="review"/></span>
             <span class="row ms-4"><ReviewLikeView :review="review"/></span>
-            <span>LIKE {{review.like_users.length}}</span>
+            
             <span class="row ms-4"><CreateCommentView :review="review"/></span>
           </div>
 
@@ -110,7 +110,12 @@ export default {
         },
         refreshDeleteCommentCnt() {
             return this.$store.state.refresh_delete_com
+        },
+
+        reviewLike() {
+            return this.review.like_users.length
         }
+
     },
     methods: {
       getMovieById(){
@@ -209,7 +214,15 @@ export default {
             console.log(val, oldVal)
             
             
-         }
+         },
+
+
+
+         refreshReviewLikeCnt: function(new_val,old_val) {
+            console.log(new_val,old_val)
+
+            this.getReviewById()
+        },
     }
     
 }

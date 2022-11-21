@@ -49,6 +49,8 @@ export default new Vuex.Store({
     refresh_delete_com: 0,
     
     refresh_home: 0,
+
+    refresh_review_like: 0,
   
     // 추천 알고리즘
     token: null,
@@ -101,6 +103,10 @@ export default new Vuex.Store({
     },
     ADD_REFRESH_H(state) {
       state.refresh_home ++
+    },
+
+    ADD_REFRESH_REVIEW_LIKE(state) {
+      state.refresh_review_like ++ 
     },
 
     SAVE_TOKEN_LOGIN(state, token) {

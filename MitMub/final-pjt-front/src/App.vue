@@ -30,7 +30,7 @@
         </div>
       </div>
     </nav>
-    <router-view/>
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 
@@ -162,18 +162,11 @@ export default {
 
   },
   update() {
-    
+    this.$router.push({name:'HomeView'})
   },
   mounted() {
-    // const refreshing = setInterval('location.reload()', 1000)
-      
-
-    // if (this.refresh > 0) {
-    //   clearInterval(refreshing)
-    //   this.refresh = 0
-    // }
     
-    // this.refresh = this.refresh +1
+
   },
 
   // login 할 때  
@@ -191,14 +184,14 @@ export default {
       //this.$router.push({name:'HomeView'})
     },
 
-    profile: {
-      handler: function (val) {
-        console.log("val", val); // {title: '', contens: '변경'}
-        //this.$router.push({name:'HomeView'})
+    // profile: {
+    //   handler: function (val) {
+    //     console.log("val", val); // {title: '', contens: '변경'}
+    //     //this.$router.push({name:'HomeView'})
      
-      },
-      deep: true,
-    },
+    //   },
+    //   deep: true,
+    // },
 
   }
 
