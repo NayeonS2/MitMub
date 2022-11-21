@@ -10,7 +10,7 @@ import CreateReviewView from '@/views/movies/CreateReviewView'
 import UpdateReviewView from '@/views/movies/UpdateReviewView'
 import ReviewView from '@/views/movies/ReviewView'
 import ReviewDetailView from '@/views/movies/ReviewDetailView'
-
+import IntroView from '@/views/movies/IntroView'
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -26,6 +26,11 @@ const routes = [
     path: '/',
     name: 'HomeView',
     component: HomeView
+  },
+  {
+    path: '/intro',
+    name: 'IntroView',
+    component: IntroView
   },
   {
     path: '/signup',

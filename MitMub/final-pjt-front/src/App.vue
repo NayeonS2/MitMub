@@ -58,6 +58,22 @@ export default {
     isLogin() {
         return this.$store.getters.isLogin
     },
+
+    popularLen() {
+      return this.$store.getters.movies.length
+    },
+    highRateLen() {
+      return this.$store.getters.highRateMovies.length
+    },
+    newLen() {
+      return this.$store.getters.newMovies.length
+    },
+    upcomingLen() {
+      return this.$store.getters.upcomingMovies.length
+    },
+    longLen() {
+      return this.$store.getters.longMovies.length
+    },
   },
   methods: {
     logOut() {
@@ -143,26 +159,44 @@ export default {
     
     if (this.isLogin) {
       this.login = true
+      this.getUserName()
+
+      this.getUser()
+      this.getProfile()
+
+      
+
+      // this.getMovies()
+      // this.highRateMovies()
+      // this.newMovies()
+      // this.upcomingMovies()
+      // this.longMovies()
+      this.getReviews()
     } else {
       this.login = false
     }
-    this.getUserName()
-
-    this.getUser()
-    this.getProfile()
-    this.getMovies()
-    this.highRateMovies()
-    this.newMovies()
-    this.upcomingMovies()
-    this.longMovies()
-    this.getReviews()
+    if (this.popularLen === 0) {
+        this.getMovies()
+      }
+    if (this.highRateLen === 0) {
+      this.highRateMovies()
+    }
+    if (this.newLen === 0) {
+      this.newMovies()
+    }
+    if (this.upcomingLen === 0) {
+      this.upcomingMovies()
+    }
+    if (this.longLen === 0) {
+      this.longMovies()
+    }
 
     //this.refresh = this.refresh + 1
     //this.refresher()
 
   },
   update() {
-    this.$router.push({name:'HomeView'})
+    //this.$router.push({name:'HomeView'})
   },
   mounted() {
     
@@ -181,8 +215,8 @@ export default {
       
      
 
-      //this.$router.push({name:'HomeView'})
-    },
+    //   //this.$router.push({name:'HomeView'})
+    // },
 
     // profile: {
     //   handler: function (val) {
@@ -191,7 +225,7 @@ export default {
      
     //   },
     //   deep: true,
-    // },
+    },
 
   }
 

@@ -115,7 +115,7 @@ export default {
 
     location.reload();
 
-    }, 7000);
+    }, 9000);
 
     //this.popularMovies()
     if (this.nowMovies.length != 0) {
@@ -126,10 +126,10 @@ export default {
   },
 
   updated() {
-    this.popularMovies()
-    if (this.nowMovies.length != 0) {
-      this.$router.go()
-    }
+    // this.popularMovies()
+    // if (this.nowMovies.length != 0) {
+    //   this.$router.go()
+    // }
   },
 
 
@@ -158,10 +158,10 @@ export default {
   },
   watch: {
     isLogin() {
-      this.$router.push({name:'HomeView'})
+      //this.$router.push({name:'HomeView'})
     },
     refreshHomeCnt() {
-      this.$router.go(this.$router.currentRoute)
+      //this.$router.go(this.$router.currentRoute)
     },
     // nowMoviesLen() {
     //   //this.$router.go(this.$router.currentRoute)

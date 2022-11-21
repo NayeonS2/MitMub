@@ -276,23 +276,28 @@ export default new Vuex.Store({
 
     // movies actions
     getMovies(context) {
-      axios({
-        method: 'get',
-        url: `${API_URL}/api/v1/movies/`,
-        headers: {
-          Authorization: `Token ${ context.state.token }`,
-         
-        },
-        
-      })
-        .then(res => {
-          context.commit('GET_MOVIES', res.data)
+      if (context.getters.isLogin) {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/movies/`,
+          headers: {
+            Authorization: `Token ${ context.state.token }`,
+           
+          },
+          
         })
-        .catch(err => {
-          console.error(err)
-        })
+          .then(res => {
+            context.commit('GET_MOVIES', res.data)
+            console.log('popular')
+          })
+          .catch(err => {
+            console.error(err)
+          })
+      }
+      
     },
     highRateMovies(context) {
+      if (context.getters.isLogin) {
       axios({
         method: 'get',
         url: `${API_URL}/api/v1/movies/highrate/`,
@@ -304,62 +309,78 @@ export default new Vuex.Store({
       })
         .then(res => {
           context.commit('HIGH_RATE_MOVIES', res.data)
+          console.log('highrate')
         })
         .catch(err => {
           console.error(err)
         })
+      }  
     },
     
+    
     newMovies(context) {
-      axios({
-        method: 'get',
-        url: `${API_URL}/api/v1/movies/new/`,
-        headers: {
-          Authorization: `Token ${ context.state.token }`,
-         
-        },
-        
-      })
-        .then(res => {
-          context.commit('NEW_MOVIES', res.data)
+      if (context.getters.isLogin) {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/movies/new/`,
+          headers: {
+            Authorization: `Token ${ context.state.token }`,
+           
+          },
+          
         })
-        .catch(err => {
-          console.error(err)
-        })
+          .then(res => {
+            context.commit('NEW_MOVIES', res.data)
+            console.log('new')
+          })
+          .catch(err => {
+            console.error(err)
+          })
+      }
+      
     },
     upcomingMovies(context) {
-      axios({
-        method: 'get',
-        url: `${API_URL}/api/v1/movies/upcoming/`,
-        headers: {
-          Authorization: `Token ${ context.state.token }`,
-         
-        },
-        
-      })
-        .then(res => {
-          context.commit('UPCOMING_MOVIES', res.data)
+      if (context.getters.isLogin) {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/movies/upcoming/`,
+          headers: {
+            Authorization: `Token ${ context.state.token }`,
+           
+          },
+          
         })
-        .catch(err => {
-          console.error(err)
-        })
+          .then(res => {
+            context.commit('UPCOMING_MOVIES', res.data)
+            console.log('upcoming')
+          })
+          .catch(err => {
+            console.error(err)
+          })
+      }
+      
+      
     },
     longMovies(context) {
-      axios({
-        method: 'get',
-        url: `${API_URL}/api/v1/movies/long/`,
-        headers: {
-          Authorization: `Token ${ context.state.token }`,
-         
-        },
-        
-      })
-        .then(res => {
-          context.commit('LONG_MOVIES', res.data)
+      if (context.getters.isLogin) {
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/movies/long/`,
+          headers: {
+            Authorization: `Token ${ context.state.token }`,
+           
+          },
+          
         })
-        .catch(err => {
-          console.error(err)
-        })
+          .then(res => {
+            context.commit('LONG_MOVIES', res.data)
+            console.log('long')
+          })
+          .catch(err => {
+            console.error(err)
+          })
+      }
+      
     },
 
 

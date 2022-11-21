@@ -45,7 +45,7 @@ export default {
     created() {
       
         if (this.isLogin) {
-            this.$router.push({name:'HomeView'})
+            this.$router.push({name:'IntroView'})
         }
     }
 
