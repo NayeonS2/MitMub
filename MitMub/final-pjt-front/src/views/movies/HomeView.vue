@@ -6,19 +6,19 @@
       <div class="d-grid gap-2 d-flex justify-content-center mb-4 mt-5">
 
         <input type="radio" class="btn-check mx-1 p-1" name="options" id="option1" autocomplete="off" checked @click="popularMovies">
-        <label class="btn btn-outline-secondary" for="option1">인기순</label>
+        <label class="btn btn-outline-light" for="option1">인기순</label>
 
         <input type="radio" class="btn-check mx-1 p-1" name="options" id="option2" autocomplete="off" @click="highRateMovies">
-        <label class="btn btn-outline-secondary" for="option2">평점순</label>
+        <label class="btn btn-outline-light" for="option2">평점순</label>
 
         <input type="radio" class="btn-check mx-1 p-1" name="options" id="option3" autocomplete="off" @click="newMovies">
-        <label class="btn btn-outline-secondary" for="option3">최신순</label>
+        <label class="btn btn-outline-light" for="option3">최신순</label>
 
         <input type="radio" class="btn-check mx-1 p-1" name="options" id="option4" autocomplete="off" @click="upcomingMovies">
-        <label class="btn btn-outline-secondary" for="option4">상영예정작</label>
+        <label class="btn btn-outline-light" for="option4">상영예정작</label>
 
         <input type="radio" class="btn-check mx-1 p-1" name="options" id="option5" autocomplete="off" @click="longMovies">
-        <label class="btn btn-outline-secondary" for="option5">킬링타임용</label>
+        <label class="btn btn-outline-light" for="option5">킬링타임용</label>
 
       </div>
     </header>
@@ -36,11 +36,12 @@
       </carousel>
     </div>
     <div class="p-0 container-lg">
-      <div class="popular-list row row-cols-6 d-flex justify-content-around">
+      <div class="popular-list row d-flex justify-content-around">
         <MovieCard2
           v-for="(movie, idx) in nowMovies.slice(0,50)"
           :key="idx"
           :movie="movie"
+          class="col-1"
         />
       </div>
     </div>
