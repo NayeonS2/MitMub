@@ -71,7 +71,10 @@ export default {
    
   isLogin() {
     return this.$store.getters.isLogin
-  }
+  },
+  refreshHomeCnt() {
+            return this.$store.state.refresh_home
+        },
   },
   created() {
     // 기본값 === popularMovies
@@ -114,6 +117,9 @@ export default {
   watch: {
     isLogin() {
       this.$router.push({name:'HomeView'})
+    },
+    refreshHomeCnt() {
+      this.$router.go(this.$router.currentRoute)
     }
   }
 

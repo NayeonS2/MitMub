@@ -105,8 +105,11 @@ export default {
         reviewNum() {
             return this.$store.state.reviews.length
         },
-        refreshCnt() {
-            return this.$store.state.refresh
+        refreshCreateCommentCnt() {
+            return this.$store.state.refresh_create_com
+        },
+        refreshDeleteCommentCnt() {
+            return this.$store.state.refresh_delete_com
         }
     },
     methods: {
@@ -149,7 +152,7 @@ export default {
                     }
                 })
                 .then((res) => {
-                    this.$store.commit('ADD_REFRESH')
+                    this.$store.commit('ADD_REFRESH_DR')
                     //this.$store.state.refresh ++
                     console.log(res)
                     //this.$emit('refresh_emit')
@@ -191,7 +194,12 @@ export default {
 
             this.$router.go(this.$router.currentRoute)
         },
-        refreshCnt: function(new_val,old_val) {
+        refreshCreateCommentCnt: function(new_val,old_val) {
+            console.log(new_val,old_val)
+
+            this.$router.go(this.$router.currentRoute)
+        },
+        refreshDeleteCommentCnt: function(new_val,old_val) {
             console.log(new_val,old_val)
 
             this.$router.go(this.$router.currentRoute)

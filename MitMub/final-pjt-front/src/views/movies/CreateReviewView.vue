@@ -124,7 +124,7 @@ export default {
                     }
                 })
                 .then((res) => {
-                    this.$store.commit('ADD_REFRESH')
+                    this.$store.commit('ADD_REFRESH_CR')
                     //this.$store.state.refresh ++
                     console.log(res)
                     //this.$emit('refresh_emit')

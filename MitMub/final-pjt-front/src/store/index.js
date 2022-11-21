@@ -41,7 +41,14 @@ export default new Vuex.Store({
     users: [],
     profile: [],
 
-    refresh: 0,
+    refresh_create_rev: 0,
+    refresh_delete_rev: 0,
+    refresh_update_rev: 0,
+    
+    refresh_create_com: 0,
+    refresh_delete_com: 0,
+    
+    refresh_home: 0,
   
     // 추천 알고리즘
     token: null,
@@ -77,8 +84,23 @@ export default new Vuex.Store({
   },
   mutations: {
 
-    ADD_REFRESH(state) {
-      state.refresh ++
+    ADD_REFRESH_CR(state) {
+      state.refresh_create_rev ++
+    },
+    ADD_REFRESH_DR(state) {
+      state.refresh_delete_rev ++
+    },
+    ADD_REFRESH_UR(state) {
+      state.refresh_update_rev ++
+    },
+    ADD_REFRESH_CC(state) {
+      state.refresh_create_com ++
+    },
+    ADD_REFRESH_DC(state) {
+      state.refresh_delete_com ++
+    },
+    ADD_REFRESH_H(state) {
+      state.refresh_home ++
     },
 
     SAVE_TOKEN_LOGIN(state, token) {
@@ -176,13 +198,12 @@ export default new Vuex.Store({
 
       })
         .then((res) => {
-<<<<<<< HEAD
+
           console.log(res)
           context.commit('SAVE_TOKEN_SIGNUP', res.data.key)
-=======
-          // console.log(res)
-          context.commit('SAVE_TOKEN', res.data.key)
->>>>>>> f98dd7a0f64a7ef1f0ec7fbeb6206a7f788e07d1
+
+          context.commit('ADD_REFRESH_H')
+
           context.commit('CREATE_USER',payload)
           
         })
@@ -209,6 +230,7 @@ export default new Vuex.Store({
           success = true
   
           context.commit('SAVE_TOKEN_LOGIN', res.data.key)
+          context.commit('ADD_REFRESH_H')
           
           //router.push({name:'HomeView'})
         })

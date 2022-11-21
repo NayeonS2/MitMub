@@ -43,8 +43,14 @@ export default {
         // reviews() {
         //     return this.$store.state.reviews
         // }
-        refreshCnt() {
-            return this.$store.state.refresh
+        refreshCreateRevCnt() {
+            return this.$store.state.refresh_create_rev
+        },
+        refreshUpdateRevCnt() {
+            return this.$store.state.refresh_update_rev
+        },
+        refreshDeleteRevCnt() {
+            return this.$store.state.refresh_delete_rev
         }
     },
     methods: {
@@ -88,7 +94,17 @@ export default {
 
             this.$router.push({name:'ReviewView'})
         },
-        refreshCnt: function(new_val,old_val) {
+        refreshCreateRevCnt: function(new_val,old_val) {
+            console.log(new_val,old_val)
+
+            this.$router.go(this.$router.currentRoute)
+        },
+        refreshUpdateRevCnt: function(new_val,old_val) {
+            console.log(new_val,old_val)
+
+            this.$router.go(this.$router.currentRoute)
+        },
+        refreshDeleteRevCnt: function(new_val,old_val) {
             console.log(new_val,old_val)
 
             this.$router.go(this.$router.currentRoute)
