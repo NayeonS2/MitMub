@@ -3,7 +3,7 @@
     <header>
       <!-- <meta http-equiv='refresh' content='10; url=http://localhost:8080/'> -->
       <h2><b>WATCHME.md 👾</b></h2>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-4 mt-5">
+      <div class="d-grid gap-2 d-flex justify-content-center mb-4 mt-5">
 
         <input type="radio" class="btn-check mx-1 p-1" name="options" id="option1" autocomplete="off" checked @click="popularMovies">
         <label class="btn btn-outline-secondary" for="option1">인기순</label>
@@ -25,7 +25,7 @@
     <div class="d-flex justify-content-center">
       <carousel 
       :autoplay="true" :nav="false" :mouseDrag="true" 
-      :touchDrag="true" class="col-10" :autoplayHoverPause="true" :items="4"
+      :touchDrag="true" class="col-11" :autoplayHoverPause="true" :items="7"
       >
         <MovieCard
           v-for="(movie, idx) in nowMovies.slice(0,10)"
@@ -35,13 +35,12 @@
         />
       </carousel>
     </div>
-    <div class="card p-0 m-0 bg-dark text-white">
-      <div class="popular-list card-body row row-cols-5 gy-3">
+    <div class="p-0 container-lg">
+      <div class="popular-list row row-cols-6 d-flex justify-content-around">
         <MovieCard2
           v-for="(movie, idx) in nowMovies.slice(0,50)"
           :key="idx"
           :movie="movie"
-          class="p-2"
         />
       </div>
     </div>

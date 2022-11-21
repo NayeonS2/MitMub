@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-item p-0">
+  <div class="movie-item">
     <div id="movie-poster">
       <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 204px; height: 298px;" @click="toDetail(movie.id)"/>
       <h3 id="fingerP" class="text-light" @click="toDetail(movie.id)">$ mit status</h3>
@@ -29,7 +29,7 @@
             <div class="container-fluid">
               <div class="row">
                 <div class="col">
-                  <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 318px; height: 450px;" />
+                  <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded border border-light" style="width: 318px; height: 450px;" />
                 </div>
                 <div class="col">
                   <h4 class="movie-detail-title">

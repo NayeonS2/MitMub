@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container-lg">
+  <div id="app">
     <!-- offcanvas == 옆에 뭐 띄우는 거 -->
     <div v-if="isLogin === true" class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header">
@@ -12,7 +12,7 @@
       </div>
     </div>
     <!-- navbar LOGO는 누르면 새로고침되면서 메인으로 이동 router 이동 x -->
-    <nav class="navbar bg-white">
+    <nav class="navbar container-lg">
       <div class="container-lg justify-content-between">
         <a href="http://localhost:8080/"><img id="logo-image" 
           src="@/assets/images/RowLogo.png" 
@@ -242,9 +242,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #ffffff;
   min-width: 992px;
-  
+  background: #141414;
 }
 
 nav {

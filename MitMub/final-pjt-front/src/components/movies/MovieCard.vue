@@ -4,8 +4,8 @@
       <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 212px; height: 300px;" @click="toDetail(movie.id)"/>
       <h3 id="fingerP" class="text-light" @click="toDetail(movie.id)">$ mit status</h3>
       <!-- <p class="d-flex justify-content-start">평점 : {{this.movie.vote_average}}</p> -->
+      <p class="detail fs-1 text-white text-start" style="text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;">{{idSrc}}</p>
     </div>
-    <p class="detail fs-1 text-white" style="text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;">{{idSrc}}</p>
   </div>
 </template>
 
@@ -59,10 +59,11 @@ p {
 .detail {
   position: absolute;
   z-index: auto;
-  left: 16%;
-  top: 1%;
+  left: 15px;
+  top: 10px;
   transition: all 0.5s;
   opacity: 1;
+  padding: 0;
   }
 
 .movie-poster {
@@ -88,5 +89,10 @@ p {
 .movie-poster:hover #fingerP{
   transition: all 0.5s;
   opacity: 1;
-}  
+}
+
+#movie-id {
+  padding: 0;
+  margin: 12px;
+}
 </style>

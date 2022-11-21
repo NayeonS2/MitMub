@@ -18,6 +18,7 @@
                     개봉 : {{ movie?.release_date }}
                   </div>
                   <div v-if="movie?.genres">
+                    장르 : <span v-for="(gen, idx) in now_genre" :key="idx"> # {{ gen }} </span>
                     <!-- {{ movie.genre_ids }} -->
                   </div>
                   <div class="movie-vote">
@@ -96,9 +97,15 @@ export default {
       selectedVideo: null,
       isStatusOn: false,
       searchText: '예고편',
+
+      now_genre: [],
+      
     }
   },
   computed: {
+    genre() {
+      return this.$store.state.genre
+    },
     movies(){
       return this.$store.state.movies
     },
@@ -121,6 +128,8 @@ export default {
       for(const movie of this.movies) {
         if(movie.id === Number(id)){
           this.movie = movie
+          //console.log(this.movie.genres)
+          //console.log(this.$store.state.genre)
           break
         }
       }
@@ -128,6 +137,22 @@ export default {
         this.$router.push({name: 'NotFound404'})
       }
     },
+
+
+    getGenre() {
+
+        for(const genre of this.movie.genres) {
+            this.now_genre.push(this.genre[Number(genre)])
+   
+            console.log(this.now_genre)
+        
+            break
+        }
+      },
+      
+    
+
+
     searchYoutube(){
       this.inputValue = this.movie.title + ' ' + this.searchText
       const params = {
@@ -162,7 +187,7 @@ export default {
   created() {
     // console.log(this.$route.params.id) 여기까지 id 잘 들어옴.
     this.getMovieById(this.$route.params.id)
-
+    this.getGenre()
     this.searchYoutube()
   },
 }
