@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="reviewList">
     <div class="card mb-3 ms-5" style="max-width: 540px;">
       <div class="row g-0">
         <div class="col-md-4">
@@ -14,7 +14,7 @@
             <p class="card-text">내용 : {{ content }}</p>
             <p class="card-text"><small class="text-muted">Created at {{created_at}}</small></p>
             <p class="card-text"><small class="text-muted">Last updated at {{updated_at}}</small></p>
-            <router-link :to="{ name: 'ReviewDetailView', params: { reviewId: review.id } }">[DETAIL]</router-link>
+            <router-link :to="{ name: 'ReviewDetailView', params: { reviewId: review.id } }"><p @click="refreshDetail">[DETAIL]</p></router-link>
           </div>
         </div>
       </div>
@@ -69,6 +69,10 @@ export default {
 
             this.poster = this.movie.poster_path
         },
+
+        refreshDetail() {
+          this.$store.commit('ADD_REFRESH_DETAIL')
+        }
     },
     created() {
       this.getMovieById()
@@ -91,5 +95,8 @@ export default {
 </script>
 
 <style>
-
+  #reviewList *{
+    color: #141414;
+    font-family: 'Nanum Gothic', sans-serif;
+  }
 </style>

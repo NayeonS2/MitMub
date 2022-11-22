@@ -1,7 +1,7 @@
 <template>
-  <div class="movie-item p-0 m-2">
-    <div id="movie-poster">
-      <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded my-1" style="width: 105px; height: 148px;" @click="toDetail(movie.id)"/>
+  <div class="movie-item p-0 m-4">
+    <div id="movie-poster" style="width: 148px; height: 210px;">
+      <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded my-1" style="width: 148px; height: 210px;" @click="toDetail(movie.id)"/>
       <h5 id="fingerP" class="text-light" @click="toDetail(movie.id)">$ mit status</h5>
       </div>
   </div>
@@ -48,6 +48,10 @@ export default {
 </script>
 
 <style>
+.movie-item{
+  position: relative;
+  right: 30px;
+}
 
 #movie-poster {
   filter: brightness(1);
@@ -64,7 +68,7 @@ export default {
   width: 100px;
   height: 35px;
   z-index: auto;
-  left: calc(50% - 50px);
+  left: calc(60% - 50px);
   bottom: 37%;
   transition: all 0.5s;
   opacity: 0;

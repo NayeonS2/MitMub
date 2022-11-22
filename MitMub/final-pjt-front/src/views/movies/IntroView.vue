@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="intro">
         <router-link :to="{name: 'HomeView'}">홈</router-link>
 
     </div>
@@ -68,5 +68,9 @@ export default {
 </script>
 
 <style>
+
+    #intro {
+        background: url('/src/assets/images/wallpaperuse.com-space-wallpaper-1920x1080-980282.jpg')
+    }
 
 </style>

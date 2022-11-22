@@ -1,10 +1,12 @@
 <template>
-  <div class="movie-item p-0 d-flex justify-content-center">
-    <div class="movie-poster d-flex justify-content-center row" style="width: 212px;">
-      <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 212px; height: 300px;" @click="toDetail(movie.id)"/>
-      <h1 id="fingerP" class="text-start text-light" @click="toDetail(movie.id)">$mit status</h1>
+  <div class="movie-item p-0 m-0 d-flex justify-content-center">
+    <div class="movie-poster d-flex justify-content-center row" style="width: 200px;">
+      <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 200px; height: 290px;"
+        @click="toDetail(movie.id)" />
+      <h1 id="fingerP" class="text-center text-light" @click="toDetail(movie.id)">$mit status</h1>
       <!-- <p class="d-flex justify-content-start">평점 : {{this.movie.vote_average}}</p> -->
-      <p class="detail fs-1 text-white text-start" style="text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;">{{idSrc}}</p>
+      <p class="detail fs-1 text-white text-start"
+        style="text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;">{{ idSrc }}</p>
     </div>
   </div>
 </template>
@@ -56,6 +58,7 @@ export default {
 p {
   font-family: 'Black Ops One', cursive;
 }
+
 .detail {
   position: absolute;
   z-index: auto;
@@ -65,11 +68,6 @@ p {
   opacity: 1;
   padding: 0;
   }
-
-.movie-poster {
-  filter: brightness(1);
-  position: relative;
-}
 .movie-poster:hover #movie-id{
   filter: brightness(0.5);
   transform: scale(1.1);
@@ -82,7 +80,7 @@ p {
   bottom: 37%;
   transition: all 0.5s;
   opacity: 0;
-  padding: 0px 12px 0px 0px;
+  padding: 0px 20px 0px 0px;
 }
 
 .movie-poster:hover #fingerP{
@@ -93,5 +91,16 @@ p {
 #movie-id {
   padding: 0;
   margin: 12px;
+}
+
+#movie-item {
+  position: relative;
+  left: 32px;
+}
+
+.movie-poster {
+  filter: brightness(1);
+  position: relative;
+  left: 32px;
 }
 </style>

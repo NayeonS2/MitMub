@@ -54,6 +54,23 @@ def profile(request, username):
     return Response(serializer.data)
 
 
+@api_view(['GET'])
+def profile_list(request):
+    people = User.objects.all()
+    serializer = UserFollowSerializer(people, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def follow(request, username):
-    pass
+    person = get_object_or_404(get_user_model(), username=username)
+    user = request.user
+    if person != user:
+        if person.followers.filter(username=user.username).exists():
+            person.followers.remove(user)
+        else:
+            person.followers.add(user)
+        return Response(person, status=status.HTTP_201_CREATED)
+    else:
+        return Response({'detail': '본인을 팔로우 할 수 없습니다.'})

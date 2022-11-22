@@ -9,6 +9,7 @@
               <div class="row">
                 <div class="col-4 p-0">
                   <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 318px; height: 450px;" />
+                  <PickMovieView :movie="movie"/>
                 </div>
                 <div class="col-8">
                   <h4 class="movie-detail-title">
@@ -75,15 +76,17 @@
 import axios from 'axios'
 import YoutubeList from '@/components/YoutubeList'
 import YoutubeDetail from '@/components/YoutubeDetail'
+import PickMovieView from '@/views/movies/PickMovieView'
 
-const API_KEY = 'AIzaSyCzV5aiqbmMpV8r7Xwdi8yGjm3MFD-MDok'
+const API_KEY = 'AIzaSyDuvPIf-TDC2fzov6I904vrJq32bB6vltA'
 const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 export default {
   name: 'DetailView',
   components: {
     YoutubeList,
-    YoutubeDetail
+    YoutubeDetail,
+    PickMovieView
   },
   data() {
     return {
@@ -120,7 +123,10 @@ export default {
     ratingToPercent() {
       const score = +this.movie.vote_average * 10;
       return score;
- }
+    },
+    refreshPickMovieCnt() {
+      return this.$store.state.refresh_pick_movie
+    }
   },
   methods: {
     getMovieById(){
@@ -190,6 +196,12 @@ export default {
     this.getGenre()
     this.searchYoutube()
   },
+
+  watch: {
+    refreshPickMovieCnt() {
+      this.getMovieById(this.$route.params.id)
+    }
+  }
 }
 </script>
 

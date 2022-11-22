@@ -23,9 +23,9 @@
       </div>
     </header>
     <div class="d-flex justify-content-center">
-      <carousel 
-      :autoplay="true" :nav="false" :mouseDrag="true" 
-      :touchDrag="true" class="col-11" :autoplayHoverPause="true" :items="7"
+      <carousel
+      :autoplay="true" :nav="false" :mouseDrag="true" :margin="1"
+      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="7"
       >
         <MovieCard
           v-for="(movie, idx) in nowMovies.slice(0,10)"
@@ -36,7 +36,7 @@
       </carousel>
     </div>
     <div class="p-0 container-lg">
-      <div class="popular-list row d-flex justify-content-around">
+      <div class="popular-list row d-flex justify-content-center">
         <MovieCard2
           v-for="(movie, idx) in nowMovies.slice(0,50)"
           :key="idx"

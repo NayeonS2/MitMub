@@ -1,17 +1,19 @@
 <template>
-    <div>
-        <h1>LogIn</h1>
-        <form @submit.prevent="logIn">
-            <label for="username">username : </label>
-            <input type="text" id="username" v-model="username"><br>
+    <div class="d-flex justify-content-center">
+        <div style="width:500px;">
+            <h1>LogIn</h1>
+            <form @submit.prevent="logIn" class="mt-3">
+                <p class="text-start" for="username">username : </p>
+                <input class="form-control" type="text" id="username" v-model="username"><br>
 
-            <label for="password">password : </label>
-            <input type="text" id="password" v-model="password"><br>
+                <p class="text-start" for="password">password : </p>
+                <input class="form-control" type="text" id="password" v-model="password"><br>
 
 
-            <input type="submit" value="logIn">
+                <input class="form-control btn btn-secondary" type="submit" value="logIn">
 
-        </form>
+            </form>
+        </div>
     </div>
 </template>
 

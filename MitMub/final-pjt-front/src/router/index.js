@@ -12,6 +12,9 @@ import ReviewView from '@/views/movies/ReviewView'
 import ReviewDetailView from '@/views/movies/ReviewDetailView'
 import IntroView from '@/views/movies/IntroView'
 
+import CommunityView from '@/views/accounts/CommunityView'
+import YourProfileView from '@/views/accounts/YourProfileView'
+
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(() => {
@@ -71,6 +74,16 @@ const routes = [
     path: '/movies/reviewDetail/:reviewId/',
     name: 'ReviewDetailView',
     component: ReviewDetailView
+  },
+  {
+    path: '/accounts/community/',
+    name: 'CommunityView',
+    component: CommunityView
+  },
+  {
+    path: '/accounts/profile/:userId/',
+    name: 'YourProfileView',
+    component: YourProfileView
   },
 
 ]

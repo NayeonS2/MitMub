@@ -1,0 +1,105 @@
+<template>
+  <div>
+    <button v-if="isPick" class="btn btn-link" style="color: blue;" @click="pickMovie" >
+      <span class="material-symbols-outlined">smart_display</span>
+    </button>
+    <button v-else class="btn btn-link" style="color: gray;" @click="pickMovie" >
+      <span class="material-symbols-outlined">queue_play_next</span>
+    </button>
+    <span> {{ pick_movie_num }} Users Pick this movie!</span>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+
+const API_URL = 'http://127.0.0.1:8000'
+
+export default {
+    name: 'PickMovieView',
+    data() {
+        return {
+            pick_movie: this.movie.users_playlist,
+            pick_movie_num: this.movie.users_playlist.length,
+            isPick: false
+        }
+    },
+    computed: {
+        UsersWatchList() {
+            return this.movie.users_playlist
+        },
+        movies() {
+            return this.$store.state.movies
+        }
+    },
+    props: {
+        movie: Object,
+    },
+    methods: {
+        pickMovie () {
+          
+            axios({
+                method: 'post',
+                url: `${API_URL}/api/v1/movies/pick_movie/${this.movie.id}/`,
+    
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`
+                }
+            })
+            .then(() => {
+                this.$store.commit('ADD_REFRESH_PICK_MOVIE')
+            })
+            .catch((err) => { 
+                console.log(err)
+            })
+            },
+        // updatePick () {
+        //     for (var i in this.pick_movie) {
+        //         for (var user of this.$store.state.users) {
+        //         if (this.pick_movie[i] == user.id){
+        //             this.pick_movie[i] = user.username
+        //         }
+        //         }
+        //     }
+        //     for (var j in this.pick_movie) {
+        //         if (this.pick_movie[j] == this.$store.state.username) {
+        //         return this.isPick = true
+        //         }
+        //     }
+        //     this.isPick = false
+        //     }
+        },
+    created: function () {
+        //this.updatePick()
+    },
+    mounted() {
+        this.pick_movie = this.movie.users_playlist,
+        this.pick_movie_num = this.movie.users_playlist.length
+
+        if (this.pick_movie.includes(this.$store.state.profile.id)) {
+            this.isPick = true
+        } else {
+            this.isPick = false
+        }
+    },
+    watch: {
+        
+        UsersWatchList: {
+                handler: function () {
+                    
+                    this.pick_movie = this.movie.users_playlist,
+                    this.pick_movie_num = this.movie.users_playlist.length
+                    //this.update_select()
+        
+                },
+                deep:true,
+            },
+},
+
+
+}
+</script>
+
+<style>
+
+</style>

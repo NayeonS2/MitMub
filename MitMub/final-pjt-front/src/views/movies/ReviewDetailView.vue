@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="reviewDetail">
     <div class="container">
       <div class="row mt-5">
         <div class="col-2"></div>
@@ -10,6 +10,7 @@
           <div class="card-body">
             <h5 class="card-title">영화 : {{ movie?.title }}</h5><br>
             <h5 class="card-title">리뷰제목 : {{ nowReview?.title }}</h5>
+            <p class="card-text">작성자 : <a href="#" style="color:blue;" @click.prevent="moveProfile(userId)">{{ nowReview?.user }}</a></p>
             <p class="card-text"><p>평점 : {{ nowReview?.rank }}</p>
             <p class="card-text">내용 : {{ nowReview?.content }}</p>
             <p class="card-text"><small class="text-muted">Created at {{created_at}}</small></p>
@@ -27,10 +28,10 @@
             <div class="position-absolute bottom-0 end-5">
                 
                     <div class="row">
-                        <router-link v-if="user === this.nowUser" :to="{ name: 'UpdateReviewView', params: { reviewId: review.id } }">수정하기</router-link>
+                        <router-link v-if="this.review.user === this.$store.state.profile.id" :to="{ name: 'UpdateReviewView', params: { reviewId: review.id } }">수정하기</router-link>
                     </div>
                     <div class="row">
-                        <a href="#" v-if="user === this.nowUser" @click.prevent="deleteReview">삭제하기</a>
+                        <a href="#" v-if="this.review.user === this.$store.state.profile.id" @click.prevent="deleteReview">삭제하기</a>
                     </div>
             
             </div>
@@ -67,6 +68,10 @@ export default {
             review: null,
             user: null,
 
+            userId: null,
+
+            profile: [],
+
             // user: this.review.user,
             // rank: this.review.rank,
             // title: this.review.title,
@@ -80,8 +85,9 @@ export default {
                 nowTitle: '',
                 nowRank: '',
                 nowContent: '', 
-            }
+            },
             
+            profileList: []
 
 
         }
@@ -114,6 +120,10 @@ export default {
 
         reviewLike() {
             return this.review.like_users.length
+        },
+
+        refreshDetailCnt() {
+            return this.$store.state.refresh_detail
         }
 
     },
@@ -146,6 +156,24 @@ export default {
 
         },
 
+        nowProfile() {
+            this.profileList = this.$store.state.profile_list
+            
+        
+                for (var profile of this.profileList) {
+                    if (this.review.user=== profile.username) {
+                        this.userId = profile.id
+                        break
+                    }
+                
+            }
+        },
+
+        moveProfile(userId) {
+            this.$router.push({name: 'YourProfileView', params: {userId}})
+        },
+
+
         deleteReview() {
             alert("정말 삭제하시겠습니까?")
             axios({
@@ -177,9 +205,15 @@ export default {
     created() {
       this.getReviewById()
       this.getMovieById()
+      this.nowProfile()
+ 
       
     },
     mounted() {
+    this.getReviewById()
+    this.getMovieById()
+    //this.nowProfile()
+
     this.user = this.review.user
 
     console.log(this.user, this.review.user)
@@ -223,11 +257,22 @@ export default {
 
             this.getReviewById()
         },
+
+
+        refreshDetailCnt: function(new_val,old_val) {
+            console.log(new_val,old_val)
+            //this.getReviewById()
+            //this.user = this.review.user
+            this.$router.go(this.$router.currentRoute)
+        },
     }
     
 }
 </script>
 
 <style>
-
+    #reviewDetail *{
+        color: white;
+        font-family: 'Nanum Gothic', sans-serif;
+    }
 </style>

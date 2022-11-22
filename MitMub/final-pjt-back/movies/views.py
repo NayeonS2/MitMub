@@ -207,5 +207,15 @@ def like_review(request, review_pk):
         review.like_users.remove(request.user)
     else:
         review.like_users.add(request.user)
-    return Response(status=status.HTTP_201_CREATED)
-   
+    return Response(review,status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def pick_movie(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    if movie.users_playlist.filter(pk=request.user.pk).exists():
+        movie.users_playlist.remove(request.user)
+    else:
+        movie.users_playlist.add(request.user)
+    return Response(movie,status=status.HTTP_201_CREATED)

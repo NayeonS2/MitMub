@@ -41,6 +41,8 @@ export default new Vuex.Store({
     users: [],
     profile: [],
 
+    profile_list: [],
+
     refresh_create_rev: 0,
     refresh_delete_rev: 0,
     refresh_update_rev: 0,
@@ -51,6 +53,12 @@ export default new Vuex.Store({
     refresh_home: 0,
 
     refresh_review_like: 0,
+
+    refresh_detail: 0,
+
+    refresh_profile: 0,
+
+    refresh_pick_movie: 0,
   
     // 추천 알고리즘
     token: null,
@@ -104,9 +112,19 @@ export default new Vuex.Store({
     ADD_REFRESH_H(state) {
       state.refresh_home ++
     },
+    ADD_REFRESH_DETAIL(state) {
+      state.refresh_detail ++
+    },
+    ADD_REFRESH_PICK_MOVIE(state) {
+      state.refresh_pick_movie ++
+    },
 
     ADD_REFRESH_REVIEW_LIKE(state) {
       state.refresh_review_like ++ 
+    },
+
+    ADD_REFRESH_PROFILE(state) {
+      state.refresh_profile ++ 
     },
 
     SAVE_TOKEN_LOGIN(state, token) {
@@ -154,6 +172,10 @@ export default new Vuex.Store({
 
     GET_PROFILE(state, profile) {
       state.profile = profile
+    },
+
+    PROFILE_LIST(state, profiles) {
+      state.profile_list = profiles
     },
     
     GET_USERNAME(state, username) {
@@ -391,6 +413,14 @@ export default new Vuex.Store({
     getProfile(context, profile) {
       context.commit('GET_PROFILE', profile)
     },
+
+    profileList(context, profiles) {
+      context.commit('PROFILE_LIST', profiles)
+    },
+
+    // ProfileList(cotext) {
+
+    // },
 
 
     getReviews(context) {
