@@ -1,3 +1,5 @@
+import json
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -71,6 +73,8 @@ def follow(request, username):
             person.followers.remove(user)
         else:
             person.followers.add(user)
-        return Response(person, status=status.HTTP_201_CREATED)
+        serializer = UserFollowSerializer(person)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+                                            
     else:
         return Response({'detail': '본인을 팔로우 할 수 없습니다.'})

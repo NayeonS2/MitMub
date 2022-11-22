@@ -30,13 +30,15 @@ export default {
         YourWatchListView,
     },
     props: {
-        // following: [], // 팔로잉하고있는 유저의 아이디 리스트
+  
     },
     data() {
         return {
             profile: [],
-            // img_url : `https://avatars.dicebear.com/api/identicon/${this.profile?.username}.svg`,
-            profileList: this.$store.state.profile_list
+            //img_url : `https://avatars.dicebear.com/api/identicon/${this.profile?.username}.svg`,
+            profileList: this.$store.state.profile_list,
+
+            userId: Number(this.$route.params.userId),
         }
     },
     computed: {
@@ -49,12 +51,14 @@ export default {
     methods: {
         nowProfile() {
             this.profileList = this.$store.state.profile_list
-            const id = this.$route.params.userId
- 
+            const id = this.userId
+                console.log(typeof(id), id)
+                console.log(typeof(this.$route.params.userId))
                 for (let profile of this.profileList) {
                     if (id === profile.id) {
                         this.profile = profile
-                        break
+                        console.log(this.profile)
+                        
                     }
                 
             }

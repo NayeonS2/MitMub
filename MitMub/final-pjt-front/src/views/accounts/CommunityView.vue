@@ -1,12 +1,13 @@
 <template>
   <div>
         
-        <ProfileView :user="userProfile.username"/>
-
-        <YourProfileView v-for="(following,idx) in this.followings" :key="idx"
-        :following="following"
+       <div>
+        <UserInfoView v-for="(other,idx) in others" :key="idx"
+        :other="other"
         :idx="idx"
         />
+       </div>
+        
  
 
 
@@ -14,18 +15,17 @@
 </template>
 
 <script>
-import YourProfileView from '@/views/accounts/YourProfileView'
-import ProfileView from '@/views/accounts/ProfileView'
+import UserInfoView from '@/views/accounts/UserInfoView'
+
 export default {
     name: 'CommunityView',
     components: {
-        YourProfileView,
-        ProfileView
+        UserInfoView,
+
     },
     data() {
         return {
-            userProfile: this.$store.state.profile
-            
+            others: [],
         }
     },
     computed: {
@@ -37,9 +37,19 @@ export default {
             return this.$store.state.profile_list
         },
 
-        followings() {
-            return this.userProfile.followings
+    
+    },
+    methods: {
+        getOthers() {
+            for (let user of this.users) {
+                if (user.id != this.$store.state.profile.id) {
+                    this.others.push(user)
+                }
+            }
         }
+    },
+    created() {
+        this.getOthers()
     }
 }
 </script>

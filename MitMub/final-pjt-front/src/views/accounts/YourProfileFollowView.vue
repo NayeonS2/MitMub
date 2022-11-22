@@ -44,6 +44,7 @@ export default {
             })
             .then((res) => {
                 //this.$store.commit('ADD_REFRESH_PROFILE')
+                console.log(res)
                 if (res.data.detail !== '본인을 팔로우 할 수 없습니다.'){
                     this.isFollow = !this.isFollow
                     if (this.isFollow) {

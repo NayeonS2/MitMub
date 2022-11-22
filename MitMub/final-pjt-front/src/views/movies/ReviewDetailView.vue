@@ -10,7 +10,7 @@
           <div class="card-body">
             <h5 class="card-title">영화 : {{ movie?.title }}</h5><br>
             <h5 class="card-title">리뷰제목 : {{ nowReview?.title }}</h5>
-            <p class="card-text">작성자 : <a href="#" style="color:blue;" @click.prevent="moveProfile(userId)">{{ nowReview?.user }}</a></p>
+            <p class="card-text">작성자 : {{ nowReview?.user }}</p>
             <p class="card-text"><p>평점 : {{ nowReview?.rank }}</p>
             <p class="card-text">내용 : {{ nowReview?.content }}</p>
             <p class="card-text"><small class="text-muted">Created at {{created_at}}</small></p>
