@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-item p-0 m-4">
+  <div class="movie-item pl-2 m-3">
     <div id="movie-poster" style="width: 148px; height: 210px;">
       <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded my-1" style="width: 148px; height: 210px;" @click="toDetail(movie.id)"/>
       <h5 id="fingerP" class="text-light" @click="toDetail(movie.id)">$ mit status</h5>
