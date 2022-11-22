@@ -44,7 +44,11 @@ export default {
     computed: {
         imgUrl() {
             return `https://avatars.dicebear.com/api/identicon/${this.profile?.username}.svg`
+        },
+        refreshProfileCnt() {
+            return this.$store.state.refresh_profile
         }
+
       
         
     },
@@ -83,10 +87,10 @@ export default {
             
         // },
 
-        // refreshProfileCnt() {
-        //     this.getProfile()
-        //     //this.$router.go(this.$router.currentRoute)
-        // }
+        refreshProfileCnt() {
+            this.nowProfile()
+            //this.$router.go(this.$router.currentRoute)
+        }
     }
 }
 </script>

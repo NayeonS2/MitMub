@@ -41,7 +41,7 @@ export default {
         handler: function (val) {
             console.log("val", val)
             //this.watchList = []
-            this.getWatchlist()
+            //this.getWatchlist()
         },
         deep: true,
     },

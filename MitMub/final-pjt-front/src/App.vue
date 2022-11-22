@@ -133,7 +133,7 @@ export default {
           },
         })
           .then(res => {
-            // console.log(res.data) 
+            console.log(res.data) 
             // acounts serializers에 정의된 프로필 데이터 받아옴.
             this.$store.dispatch('getProfile', res.data)
             this.profile = this.$store.state.profile

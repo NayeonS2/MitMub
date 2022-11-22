@@ -71,6 +71,7 @@ def follow(request, username):
     if person != user:
         if person.followers.filter(username=user.username).exists():
             person.followers.remove(user)
+            
         else:
             person.followers.add(user)
         serializer = UserFollowSerializer(person)

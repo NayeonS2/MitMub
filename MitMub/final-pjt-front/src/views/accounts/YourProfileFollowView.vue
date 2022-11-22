@@ -1,9 +1,10 @@
 <template>
   <div>
-     
-        <span v-if="isFollow" @click="follow"><i class="bi bi-person-hearts" style="color: red;"></i></span>
-        <span v-else @click="follow"><i  class="bi bi-person-plus" style="color: red;"></i></span>
-
+        <span>
+ 
+        <span v-if="isFollow===false" @click="follow" class="material-symbols-outlined">person_add</span>
+        <span v-else @click="follow" class="material-symbols-outlined">diversity_1</span>
+        </span>
         <!-- <span class="material-symbols-outlined" style="color: red;">diversity_1</span> -->
 
 
@@ -24,13 +25,21 @@ export default {
     name: 'YourProfileFollowView',
     data() {
         return {
-            isFollow: false,
+            isFollow: null,
             followers_len: 0,
             followings_len: 0,
+
+            profileList: [],
         }
     },
     props: {
-        profile: {},
+        profile: Object,
+    },
+
+    computed: {
+        // profileList() {
+        //     return this.$store.state.profile_list
+        // }
     },
     methods: {
         follow: function () {
@@ -43,25 +52,88 @@ export default {
                 }
             })
             .then((res) => {
-                //this.$store.commit('ADD_REFRESH_PROFILE')
-                console.log(res)
+                this.$store.commit('ADD_REFRESH_PROFILE')
+                console.log(res.data.followers)
+                console.log(res.data.detail)
                 if (res.data.detail !== '본인을 팔로우 할 수 없습니다.'){
-                    this.isFollow = !this.isFollow
-                    if (this.isFollow) {
-                    this.followers_len += 1
-                    } else {
-                    this.followers_len -= 1
-                    }
+                        this.isFollow = !this.isFollow
+                     
+                        this.followers_len = res.data.followers.length
+                        this.followings_len = res.data.followings.length    
+                    
             
                 }
                 else {
                     alert('본인을 팔로우 할 수 없습니다.')
                 }
+                //this.$router.go()
+                
+            
             })
             .catch((err) => { 
                 console.log(err)
             })
+        
         },
+
+        // nowProfile() {
+        //     this.profileList = this.$store.state.profile_list
+        //     const id = this.profile.id
+        //         // console.log(typeof(id), id)
+        //         // console.log(typeof(this.$route.params.userId))
+        //         for (let profile of this.profileList) {
+        //             if (id === profile.id) {
+        //                 this.profile = profile
+        //                 console.log(this.profile)
+                        
+        //             }
+            
+        //     this.followers_len = this.profile.followers.length
+        //     this.followings_len = this.profile.followings.length
+                
+        //     }
+        // },
+    },
+    created() {
+        //this.$store.dispatch('profileList')
+        //this.$store.dispatch('getProfile')
+        // if (this.profile.followers.includes(this.$store.state.profile.id)) {
+        //     this.isFollow = true
+        // } else {
+        //     this.isFollow = false
+        // }
+        if (this.profile.followers.includes(this.$store.state.profile.id)) {
+            this.isFollow = true
+            this.followers_len = this.profile.followers.length
+            this.followings_len = this.profile.followings.length
+        } else {
+            this.isFollow = false
+            this.followers_len = this.profile.followers.length
+            this.followings_len = this.profile.followings.length
+        }
+        
+    },
+    mounted() {
+        //this.$store.dispatch('profileList')
+        //this.$store.dispatch('getProfile')
+        console.log(this.profile)
+        console.log(this.isFollow)
+        if (this.profile.followers.includes(this.$store.state.profile.id)) {
+            this.isFollow = true
+            this.followers_len = this.profile.followers.length
+            this.followings_len = this.profile.followings.length
+        } else {
+            this.isFollow = false
+            this.followers_len = this.profile.followers.length
+            this.followings_len = this.profile.followings.length
+        }
+    },
+    watch: {
+        isFollow() {
+            //this.$router.go()
+            // this.followers_len = this.profile.followers.length
+            // this.followings_len = this.profile.followings.length
+        }
     }
 
 }
