@@ -14,11 +14,17 @@
     <!-- navbar LOGO는 누르면 새로고침되면서 메인으로 이동 router 이동 x -->
     <nav class="navbar">
       <div id="nav-div" class="container-lg">
-        <a href="http://localhost:8080/"><img id="logo-image" 
-          src="@/assets/images/RowLogo.png" 
-          style="width:170px; height:80px;"
-        />
-        </a>
+        <div class="row">
+          <a href="http://localhost:8080/" class="col">
+            <img id="logo-image" 
+            src="@/assets/images/RowLogo.png" 
+            style="width:170px; height:80px;"
+          />
+          </a>
+          <p class="col pt-1 mt-3" id="nav-div-a">
+            <input id="search-input" class="form-control nav-item col" type="text" placeholder="Search movie ...                      🎬"/>
+          </p>
+        </div>
         <div>
           <!-- 로그인 안 된 사용자 용 ui -->
           <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'LogInView' }">LogIn </router-link><span v-if="isLogin === false"> | </span> 
@@ -34,6 +40,15 @@
     <transition name="slide-fade" mode="out-in">
       <router-view :key="$route.fullPath"/>
     </transition>
+    <footer>
+      <nav id="footer-nav">
+        <a href='https://github.com/NayeonS2' target='_blank'>NayeonS2</a> |
+        <a href='https://github.com/recorror' target='_blank'>recorror</a>
+        <p>
+          <span>Copyright 2020. cocoder. All Rights Reserved.</span>
+        </p>
+      </nav>
+    </footer>
   </div>
 </template>
 
@@ -60,7 +75,7 @@ export default {
   },
   computed: {
     isLogin() {
-        return this.$store.getters.isLogin
+      return this.$store.getters.isLogin
     },
 
     popularLen() {
@@ -81,9 +96,7 @@ export default {
   },
   methods: {
     logOut() {
-      
       this.$store.dispatch('logOut')
-      
     },
 
     getUserName() {
@@ -155,8 +168,6 @@ export default {
             console.error(err)
           })
     },
-
-
 
     getMovies() {
               this.$store.dispatch('getMovies')
@@ -261,16 +272,22 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #eeeeee;
+  position: relative;
   min-width: 992px;
-  max-width: 1600px;
-  background: #141414;
+  max-width: 1920px;
+  min-height: 100vh;
+  background-image: url(@/assets/images/hero-bg.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  overflow-y: scroll;
 }
 
 nav {
   margin: 0;
   padding: 30px;
   min-width: 992px;
-  max-width: 1600px;
+  max-width: 1920px;
 }
 
 nav a {
@@ -279,7 +296,7 @@ nav a {
 }
 #nav-div {
   min-width: 992px;
-  max-width: 1500px;
+  max-width: 1860px;
 }
 
 nav a.router-link-exact-active {
@@ -299,5 +316,30 @@ nav a.router-link-exact-active {
 .slide-fade-leave-to {
   transform: translateX(-10px);
   opacity: 0;
+}
+
+footer {
+	width: 100%;
+	height: 60px;
+	bottom: 0px;
+	position: absolute;
+}
+
+#footer-nav {
+  padding: 0;
+  margin: 0;
+}
+#footer-nav *{
+  padding: 0;
+  margin: 0;
+}
+
+#nav-div-a {
+  min-width: 300px;
+}
+
+#search-input {
+  background: none;
+  color: #eeeeee;
 }
 </style>
