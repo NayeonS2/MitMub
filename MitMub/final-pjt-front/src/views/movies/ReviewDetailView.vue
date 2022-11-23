@@ -10,14 +10,14 @@
           <div class="card-body">
             <h5 class="card-title">영화 : {{ movie?.title }}</h5><br>
             <h5 class="card-title">리뷰제목 : {{ nowReview?.title }}</h5>
-            <p class="card-text">작성자 : {{ nowReview?.user }}</p>
+            <p class="card-text">작성자 : {{ user }}</p>
             <p class="card-text"><p>평점 : {{ nowReview?.rank }}</p>
             <p class="card-text">내용 : {{ nowReview?.content }}</p>
             <p class="card-text"><small class="text-muted">Created at {{created_at}}</small></p>
             <p class="card-text"><small class="text-muted">Last updated at {{updated_at}}</small></p>
 
             <span class="row ms-4"><CommentListView :review="review"/></span>
-            <span class="row ms-4"><ReviewLikeView :review="review"/></span>
+            <span class="row ms-4"><ReviewLikeView :review="review" @refreshReview="refreshReview"/></span>
             
             <span class="row ms-4"><CreateCommentView :review="review"/></span>
           </div>
@@ -28,10 +28,10 @@
             <div class="position-absolute bottom-0 end-5">
                 
                     <div class="row">
-                        <router-link v-if="this.review.user === this.$store.state.profile.id" :to="{ name: 'UpdateReviewView', params: { reviewId: review.id } }">수정하기</router-link>
+                        <router-link v-if="this.review.user === this.$store.state.profile.username" :to="{ name: 'UpdateReviewView', params: { reviewId: review.id } }">수정하기</router-link>
                     </div>
                     <div class="row">
-                        <a href="#" v-if="this.review.user === this.$store.state.profile.id" @click.prevent="deleteReview">삭제하기</a>
+                        <a href="#" v-if="this.review.user === this.$store.state.profile.username" @click.prevent="deleteReview">삭제하기</a>
                     </div>
             
             </div>
@@ -102,9 +102,9 @@ export default {
         reviews(){
             return this.$store.state.reviews
         },
-        nowUser() {
-            return this.$store.state.profile.username
-        },
+        // nowUser() {
+        //     return this.$store.state.profile.username
+        // },
         nowReview() {
             return this.review
         },
@@ -163,6 +163,22 @@ export default {
                 for (var profile of this.profileList) {
                     if (this.review.user=== profile.username) {
                         this.userId = profile.id
+                        this.user = profile.username
+                        break
+                    }
+                
+            }
+        },
+
+
+        nowUser() {
+            this.profileList = this.$store.state.profile_list
+            
+        
+                for (var profile of this.profileList) {
+                    if (this.review.user== profile.username || this.review.user == profile.id) {
+                    
+                        this.user = profile.username
                         break
                     }
                 
@@ -200,19 +216,40 @@ export default {
                 console.log(err)
                 })
                 
+        },
+        getReviews() {
+
+            this.movie_reviews = this.$store.state.reviews
+            
+       
+            for (var review of this.movie_reviews) {
+                for (var user of this.$store.state.users) {
+                if (review.user == user.id){
+                    review.user = user.username
+                        }
+                    }
+                }
+        
+        },
+
+        refreshReview(newReview) {
+            this.review = newReview
+            this.getReviews()
+            location.reload()
         }
     },
     created() {
+      
       this.getReviewById()
       this.getMovieById()
-      this.nowProfile()
+      this.getReviews()
  
       
     },
     mounted() {
     this.getReviewById()
     this.getMovieById()
-    //this.nowProfile()
+    //this.nowUser()
 
     this.user = this.review.user
 

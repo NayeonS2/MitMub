@@ -1,4 +1,4 @@
-
+from django.http import JsonResponse
 import datetime
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -207,7 +207,24 @@ def like_review(request, review_pk):
         review.like_users.remove(request.user)
     else:
         review.like_users.add(request.user)
-    return Response(review,status=status.HTTP_201_CREATED)
+    serializer = GetReviewSerializer(review)
+    return Response(serializer.data,status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def check_like(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.user in review.like_users.all():
+        isLike = True
+    else:
+        isLike = False
+   
+    return JsonResponse({'isLike': isLike})
+
+
+
+
 
 
 @api_view(['POST'])

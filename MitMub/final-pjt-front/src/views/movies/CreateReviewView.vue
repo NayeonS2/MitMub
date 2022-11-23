@@ -23,7 +23,7 @@
                 <input type="text" id="rank" class="form-control" v-model.trim="rank"><br>
                 <div class="input-group">
                     <span class="input-group-text">리뷰 :</span>
-                    <textarea id="content" cols="30" rows="10" v-model="content" class="form-control" aria-label="With textarea"></textarea>
+                    <textarea id="content" cols="30" rows="10" v-model="content" class="form-control" aria-label="With textarea" @keypress.enter="createReview"></textarea>
                 </div>
                 <!-- <label for="content">리뷰 : </label>
                 <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br> -->

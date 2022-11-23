@@ -125,5 +125,14 @@ export default {
 </script>
 
 <style>
-
+   
+    /* #dung{
+            position:absolute; top:150px;
+    left:300px;
+    animation:ani 1s infinite alternate;  
+    }
+    @keyframes ani{
+    0%{transform:translate(0,0);}
+    100%{transform:translate(0,50px);}
+    }   */
 </style>

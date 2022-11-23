@@ -10,7 +10,7 @@
 
                 <div class="col-4 p-0">
                   <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 318px; height: 450px;" />
-                  <PickMovieView :movie="movie"/>
+                  <PickMovieView :movie="movie" @refreshMovie="refreshMovie"/>
                 </div>
                 <div class="col-8">
                   <div class="row">
@@ -192,6 +192,12 @@ export default {
     },
     toggleOnOff: function() {
     this.isStatusOn = !this.isStatusOn;
+  },
+
+
+  refreshMovie(newMovie) {
+    this.movie = newMovie
+    location.reload()
   }
   },
   created() {

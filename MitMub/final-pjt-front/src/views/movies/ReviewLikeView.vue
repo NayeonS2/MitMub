@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-6" >
             
-            <span v-if="isLike" @click="likeReview">💗</span>
+            <span v-if="isLike" @click="[likeReview(),checkLike()]">💗</span>
             <span v-else @click="likeReview">🤍</span>
             <span>LIKE {{like_review_len}}</span>
         </div>
@@ -21,8 +21,8 @@ export default {
     name: 'ReviewLikeView',
     data() {
         return {
-            like_review: this.review.like_users,
-            like_review_len: this.review.like_users.length,
+            like_review: null,
+            like_review_len: 0,
             isLike: false
         }
     },
@@ -50,20 +50,60 @@ export default {
             })
             .then((res) => {
                 console.log(res)
-                this.isLike = !this.isLike
-                if (this.isLike) {
-                    this.like_review_len += 1
-                } else {
-                    this.like_review_len -= 1
-                }
-                //this.$router.go()
+                //this.isLike = !this.isLike
+                // if (this.isLike) {
+                //     this.like_review_len += 1
+                // } else {
+                //     this.like_review_len -= 1
+                // }
+                // //this.$router.go()
+
+                //this.$store.commit('REFRESH_REVIEW', res.data)
+           
+                this.like_review = res.data.like_users
+                this.like_review_len = res.data.like_users.length
+                this.$emit('refreshReview', res.data)
                 this.$store.dispatch('getReviews')
-                this.$store.commit('ADD_REFRESH_REVIEW_LIKE')
+                this.$store.commit('REFRESH_REVIEW' , res.data)
                 })
                 .catch((err) => { 
                 console.log(err)
                 })
     },
+
+    checkLike: function () {
+     
+      axios({
+            method: 'get',
+            url: `${API_URL}/api/v1/movies/check_like/${this.review.id}/`,
+   
+            headers: {
+                Authorization: `Token ${this.$store.state.token}`
+            }
+            })
+            .then((res) => {
+                console.log(res)
+                // this.isLike = !this.isLike
+                // if (this.isLike) {
+                //     this.like_review_len += 1
+                // } else {
+                //     this.like_review_len -= 1
+                // }
+                // //this.$router.go()
+                if (res.data.isLike === true) {
+                  this.isLike = true
+                } else {
+                  this.isLike = false
+                }
+                })
+                .catch((err) => { 
+                console.log(err)
+                })
+    },
+
+
+
+
     // update_like: function () {
     //   for (var i in this.like_review) {
     //     for (var user of this.$store.state.users) {
@@ -81,19 +121,21 @@ export default {
     // }
   },
   created: function () {
+      this.checkLike()
+      //this.like_review= this.review.like_users
+      //this.like_review_len= this.review.like_users.length
       //this.update_like()
+      
+
   },
 
 
   mounted() {
+        //this.checkLike()
         this.like_review= this.review.like_users
         this.like_review_len= this.review.like_users.length
 
-        if (this.like_review.includes(this.$store.state.profile.id)) {
-            this.isLike= true
-        } else {
-          this.isLike= false
-        }
+ 
 
         
   },

@@ -182,6 +182,16 @@ export default new Vuex.Store({
       console.log(33333,state.movies)
     },
 
+    REFRESH_REVIEW(state, newReview) {
+      for (let review of state.reviews) {
+        if (newReview.id === review.id) {
+          state.reviews[review.id-1] = newReview
+          
+        }
+      }
+      console.log(33333,state.movies)
+    },
+
 
 
     GET_USER(state,users) {

@@ -52,6 +52,7 @@ export default {
             })
             .then((res) => {
                 this.$store.commit('REFRESH_MOVIE', res.data)
+                this.$emit('refreshMovie', res.data)
                 this.nowMovie = res.data
                 
                 console.log(this.$store.state.movies)
