@@ -7,32 +7,56 @@
           <div>
             <div class="container-fluid">
               <div class="row">
+<<<<<<< HEAD
                 <div class="col-4 p-0">
                   <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 318px; height: 450px;" />
                   <PickMovieView :movie="movie"/>
                 </div>
                 <div class="col-8">
-                  <h4 class="movie-detail-title">
-                    Title : {{ movie?.title }}
-                  </h4>
+                  <div class="row">
+                    <h2 class="movie-detail-title col-10">
+                      Title  {{ movie?.title }}
+                    </h2>
+                    <span class="d-flex justify-content-end col-2">
+                      <router-link :to="{ name: 'CreateReviewView', params: { movieId: movie?.id } }">리뷰쓰러 가기✏</router-link>
+                    </span>
+                  </div>
                   <div v-if="movie?.release_date">
-                    개봉 : {{ movie?.release_date }}
+                    개봉  {{ movie?.release_date }}
                   </div>
                   <div v-if="movie?.genres">
-                    장르 : <span v-for="(gen, idx) in now_genre" :key="idx"> # {{ gen }} </span>
+                    장르  <span v-for="(gen, idx) in now_genre" :key="idx"> # {{ gen }} </span>
                     <!-- {{ movie.genre_ids }} -->
                   </div>
                   <div class="movie-vote">
+                    평점  {{ movie?.vote_average }}
+=======
+                <div id="detail-poster-img" class="col-4 p-0">
+                  <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 430px; height: 622px;" />
+                </div>
+                <div class="col-8 row">
+                  <h4 class="movie-detail-title text-start">
+                    {{ movie?.title }}
+                  </h4>
+                  <div v-if="movie?.release_date" class="text-start">
+                    개봉 : {{ movie?.release_date }}
+                  </div>
+                  <div v-if="movie?.genres" class="text-start">
+                    장르 : <span v-for="(gen, idx) in now_genre" :key="idx"> # {{ gen }} </span>
+                    <!-- {{ movie.genre_ids }} -->
+                  </div>
+                  <div class="movie-vote text-start">
                     평점 : {{ movie?.vote_average }}
+>>>>>>> b1c98dabe40df99bdbcc4384c5465b2ed039846b
                   </div>
                   <div class="star-ratings">
                     <div 
-                      class="star-ratings-fill space-x-2 text-lg"
+                      class="star-ratings-fill text-lg"
                       :style="{ width: ratingToPercent + '%' }"
                     >
                       <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                     </div>
-                    <div class="star-ratings-base space-x-2 text-lg">
+                    <div class="star-ratings-base text-lg">
                       <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                     </div>
                   </div>
@@ -41,7 +65,7 @@
                   </div>
                   <hr>
                   <!-- info over view -->
-                  <div class="movie-detail-overview-header mb-3" @click="toggleOnOff">
+                  <div class="movie-detail-overview-header mb-3 text-start" @click="toggleOnOff">
                     줄거리 보기 🔽
                   </div>
                   <div v-if="isStatusOn">
@@ -62,9 +86,6 @@
           <div class="row my-3 fw-semibold">
             <div class="my-3">'{{movie?.title}} 예고편'에 대한 검색 결과입니다. 🔽</div>
             <YoutubeList :videos="videos" @select-video="onSelectVideo" />
-          </div>
-          <div class="d-flex justify-content-end ">
-            <router-link :to="{ name: 'CreateReviewView', params: { movieId: movie.id } }">리뷰쓰러 가기✏</router-link>
           </div>
         </div>
       </div>
@@ -243,5 +264,9 @@ div {
 .star-ratings-base {
   z-index: 0;
   padding: 0;
+}
+
+.detail-poster-img {
+  margin: auto;
 }
 </style>

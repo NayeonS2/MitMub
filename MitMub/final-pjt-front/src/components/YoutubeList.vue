@@ -1,6 +1,6 @@
 <template>
   <div class="p-0 m-0">
-    <div id="list-item-div" class="d-flex justify-content-between">
+    <div id="list-item-div" class="d-flex justify-content-center">
       <YoutubeListItem 
         v-for="video in videos.slice(0,5)" 
         :key="video.id.videoId" 

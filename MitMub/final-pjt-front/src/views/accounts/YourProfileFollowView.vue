@@ -76,23 +76,6 @@ export default {
         
         },
 
-        // nowProfile() {
-        //     this.profileList = this.$store.state.profile_list
-        //     const id = this.profile.id
-        //         // console.log(typeof(id), id)
-        //         // console.log(typeof(this.$route.params.userId))
-        //         for (let profile of this.profileList) {
-        //             if (id === profile.id) {
-        //                 this.profile = profile
-        //                 console.log(this.profile)
-                        
-        //             }
-            
-        //     this.followers_len = this.profile.followers.length
-        //     this.followings_len = this.profile.followings.length
-                
-        //     }
-        // },
     },
     created() {
         //this.$store.dispatch('profileList')
