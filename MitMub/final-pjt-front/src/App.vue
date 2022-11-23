@@ -1,10 +1,10 @@
 <template>
   <div id="app" style="margin: auto;">
     <!-- offcanvas == 옆에 뭐 띄우는 거 -->
-    <div v-if="isLogin === true" class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div v-if="isLogin === true" class="offcanvas offcanvas-end" style=" background: linear-gradient(45deg, pink, white 1px,violet,darkviolet,navy 90%, black);" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header">
-        <div class="card-header" style="color:#141414;"><h5><b>{{profile?.username}}님의 프로필</b></h5></div>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="card-header" style="color:#141414;"><h5 style="color: lightgrey;">Signed in as <b style="color: #eeeeee;">{{profile?.username}}</b></h5></div>
+        <button type="button" class="btn btn-close btn-outline-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ProfileView :user="user"/>
@@ -13,36 +13,24 @@
     </div>
     <!-- navbar LOGO는 누르면 새로고침되면서 메인으로 이동 router 이동 x -->
     <nav class="navbar">
-<<<<<<< HEAD
-      <div id="nav-div" class="container-lg">
-        <div class="row">
-          <a href="http://localhost:8080/" class="col">
-            <img id="logo-image" 
-            src="@/assets/images/RowLogo.png" 
-            style="width:170px; height:80px;"
-          />
-          </a>
-        </div>
-=======
+
       <div id="nav-div" class="container justify-content-between">
         <a href="http://localhost:8080/"><img id="logo-image" 
           src="@/assets/images/RowLogo.png" 
           style="width:170px; height:80px;"
         />
         </a>
->>>>>>> b1c98dabe40df99bdbcc4384c5465b2ed039846b
+
         <div>
           <!-- 로그인 안 된 사용자 용 ui -->
           <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'LogInView' }">Sign in </router-link><span v-if="isLogin === false"> | </span> 
           <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'SignUpView' }">Sign up </router-link><span v-if="isLogin === false"> | </span>  
           <!-- 로그인 된 사용자 용 ui -->
           <router-link v-if="isLogin === true" class="text-decoration-none me-4 fs-5" :to="{ name: 'ReviewView' }">Reviews </router-link>
-<<<<<<< HEAD
+
           <router-link v-if="isLogin === true" class="text-decoration-none me-4 fs-5" :to="{ name: 'CommunityView' }">Community </router-link>
-          <button v-if="isLogin === true" class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">{{profile?.username}} 님 환영합니다👋</button>
-=======
-          <button v-if="isLogin === true" class="btn btn-outline-light mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">{{profile?.username}} 님 환영합니다👋</button>
->>>>>>> b1c98dabe40df99bdbcc4384c5465b2ed039846b
+          <button v-if="isLogin === true" class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Signed in as <b style="color: #eeeeee;">{{profile?.username}}</b> 🚀</button>
+
 
         </div>
       </div>
@@ -285,7 +273,7 @@ export default {
   position: relative;
   min-width: 992px;
   max-width: 1920px;
-<<<<<<< HEAD
+
   min-height: 100vh;
   background-image: url(@/assets/images/hero-bg.jpg);
   background-size: cover;
@@ -294,9 +282,6 @@ export default {
 }
 #app *{
   font-family: 'Nanum Gothic', sans-serif;
-=======
-  background: #141414;
->>>>>>> b1c98dabe40df99bdbcc4384c5465b2ed039846b
 }
 
 nav {
@@ -319,7 +304,7 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 
-<<<<<<< HEAD
+
 .slide-fade-enter {
   transform: translateX(10px);
   opacity: 0;
@@ -358,9 +343,6 @@ footer {
 #search-input {
   background: none;
   color: #eeeeee;
-=======
-#nav-div {
-  max-width: 1600px;
->>>>>>> b1c98dabe40df99bdbcc4384c5465b2ed039846b
 }
+
 </style>

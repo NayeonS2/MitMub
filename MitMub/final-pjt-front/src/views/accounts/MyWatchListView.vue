@@ -1,10 +1,17 @@
 <template>
   <div>
-    <ul>
-      <li v-for="(movie, idx) in watchList" :key="idx">
-        {{ movie.title }}  
-      </li>
+    <ul style="list-style:none;">
+
+      <div @click="toggleOnOff"><h5 style="color: #FFEBF0;"><b>My WatchList 🎬</b><hr></h5></div>
+      <div v-if="isStatusOn">
+        <li v-for="(movie, idx) in watchList" :key="idx" id="watch">
+          <p>{{ movie.title }} </p> 
+        </li>
+      </div>
+      
+      
     </ul>
+    
   </div>
 </template>
 
@@ -14,7 +21,8 @@ export default {
     data() {
         return {
             movies: this.$store.state.movies,
-            watchList: []
+            watchList: [],
+             isStatusOn: false,
         }
     },
     props: {
@@ -31,6 +39,10 @@ export default {
                 }
             }
         },
+
+        toggleOnOff: function() {
+          this.isStatusOn = !this.isStatusOn;
+        }
   },
   mounted () {
     //this.watchList = []
@@ -52,5 +64,7 @@ export default {
 </script>
 
 <style>
-
+  #watch {
+    color: white;
+  }
 </style>

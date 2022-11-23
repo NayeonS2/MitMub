@@ -1,10 +1,10 @@
 <template>
   <div>
     <button v-if="isPick" class="btn btn-link" style="color: blue;" @click="pickMovie" >
-      <span class="material-symbols-outlined">smart_display</span>
+      <i class="bi bi-bookmark-check-fill" style="font-size: 2rem; color: blue;"></i>
     </button>
     <button v-else class="btn btn-link" style="color: gray;" @click="pickMovie" >
-      <span class="material-symbols-outlined">queue_play_next</span>
+      <i class="bi bi-bookmark-plus-fill" style="font-size: 2rem; color: white;"></i>
     </button>
     <span> {{ pick_movie_num }} Users Pick this movie!</span>
   </div>

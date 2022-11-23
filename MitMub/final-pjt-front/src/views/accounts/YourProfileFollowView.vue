@@ -1,16 +1,23 @@
 <template>
-  <div>
-        <span>
-        <span v-if="isFollow===false" @click="[follow(),checkFollow(),followNum()]" class="material-symbols-outlined">person_add</span>
-        <span v-else @click="follow" class="material-symbols-outlined">diversity_1</span>
+  <div> 
+        <span class="row">
+        
+        <div class="col text-end mt-2 me-2">
+            <span v-if="isFollow===false" @click="[follow(),checkFollow(),followNum()]" class="material-symbols-outlined"><i class="bi bi-person-plus-fill" style="font-size: 2rem; color: #7ee787;"></i></span>
+            <span v-else @click="follow" class="material-symbols-outlined"><i class="bi bi-person-check-fill" style="font-size: 2rem; color: #7ee787;"></i></span>
+        </div>
+        <div class="col text-start me-3 ms-0">
+             <p style="color: #eeeeee;" class="p-0 m-0"><b>followers: {{ followers_len }}</b></p>
+             <p style="color: #eeeeee;"><b>follwings: {{ followings_len }}</b></p>
+        </div>
+       
         </span>
         <!-- <span class="material-symbols-outlined" style="color: red;">diversity_1</span> -->
 
 
 
     
-    <p>followers: {{ followers_len }} </p>
-    <p>follwings: {{ followings_len }} </p>
+        
 
   </div>
 

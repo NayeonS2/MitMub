@@ -17,6 +17,7 @@
     "slide": "^1.1.6",
     "vue-owl-carousel": "^2.0.3",
     "vue-router": "^3.5.1",
+    "vue-typical": "^1.6.2",
     "vue-youtube": "^1.4.0",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"

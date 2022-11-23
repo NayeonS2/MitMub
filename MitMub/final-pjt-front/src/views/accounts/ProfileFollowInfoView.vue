@@ -4,12 +4,12 @@
         <!-- <span v-if="isFollow" @click="follow"><i class="bi bi-person-hearts"></i></span>
         <span v-else @click="follow"><i  class="bi bi-person-plus"></i></span> -->
 
-        <span class="material-symbols-outlined" style="color: red;">diversity_1</span>
+        <i class="bi bi-person-hearts" style="font-size: 2rem; color: #F56E6E;"></i>
 
 
     
-    <p>followers: {{ followers_len }} </p>
-    <p>follwings: {{ followings_len }} </p>
+    <p class="m-0" style="color: #FFEBF0"><b>My Followers: {{ followers_len }}</b></p>
+    <p class="mt-1" style="color: #FFEBF0"><b>My Follwings: {{ followings_len }}</b></p>
     <hr>
   </div>
 

@@ -1,12 +1,12 @@
 <template>
   <div id="profile">
     <div class="mb-4">   
-        <img :src=img_url alt="" style="width:200px; height:20  0px;" class="rounded-circle"><br>
+        <img :src=img_url alt="" style="width:200px; height:20  0px; background-color: #ffffff;" class="rounded-circle"><br>
     </div>
     
-    <h5>닉네임 : {{ profile?.username }}</h5>
+    <!-- <h5>닉네임 : {{ profile?.username }}</h5> -->
     <ProfileFollowInfoView :profile="profile"/>
-    <h5><b>[WatchList]</b></h5>
+    
     <MyWatchListView :profile="profile"/>
     
     

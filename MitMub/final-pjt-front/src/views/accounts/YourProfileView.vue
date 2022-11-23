@@ -4,7 +4,7 @@
         <img :src=this.imgUrl alt="" style="width:200px; height:20  0px;" class="rounded-circle"><br>
     </div>
     
-    <h5>{{ profile?.username }}님의 프로필</h5>
+    <h5><b style="color: #7ee787;">{{ profile?.username }}</b>님의 프로필</h5>
     <YourProfileFollowView :profile="profile" @refreshProfile="refreshProfile"/><br>
      <h5><b>[WatchList]</b></h5>
     <YourWatchListView :profile="profile"/>

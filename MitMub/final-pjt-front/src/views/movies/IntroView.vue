@@ -1,13 +1,28 @@
 <template>
     <div id="intro">
-        <router-link :to="{name: 'HomeView'}">홈</router-link>
+        <div class="rocket">
+            <img src="@/assets/images/rocket-158.gif" alt="" class="rocketImg" style="width:400px; height:400px; background:none; margin-top:50px;">
+        </div>
+        <!-- <router-link :to="{name: 'HomeView'}">홈</router-link> -->
+
+        <v-typical
+        class="blink"
+        :steps="[2000,'Welcome', 500,'Welcome to MitMub !', 1000]"
+        :wrapper="'h2'"
+        @animationend="event"
+    ></v-typical>
 
     </div>
 </template>
 
 <script>
+import VTypical from 'vue-typical';
 export default {
     name: 'IntroView',
+    components : {
+        VTypical,
+        
+    },
     methods: {
         getMovies() {
               this.$store.dispatch('getMovies')
@@ -24,6 +39,9 @@ export default {
         longMovies() {
             this.$store.dispatch('longMovies')
         },
+        event() {
+
+        }
     },
     computed: {
         popularLen() {
@@ -68,9 +86,14 @@ export default {
 </script>
 
 <style>
+    .rocket {text-align: center; margin-top: 20px;}
+    .rocketImg{animation: motion 4s linear 0s alternate forwards; margin-top: 0;}
 
-    #intro {
-        background: url('/src/assets/images/wallpaperuse.com-space-wallpaper-1920x1080-980282.jpg')
+    @keyframes motion {
+        0% {margin-top: 0px;}
+        100% {margin-top: -1000px;}
     }
+    
 
+    
 </style>

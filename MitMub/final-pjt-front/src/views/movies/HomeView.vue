@@ -209,7 +209,7 @@ export default {
 </script>
 
 <style>
-<<<<<<< HEAD
+
 #home-view {
   padding-bottom: 70px;
 }
@@ -245,9 +245,9 @@ h2 span:nth-child(11) {
   }
 }
 
-=======
+
 .popular-list {
   padding: auto;
 }
->>>>>>> b1c98dabe40df99bdbcc4384c5465b2ed039846b
+
 </style>
