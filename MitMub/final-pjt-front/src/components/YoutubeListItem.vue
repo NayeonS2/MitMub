@@ -1,5 +1,5 @@
 <template>
-  <div class="list-group-item p-0" @click="selectVideo">
+  <div class="list-group-item p-1 mx-4" @click="selectVideo">
     <img :src="youtubeImageSrc" alt="youtube-thumbnail-image" id="thumbnail-image">
   </div>
 </template>

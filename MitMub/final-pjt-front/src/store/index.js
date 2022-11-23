@@ -69,8 +69,9 @@ export default new Vuex.Store({
     new_movies: [],
     upcoming_movies: [],
     long_movies: [],
-
-
+    // 검색 리스트
+    search_movies: [],
+    // 커뮤니티 구현
     reviews: [],
     comments: [],
   },
@@ -92,6 +93,9 @@ export default new Vuex.Store({
     },
     longMovies(state) {
       return state.long_movies
+    },
+    searchMovies(state) {
+      return state.search_movies
     }
   },
   mutations: {
@@ -213,10 +217,26 @@ export default new Vuex.Store({
 
     },
 
-
     GET_REVIEWS(state, reviews) {
       state.reviews = reviews
-      
+    },
+
+    SEARCH_LIST(state, searchText) {
+      // console.log(state.movies)
+      // console.log(payload)
+      const movies = state.movies
+      let movie_list = []
+      for (const movie of movies) {
+        if (movie.title.includes(searchText) === true || movie.overview.includes(searchText) === true) {
+          // console.log(movie.title)
+          movie_list.push(movie)
+        }
+      }
+      state.search_movies = movie_list
+      // console.log(state.search_movies)
+    },
+    DELETE_SEARCH(state) { 
+      state.search_movies = []
     }
 
   },
@@ -233,7 +253,7 @@ export default new Vuex.Store({
 
       })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
   
           context.commit('GET_USERNAME', res.username)
           
@@ -447,25 +467,26 @@ export default new Vuex.Store({
 
 
     getReviews(context) {
-          axios({
-              method: 'get',
-              url: `${API_URL}/api/v1/movies/review/`,
-              headers: {
-                      Authorization: `Token ${context.state.token}`
-                  }
-          })
-          .then(res => {
-            console.log(res)
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/v1/movies/review/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+      .then(res => {
+        // console.log(res)
 
-            context.commit('GET_REVIEWS', res.data)
-            
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      },
-      
-
+        context.commit('GET_REVIEWS', res.data)
+        
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    searchList(context, data) { 
+      context.commit('SEARCH_LIST', data)
+    }
 
   },
   modules: {

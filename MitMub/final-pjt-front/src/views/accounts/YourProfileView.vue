@@ -63,7 +63,7 @@ export default {
                     if (id === profile.id) {
                         this.profile = profile
                         //console.log(this.profile)
-                        
+
                     }
                 
             }
