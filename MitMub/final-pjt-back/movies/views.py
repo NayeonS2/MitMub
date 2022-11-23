@@ -218,4 +218,5 @@ def pick_movie(request, movie_pk):
         movie.users_playlist.remove(request.user)
     else:
         movie.users_playlist.add(request.user)
-    return Response(movie,status=status.HTTP_201_CREATED)
+    serializer = MovieSerializer(movie)
+    return Response(serializer.data,status=status.HTTP_201_CREATED)

@@ -19,18 +19,22 @@ export default {
     name: 'PickMovieView',
     data() {
         return {
-            pick_movie: this.movie.users_playlist,
-            pick_movie_num: this.movie.users_playlist.length,
-            isPick: false
+            pick_movie: null,
+            pick_movie_num: 0,
+            isPick: false,
+
+            movies: [],
+
+            nowMovie: null,
         }
     },
     computed: {
-        UsersWatchList() {
-            return this.movie.users_playlist
-        },
-        movies() {
-            return this.$store.state.movies
-        }
+        // UsersWatchList() {
+        //     return this.movie.users_playlist
+        // },
+        // movies() {
+        //     return this.$store.state.movies
+        // }
     },
     props: {
         movie: Object,
@@ -46,13 +50,23 @@ export default {
                     Authorization: `Token ${this.$store.state.token}`
                 }
             })
-            .then(() => {
-                this.$store.commit('ADD_REFRESH_PICK_MOVIE')
+            .then((res) => {
+                this.$store.commit('REFRESH_MOVIE', res.data)
+                this.nowMovie = res.data
+                
+                console.log(this.$store.state.movies)
+
+                console.log(res.data)
+                console.log(this.nowMovie, this.isPick)
+                
             })
             .catch((err) => { 
                 console.log(err)
             })
             },
+
+
+        
         // updatePick () {
         //     for (var i in this.pick_movie) {
         //         for (var user of this.$store.state.users) {
@@ -70,13 +84,26 @@ export default {
         //     }
         },
     created: function () {
+        this.nowMovie = this.movie
+        this.movies = this.$store.state.movies
+        this.pick_movie = this.nowMovie.users_playlist,
+        this.pick_movie_num = this.nowMovie.users_playlist.length
+
+
+        if (this.nowMovie.users_playlist.includes(Number(this.$store.state.profile.id))) {
+            this.isPick = true
+        } else {
+            this.isPick = false
+        }
         //this.updatePick()
     },
     mounted() {
-        this.pick_movie = this.movie.users_playlist,
-        this.pick_movie_num = this.movie.users_playlist.length
+        this.movies = this.$store.state.movies
 
-        if (this.pick_movie.includes(this.$store.state.profile.id)) {
+        this.pick_movie = this.nowMovie.users_playlist,
+        this.pick_movie_num = this.nowMovie.users_playlist.length
+
+        if (this.nowMovie.users_playlist.includes(Number(this.$store.state.profile.id))) {
             this.isPick = true
         } else {
             this.isPick = false
@@ -84,16 +111,16 @@ export default {
     },
     watch: {
         
-        UsersWatchList: {
-                handler: function () {
+        // UsersWatchList: {
+        //         handler: function () {
                     
-                    this.pick_movie = this.movie.users_playlist,
-                    this.pick_movie_num = this.movie.users_playlist.length
-                    //this.update_select()
+        //             this.pick_movie = this.movie.users_playlist,
+        //             this.pick_movie_num = this.movie.users_playlist.length
+        //             //this.update_select()
         
-                },
-                deep:true,
-            },
+        //         },
+        //         deep:true,
+        //     },
 },
 
 

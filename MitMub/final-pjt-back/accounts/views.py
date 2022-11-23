@@ -71,11 +71,63 @@ def follow(request, username):
     if person != user:
         if person.followers.filter(username=user.username).exists():
             person.followers.remove(user)
+            user.followings.remove(person)
+            
             
         else:
             person.followers.add(user)
-        serializer = UserFollowSerializer(person)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+            user.followings.add(person)
+        Yourserializer = UserFollowSerializer(person)
+        Myserializer = UserFollowSerializer(user)
+        return Response({'yours':Yourserializer.data,'mine':Myserializer.data}, status=status.HTTP_201_CREATED)
                                             
     else:
         return Response({'detail': '본인을 팔로우 할 수 없습니다.'})
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def check_follow(request, username):
+    person = get_object_or_404(get_user_model(), username=username)
+
+    if request.user in person.followers.all():
+        IFollow = True
+        
+    else:
+        IFollow = False
+    
+    
+    return JsonResponse({'IFollow': IFollow})
+  
+
+
+def follow_num(request, username):
+    person = get_object_or_404(get_user_model(), username=username)
+
+
+    followers_num = len(person.followers.all())
+    followings_num = len(person.followings.all())
+  
+    
+    return JsonResponse({'followers_num': followers_num, 'followings_num':followings_num})
+
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def my_follow(request, username):
+    person = get_object_or_404(get_user_model(), username=username)
+    user = request.user
+    if person != user:
+        if person.followers.filter(username=user.username).exists():
+            user.followings.remove(person)
+            #person.followers.remove(user)
+            
+            
+        else:
+            user.followings.add(person)
+            #person.followers.add(user)
+        serializer = UserFollowSerializer(user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+                                            

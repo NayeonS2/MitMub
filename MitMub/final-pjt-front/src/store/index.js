@@ -40,6 +40,8 @@ export default new Vuex.Store({
 
     users: [],
     profile: [],
+    watch_list : [],
+  
 
     profile_list: [],
 
@@ -166,6 +168,18 @@ export default new Vuex.Store({
       state.long_movies = movies
     },
     
+    REFRESH_MOVIE(state, newMovie) {
+      for (let movie of state.movies) {
+        if (newMovie.id === movie.id) {
+          state.movies[movie.id-1] = newMovie
+          
+        }
+      }
+      console.log(33333,state.movies)
+    },
+
+
+
     GET_USER(state,users) {
       state.users = users
     },
@@ -176,6 +190,18 @@ export default new Vuex.Store({
 
     PROFILE_LIST(state, profiles) {
       state.profile_list = profiles
+    },
+
+    REFRESH_PROFILE(state, newProfile) {
+      for (let profile in state.profile_list) {
+        if (profile.id === newProfile.id) {
+          // profile = newProfile
+          profile = {...profile, followers: newProfile.followers}
+          
+          break
+
+        }
+      }
     },
     
     GET_USERNAME(state, username) {
@@ -418,9 +444,6 @@ export default new Vuex.Store({
       context.commit('PROFILE_LIST', profiles)
     },
 
-    // ProfileList(cotext) {
-
-    // },
 
 
     getReviews(context) {
@@ -441,7 +464,7 @@ export default new Vuex.Store({
             console.log(err)
           })
       },
-
+      
 
 
   },

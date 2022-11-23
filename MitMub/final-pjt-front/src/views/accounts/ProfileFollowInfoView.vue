@@ -7,7 +7,6 @@
         <span class="material-symbols-outlined" style="color: red;">diversity_1</span>
 
 
-
     
     <p>followers: {{ followers_len }} </p>
     <p>follwings: {{ followings_len }} </p>
@@ -17,14 +16,14 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
-const API_URL = 'http://127.0.0.1:8000'
+// const API_URL = 'http://127.0.0.1:8000'
 export default {
     name: 'ProfileFollowInfoView',
     data() {
         return {
-            isFollow: false,
+            Myprofile : [],
             followers_len: 0,
             followings_len: 0,
         }
@@ -33,35 +32,52 @@ export default {
         profile: {},
     },
     methods: {
-        follow: function () {
-            axios({
-                method: 'post',
-                url: `${API_URL}/api/v1/accounts/${this.profile.username}/follow/`,
+
+        // followNum() {
+        //     axios({
+        //         method: 'get',
+        //         url: `${API_URL}/api/v1/accounts/${this.profile.username}/follow_num/`,
     
-                headers: {
-                    Authorization: `Token ${this.$store.state.token}`
-                }
-            })
-            .then((res) => {
-                this.$store.commit('ADD_REFRESH_PROFILE')
-                if (res.data.detail !== '본인을 팔로우 할 수 없습니다.'){
-                    this.isFollow = !this.isFollow
-                    if (this.isFollow) {
-                    this.followers_len += 1
-                    } else {
-                    this.followers_len -= 1
-                    }
+        //         headers: {
+        //             Authorization: `Token ${this.$store.state.token}`
+        //         }
+        //     })
+        //     .then((res) => {
+        //         this.$store.commit('REFRESH_PROFILE', res.data)
+        
+        //         this.followers_len = res.data.followers_num
+        //         this.followings_num = res.data.followings_num
+                       
             
-                }
-                else {
-                    alert('본인을 팔로우 할 수 없습니다.')
-                }
-            })
-            .catch((err) => { 
-                console.log(err)
-            })
-        },
-    }
+        //     })
+        //     .catch((err) => { 
+        //         console.log(err)
+        //     })
+        // }
+    },
+    created() {
+        this.Myprofile = this.$store.state.profile
+        this.followers_len = this.Myprofile.followers.length
+        this.followings_len = this.Myprofile.followings.length
+        //this.checkFollow()
+        //this.followNum()
+        console.log()
+
+    },
+    mounted() {
+        this.Myprofile = this.$store.state.profile
+        this.followers_len = this.Myprofile.followers.length
+        this.followings_len = this.Myprofile.followings.length
+       //this.checkFollow()
+        //this.followNum() 
+
+        //this.followers_len = this.profile.followers.length
+        //this.followings_len = this.profile.followings.length
+
+
+        console.log(this.profile)
+        console.log(this.isFollow)
+    },
 
 }
 </script>

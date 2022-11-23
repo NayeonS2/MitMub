@@ -5,7 +5,7 @@
     </div>
     
     <h5>{{ profile?.username }}님의 프로필</h5>
-    <YourProfileFollowView :profile="profile"/><br>
+    <YourProfileFollowView :profile="profile" @refreshProfile="refreshProfile"/><br>
      <h5><b>[WatchList]</b></h5>
     <YourWatchListView :profile="profile"/>
 
@@ -30,15 +30,16 @@ export default {
         YourWatchListView,
     },
     props: {
+        other: Object,
   
     },
     data() {
         return {
             profile: [],
             //img_url : `https://avatars.dicebear.com/api/identicon/${this.profile?.username}.svg`,
-            profileList: this.$store.state.profile_list,
+            profileList: [],
 
-            userId: Number(this.$route.params.userId),
+            //userId: Number(this.$route.params.userId),
         }
     },
     computed: {
@@ -55,28 +56,43 @@ export default {
     methods: {
         nowProfile() {
             this.profileList = this.$store.state.profile_list
-            const id = this.userId
-                console.log(typeof(id), id)
-                console.log(typeof(this.$route.params.userId))
+            const id = this.other.id
+                //console.log(typeof(id), id)
+                //console.log(typeof(this.$route.params.userId))
                 for (let profile of this.profileList) {
                     if (id === profile.id) {
                         this.profile = profile
-                        console.log(this.profile)
+                        //console.log(this.profile)
                         
                     }
                 
             }
         },
+
+        refreshProfile(profile) {
+            //this.$store.dispatch('refreshProfile', profile)
+            //this.nowProfile()
+            this.$emit('refreshProfile', profile)
+            console.log(33333333333,profile)
+            this.profile = profile
+            console.log(33333333333,this.profile)
+
+        }
         
     },
     created() {
+        //this.profileList = this.$store.state.profile_list
         this.nowProfile()
+        //this.$store.dispatch('refreshProfile', this.profile)
         //this.profile = this.$store.state.profile
         //this.$router.go(this.$router.currentRoute)
 
     },
     mounted() {
+        //this.profileList = this.$store.state.profile_list
         this.nowProfile()
+        //this.$store.dispatch('refreshProfile', this.profile)
+
         //this.profile = this.$store.state.profile
         //this.$router.go(this.$router.currentRoute)
     },
@@ -89,7 +105,9 @@ export default {
 
         refreshProfileCnt() {
             this.nowProfile()
-            //this.$router.go(this.$router.currentRoute)
+            this.$router.push({name:'CommunityView'})
+            console.log(this.profile)
+            
         }
     }
 }

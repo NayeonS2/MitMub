@@ -86,6 +86,7 @@ const routes = [
     component: YourProfileView
   },
 
+
 ]
 
 const router = new VueRouter({

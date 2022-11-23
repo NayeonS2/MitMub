@@ -12,5 +12,10 @@ urlpatterns = [
     path('<username>/', views.profile),
     path('<username>/follow/', views.follow),
 
+    path('<username>/my_follow/', views.my_follow),
+
+    path('<username>/check_follow/', views.check_follow),
+    path('<username>/follow_num/', views.follow_num),
+
    
 ] 

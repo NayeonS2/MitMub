@@ -37,14 +37,14 @@ export default {
     this.getWatchList()
   },
   watch: {
-    profile: {
-        handler: function (val) {
-            console.log("val", val)
-            //this.watchList = []
-            //this.getWatchlist()
-        },
-        deep: true,
-    },
+    // profile: {
+    //     handler: function (val) {
+    //         //console.log("val", val)
+    //         //this.watchList = []
+    //         //this.getWatchlist()
+    //     },
+    //     deep: true,
+    // },
     
 
   }
