@@ -56,12 +56,12 @@ export default {
         nowProfile() {
             this.profileList = this.$store.state.profile_list
             const id = this.userId
-                console.log(typeof(id), id)
-                console.log(typeof(this.$route.params.userId))
+                // console.log(typeof(id), id)
+                // console.log(typeof(this.$route.params.userId))
                 for (let profile of this.profileList) {
                     if (id === profile.id) {
                         this.profile = profile
-                        console.log(this.profile)
+                        // console.log(this.profile)
                         
                     }
                 

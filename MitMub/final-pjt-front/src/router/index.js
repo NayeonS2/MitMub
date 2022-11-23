@@ -14,6 +14,7 @@ import IntroView from '@/views/movies/IntroView'
 
 import CommunityView from '@/views/accounts/CommunityView'
 import YourProfileView from '@/views/accounts/YourProfileView'
+import SearchView from '@/views/SearchView'
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -84,6 +85,12 @@ const routes = [
     path: '/accounts/profile/:userId/',
     name: 'YourProfileView',
     component: YourProfileView
+  },
+  {
+    path: '/search/:text/',
+    name: 'SearchView',
+    component: SearchView,
+    props: true
   },
 
 ]

@@ -1,16 +1,25 @@
 <template>
   <div id="home-view">
-    <header>
-      <h2 class="mb-3 pb-3"><b>WATCHME.md 👾</b></h2>
+    <header class="d-flex justify-content-center row">
+      <h2 class="mt-5 pt-5">
+        <b>WATCHME.md</b>
+        &nbsp; <!--공백 삽입-->
+        <span>👾</span>
+      </h2>
+      <p class="col-12 pb-5 mb-5" id="nav-div-a" style="width:500px;">
+        <input id="search-input" class="form-control nav-item" type="text" @keyup.enter="searchMovie(searchText)" v-on:input="voninput"
+          placeholder="Search movie ...                                                                       🎬" />
+      </p>
     </header>
     <h5 class="text-start px-3 m-3"> 👍 현재 가장 인기있는 영화</h5>
     <div class="d-flex justify-content-center">
       <carousel
       :autoplay="true" :nav="false" :mouseDrag="true" :margin="1"
-      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="7"
+      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="9"
+      style="max-width: 1860px;"
       >
         <MovieCard
-          v-for="(movie, idx) in nowMovies.slice(0,10)"
+          v-for="(movie, idx) in nowMovies.slice(0,27)"
           :key="idx"
           :movie="movie"
           :idx="idx"
@@ -21,10 +30,11 @@
     <div class="d-flex justify-content-center">
       <carousel
       :autoplay="true" :nav="false" :mouseDrag="true" :margin="1"
-      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="7"
+      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="9"
+      style="max-width: 1860px;"
       >
         <MovieCard
-          v-for="(movie, idx) in highRateList.slice(0,10)"
+          v-for="(movie, idx) in highRateList.slice(0,27)"
           :key="idx"
           :movie="movie"
           :idx="idx"
@@ -35,10 +45,11 @@
     <div class="d-flex justify-content-center">
       <carousel
       :autoplay="true" :nav="false" :mouseDrag="true" :margin="1"
-      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="7"
+      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="9"
+      style="max-width: 1860px;"
       >
         <MovieCard
-          v-for="(movie, idx) in newList.slice(0,10)"
+          v-for="(movie, idx) in newList.slice(0,27)"
           :key="idx"
           :movie="movie"
           :idx="idx"
@@ -49,10 +60,11 @@
     <div class="d-flex justify-content-center">
       <carousel
       :autoplay="true" :nav="false" :mouseDrag="true" :margin="1"
-      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="7"
+      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="9"
+      style="max-width: 1860px;"
       >
         <MovieCard
-          v-for="(movie, idx) in upcomingList.slice(0,10)"
+          v-for="(movie, idx) in upcomingList.slice(0,27)"
           :key="idx"
           :movie="movie"
           :idx="idx"
@@ -63,10 +75,11 @@
     <div class="d-flex justify-content-center">
       <carousel
       :autoplay="true" :nav="false" :mouseDrag="true" :margin="1"
-      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="7"
+      :touchDrag="true" class="col-12" :autoplayHoverPause="true" :items="9"
+      style="max-width: 1860px;"
       >
         <MovieCard
-          v-for="(movie, idx) in longList.slice(0,10)"
+          v-for="(movie, idx) in longList.slice(0,27)"
           :key="idx"
           :movie="movie"
           :idx="idx"
@@ -104,6 +117,7 @@ export default {
       newList: [],
       upcomingList: [],
       longList: [],
+      searchText: null,
     }
   },
   components: {
@@ -184,12 +198,56 @@ export default {
       // this.nowMovies = this.$store.getters.longMovies
       this.longList = this.$store.getters.longMovies
     },
+    searchMovie(text) { 
+      this.$router.push({ name: 'SearchView', params: {text} })
+    },
+    voninput(e) { 
+      this.searchText = e.target.value
+    }
   },
 }
 </script>
 
 <style>
+<<<<<<< HEAD
 #home-view {
   padding-bottom: 70px;
 }
+h2 {
+  height: 100px;
+}
+
+h2 span {
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  animation: bounce .5s ease infinite alternate;
+  font-size: 35px;
+
+}
+
+h2 span:nth-child(8) {
+  animation-delay: .3s;
+}
+h2 span:nth-child(9) {
+  animation-delay: .1s;
+}
+h2 span:nth-child(10) {
+  animation-delay: .1s;
+}
+h2 span:nth-child(11) {
+  animation-delay: .3s;
+}
+
+@keyframes bounce {
+  100% {
+    top: -5px;
+  }
+}
+
+=======
+.popular-list {
+  padding: auto;
+}
+>>>>>>> b1c98dabe40df99bdbcc4384c5465b2ed039846b
 </style>
