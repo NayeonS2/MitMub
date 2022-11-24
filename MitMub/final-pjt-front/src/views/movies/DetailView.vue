@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-3">
+  <div class="mt-3" id="detail-view-main">
     <div tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="movie-detail-info">
         <!-- info header -->
@@ -8,31 +8,54 @@
             <div class="container-fluid">
               <div class="row">
 
-                <div class="col-4 p-0">
-                  <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 318px; height: 450px;" />
-                  <PickMovieView :movie="movie" @refreshMovie="refreshMovie"/>
+                <div class="col-4 p-0" id="detail-div">
+                  <img id="detail-img-profile" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" />
                 </div>
                 <div class="col-8">
-                  <div class="row">
-                    <h2 class="movie-detail-title col-10">
-                      Title  {{ movie?.title }}
-                    </h2>
-                    <span class="d-flex justify-content-end col-2">
-                      <router-link :to="{ name: 'CreateReviewView', params: { movieId: movie?.id } }">리뷰쓰러 가기✏</router-link>
+                  <div id="detailTitle">
+                    <div class="row">
+                      <h2 class="movie-detail-title col-5 text-end mr-2" style="height:50px; margin:0px 0px;">
+                        Title
+                      </h2>
+                      <h2 class=" col text-start" style="height:50px; margin:0px 0px;">
+                        {{ movie?.title }}
+                      </h2>
+                    </div>
+                    <span id="detail-absoulute">
+                      <PickMovieView :movie="movie" @refreshMovie="refreshMovie" />
+                      <router-link :to="{ name: 'CreateReviewView', params: { movieId: movie?.id } }" id="review-router-link">&nbsp;리뷰쓰러 가기✍</router-link>
                     </span>
                   </div>
-                  <div v-if="movie?.release_date">
-                    개봉  {{ movie?.release_date }}
+                  <div id="개봉 정보" v-if="movie?.release_date" class="row">
+                    <div class="col-5 text-end mr-2">
+                      개봉
+                    </div>
+                    <div class="col text-start">
+                      {{ movie?.release_date }}
+                    </div>
                   </div>
-                  <div v-if="movie?.genres">
-                    장르  <span v-for="(gen, idx) in now_genre" :key="idx"> # {{ gen }} </span>
-                    <!-- {{ movie.genre_ids }} -->
+                  <div id="장르 정보" class="row" v-if="movie?.genres">
+                    <div class="col-5 text-end mr-2">
+                      장르
+                    </div>
+                    <div class="col text-start">
+                      <span v-for="(gen, idx) in now_genre" :key="idx"> # {{ gen }} </span>
+                    </div>
                   </div>
-                  <div class="movie-vote">
-                    평점  {{ movie?.vote_average }}
-
+                  <div id="평점">
+                    <div class="row" v-if="movie?.vote_average !== 0">
+                      <div class="movie-vote col-5 text-end mr-2">
+                        평점
+                      </div>
+                      <div class="movie-vote col text-start">
+                        {{ movie?.vote_average }}
+                      </div>
+                    </div>
+                    <div v-if="movie?.vote_average == 0" class="movie-vote">
+                      아직 평점이 없는 영화입니다.
+                    </div>
                   </div>
-                  <div class="star-ratings">
+                  <div v-if="movie?.vote_average !== 0" class="star-ratings">
                     <div 
                       class="star-ratings-fill text-lg"
                       :style="{ width: ratingToPercent + '%' }"
@@ -48,7 +71,7 @@
                   </div>
                   <hr>
                   <!-- info over view -->
-                  <div class="movie-detail-overview-header mb-3 text-start" @click="toggleOnOff">
+                  <div class="movie-detail-overview-header mb-3" @click="toggleOnOff">
                     줄거리 보기 🔽
                   </div>
                   <div v-if="isStatusOn">
@@ -81,8 +104,10 @@ import axios from 'axios'
 import YoutubeList from '@/components/YoutubeList'
 import YoutubeDetail from '@/components/YoutubeDetail'
 import PickMovieView from '@/views/movies/PickMovieView'
+// const API_KEY = 'AIzaSyCzV5aiqbmMpV8r7Xwdi8yGjm3MFD-MDok'
 
 const API_KEY = 'AIzaSyCzV5aiqbmMpV8r7Xwdi8yGjm3MFD-MDok'
+
 const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 export default {
@@ -228,15 +253,21 @@ div {
   font-family: 'Nanum Gothic', sans-serif;
 }
 
+#movie-detail-title {
+  right: 20px;
+}
+
 .star-ratings {
   color: #aaa9a9; 
   position: relative;
   unicode-bidi: bidi-override;
   width: max-content;
-  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 1.3px;
+  /* -webkit-text-fill-color: transparent;  */
+  /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: #2b2a29;
   margin: auto;
+  right: 60px;
 }
  
 .star-ratings-fill {
@@ -258,5 +289,32 @@ div {
 
 .detail-poster-img {
   margin: auto;
+}
+
+#detail-img-profile {
+  min-width: 530px;
+  width: 530px;
+  height: 760px;
+}
+
+#detail-absoulute {
+  position: absolute;
+  right: 1%;
+  top: 10%;
+  height: 110px;
+  border: #9dfffa solid 0.4px;
+  border-radius: 10px;
+  background: #b348405d;
+  /* background-color: rgba(255, 103, 103, 0.5); */
+}
+
+#detail-view-main {
+  min-width: 1500px;
+  padding-bottom: 80px;
+}
+
+#review-router-link {
+  text-decoration: none;
+  color: #eeeeee;
 }
 </style>

@@ -4,7 +4,7 @@
 
     <div id="movie-poster" style="width: 148px; height: 210px;">
       <img id="movie-id" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded my-1" style="width: 148px; height: 210px;" @click="toDetail(movie.id)"/>
-      <h5 id="fingerP" class="text-light" @click="toDetail(movie.id)">$ mit status</h5>
+      <h5 id="fingerPower" class="text-light" @click="toDetail(movie.id)">$ mit status</h5>
       </div>
   </div>
 </template>
@@ -67,7 +67,7 @@ export default {
   transform: scale(1.1);
   }
 
-#fingerP {
+#fingerPower {
   position: absolute;
   width: 100px;
   height: 35px;
@@ -78,7 +78,7 @@ export default {
   opacity: 0;
 }
 
-#movie-poster:hover #fingerP{
+#movie-poster:hover #fingerPower{
   transition: all 0.5s;
   opacity: 1;
   }

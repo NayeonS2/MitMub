@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center">
     <div style="width:500px;">
       <h1>Sign in to MitMub</h1>
-      <div id="sing-in-form">
+      <div id="sign-in-form">
         <form @submit.prevent="logIn" id="form-form">
           <p class="text-start mt-3" for="username">Username</p>
           <input class="form-control" type="text" id="username" v-model="username">
@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style>
-#sing-in-form {
+#sign-in-form {
   background-color:#0C162D;
   padding: auto;
   margin: auto;

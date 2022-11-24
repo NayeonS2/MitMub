@@ -42,7 +42,7 @@ export default {
         return {
             style: {
             position:'absolute',
-            top : `${_.sample([100,350,500])}px`,
+            top : `${_.sample([100,220,370,600])}px`,
             left: `${_.sample([100,250,350,450,550,650,750,850,950,1050,1150,1250,1350,1450,1550,1650,1750])}px`,
             animation:'ani 1s infinite alternate',
             width: '230px'

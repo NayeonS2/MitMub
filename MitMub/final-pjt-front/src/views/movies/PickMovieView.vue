@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <button v-if="isPick" class="btn btn-link" style="color: blue;" @click="pickMovie" >
-      <i class="bi bi-bookmark-check-fill" style="font-size: 2rem; color: blue;"></i>
-    </button>
-    <button v-else class="btn btn-link" style="color: gray;" @click="pickMovie" >
-      <i class="bi bi-bookmark-plus-fill" style="font-size: 2rem; color: white;"></i>
-    </button>
-    <span> {{ pick_movie_num }} Users Pick this movie!</span>
+  <div class="row">
+    <div class="col-1">
+        <button v-if="isPick" class="btn btn-link" style="color: blue;" @click="pickMovie" >
+          <i class="bi bi-bookmark-check-fill" style="font-size: 2rem; color: blue;"></i>
+        </button>
+        <button v-else class="btn btn-link" style="color: gray;" @click="pickMovie" >
+          <i class="bi bi-bookmark-plus-fill" style="font-size: 2rem; color: white;"></i>
+        </button>
+    </div>
+    <div id="pick-div" class="col" style="font-family: 'Abel', sans-serif;"> {{ pick_movie_num }} Users Pick this movie!</div>
   </div>
 </template>
 
@@ -55,10 +57,10 @@ export default {
                 this.$emit('refreshMovie', res.data)
                 this.nowMovie = res.data
                 
-                console.log(this.$store.state.movies)
+                // console.log(this.$store.state.movies)
 
-                console.log(res.data)
-                console.log(this.nowMovie, this.isPick)
+                // console.log(res.data)
+                // console.log(this.nowMovie, this.isPick)
                 
             })
             .catch((err) => { 
@@ -129,5 +131,8 @@ export default {
 </script>
 
 <style>
+#pick-div {
+    margin: 18px 0px 0px 0px;
+}
 
 </style>

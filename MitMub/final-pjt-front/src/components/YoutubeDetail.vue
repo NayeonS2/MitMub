@@ -19,7 +19,7 @@
     computed: {
       videoURI: function () {
         const videoId = this.video.id.videoId
-        return `https://www.youtube.com/embed/${videoId}`
+        return `https://www.youtube-nocookie.com/embed/${videoId}`
       }
     },
     filters: {

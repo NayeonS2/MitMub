@@ -8,8 +8,8 @@
 
 
     
-    <p class="m-0" style="color: #FFEBF0"><b>My Followers: {{ followers_len }}</b></p>
-    <p class="mt-1" style="color: #FFEBF0"><b>My Follwings: {{ followings_len }}</b></p>
+    <p id="myFollow" class="m-0 pe-2" style="color: #FFEBF0"><b>My Followers: {{ followers_len }}</b></p>
+    <p id="myFollow" class="mt-1 pe-2" style="color: #FFEBF0"><b>My Follwings: {{ followings_len }}</b></p>
     <hr>
   </div>
 
@@ -57,14 +57,14 @@ export default {
     },
     created() {
         console.log(this.$store.state.token)
-        if (this.$store.state.token) {
-            if (this.$store.state.profile.length > 0) {
+       
+          
                 this.Myprofile = this.$store.state.profile
-                this.followers_len = this.Myprofile.followers.length
-                this.followings_len = this.Myprofile.followings.length
-            }
+                this.followers_len = this.Myprofile.followers?.length
+                this.followings_len = this.Myprofile.followings?.length
+          
             
-        }
+  
         
         //this.checkFollow()
         //this.followNum()
@@ -72,14 +72,9 @@ export default {
 
     },
     mounted() {
-        if (this.$store.state.token) {
-            if (this.$store.state.profile.length > 0) {
                 this.Myprofile = this.$store.state.profile
-                this.followers_len = this.Myprofile.followers.length
-                this.followings_len = this.Myprofile.followings.length
-            }
-            
-        }
+                this.followers_len = this.Myprofile.followers?.length
+                this.followings_len = this.Myprofile.followings?.length
         
        //this.checkFollow()
         //this.followNum() 
@@ -96,5 +91,7 @@ export default {
 </script>
 
 <style>
-
+    #myFollow {
+        font-family: 'Abel', sans-serif;
+    }
 </style>

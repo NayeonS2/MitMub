@@ -1,11 +1,11 @@
 <template>
   <div>
-    <ul style="list-style:none;">
+    <ul style="list-style:none;" class="p-0">
 
-      <div @click="toggleOnOff"><h5 style="color: #FFEBF0;"><b>My WatchList 🎬</b><hr></h5></div>
+      <div @click="toggleOnOff"><h5 style="color: #FFEBF0; font-family: 'Abel', sans-serif;" class="ms-3"><b>My WatchList 🎬</b><hr></h5></div>
       <div v-if="isStatusOn">
         <li v-for="(movie, idx) in watchList" :key="idx" id="watch">
-          <p>{{ movie.title }} </p> 
+          <p id="myWatch">{{ movie.title }} </p> 
         </li>
       </div>
       
@@ -66,5 +66,9 @@ export default {
 <style>
   #watch {
     color: white;
+  }
+
+  #myWatch {
+    font-family: 'Nanum Gothic', sans-serif;
   }
 </style>
