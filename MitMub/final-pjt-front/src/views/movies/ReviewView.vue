@@ -1,4 +1,5 @@
 <template>
+
   <div>
 
     
@@ -10,6 +11,7 @@
         
         </div>
       
+
     </div>
     <div v-if="movie_reviews.length === 0" style="height: 200px;" class="d-flex justify-content-center align-items-center">
       <h3>작성된 리뷰가 없습니다.</h3>
@@ -69,9 +71,9 @@ export default {
         
         },
 
-        handleChange (newVal) {
+        handleChange () {
             // Handle changes here!
-            console.log(newVal);
+            //console.log(newVal);
             this.$router.go(this.$router.currentRoute)
         },
 
@@ -89,23 +91,23 @@ export default {
     },
 
     watch: {
-        reviewNum: function(new_val,old_val) {
-            console.log(new_val,old_val)
+        reviewNum: function() {
+            //console.log(new_val,old_val)
 
             this.$router.push({name:'ReviewView'})
         },
-        refreshCreateRevCnt: function(new_val,old_val) {
-            console.log(new_val,old_val)
+        refreshCreateRevCnt: function() {
+            //console.log(new_val,old_val)
 
             this.$router.go(this.$router.currentRoute)
         },
-        refreshUpdateRevCnt: function(new_val,old_val) {
-            console.log(new_val,old_val)
+        refreshUpdateRevCnt: function() {
+            //console.log(new_val,old_val)
 
             this.$router.go(this.$router.currentRoute)
         },
-        refreshDeleteRevCnt: function(new_val,old_val) {
-            console.log(new_val,old_val)
+        refreshDeleteRevCnt: function() {
+            //console.log(new_val,old_val)
 
             this.$router.go(this.$router.currentRoute)
         },
@@ -146,5 +148,7 @@ export default {
 </script>
 
 <style>
-
+#re-view {
+    padding-bottom: 80px;
+}
 </style>

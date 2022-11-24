@@ -29,6 +29,7 @@
                 <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br> -->
                 <!-- <input type="submit" id="submit" class="form-control"> -->
                 <button class="btn btn-primary form-control mt-4" type="submit">제출</button>
+                <button class="btn btn-danger form-control mt-2" @click="backReview">뒤로가기</button>
             </form>
 
         </div>
@@ -80,6 +81,10 @@ export default {
         
     },
     methods: {
+        backReview() {
+      
+          this.$router.push({name:'ReviewView'})
+        },
         // movieInfo() {
         //     axios({
         //         method: 'get',
@@ -152,7 +157,7 @@ export default {
                 .then((res) => {
                     this.$store.commit('ADD_REFRESH_UR')
                     //this.$store.state.refresh ++ 
-                    console.log(res)
+                    //console.log(res)
                     //this.$emit('refresh_emit')
                     window.alert("리뷰 수정이 완료되었습니다.")
                     // this.title = ''

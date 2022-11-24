@@ -72,13 +72,13 @@ export default {
                 rightUsername = true
             }
              
-            console.log(username == password1)
+            //console.log(username == password1)
             
             
             let str = '';	
 
             for (let i = 65; i <= 122; i++) {
-                console.log(String.fromCharCode(i));
+                //console.log(String.fromCharCode(i));
                 
                 str += String.fromCharCode(i);
             }
@@ -87,7 +87,7 @@ export default {
             const nums = ['0','1','2','3','4','5','6','7','8','9']
 
             const arrPass = Array.from(password1)
-            console.log(upperChar,lowerChar)
+            //console.log(upperChar,lowerChar)
 
 
             let confPass = true
@@ -115,7 +115,7 @@ export default {
 
             let similarConf = arrPass.filter(it => arrUsername.includes(it))
 
-            console.log(conf1,conf2,conf3)
+            //console.log(conf1,conf2,conf3)
 
             if (unique === true && rightUsername === true && similarConf.length < arrPass.length*0.7 && confPass === true && conf1.length > 0 && conf2.length >0 && conf3.length > 0 && arrPass.length >= 8) {
                 this.$store.dispatch('signUp', payload)

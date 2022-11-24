@@ -1,13 +1,15 @@
 <template>
   <div>
-    <ul>
+    <ul style="list-style:none; padding: 0;">
       <li v-for="(comment, idx) in comments" :key="idx" style="text-align: left;">
         <div class="row">
-           <div class="col-auto" @click="toDetail(Number(userId))">
+
+           <div class="col-auto">
+
             {{ comment.user }} : {{ comment.content }}
           </div>
-          <div class="col-auto d-grid gap-2 d-md-flex justify-content-md-end text-center">
-            <button v-if="comment.user === user" @click="deleteComment(comment)" class="btn btn-light form-control me-md-5">❌</button>
+          <div class="col-3 d-grid gap-2 d-md-flex justify-content-md-end text-center">
+            <p v-if="comment.user === user" @click="deleteComment(comment)" class="me-md-5">❌</p>
           </div>
         
         </div>
@@ -33,6 +35,7 @@ export default {
         comments: [],
         user: this.$store.state.profile.username,
         comment_length: 0,
+        commentUser: '',
       }
     },
     computed: {
@@ -40,8 +43,14 @@ export default {
     },
     methods: {
       toDetail(userId){
-        this.$router.push({name:'YourDetailProfileView', params: {'userId':Number(userId)}})
-      },
+          console.log(userId)
+          if (Number(userId) !== Number(this.$store.state.profile.id)) {
+            this.$router.push({name:'YourDetailProfileView', params: {'userId':Number(userId)}})
+            
+          }
+        
+            },
+      
 
       getComments() {
         axios({
@@ -52,7 +61,7 @@ export default {
                   }
           })
           .then(res => {
-            console.log(res)
+            //console.log(res)
 
             this.comments = res.data
 
@@ -60,6 +69,7 @@ export default {
                 for (var user of this.$store.state.users) {
                 if (comment.user === user.id){
                     comment.user = user.username
+                    this.commentUser = user.id
                         }
                     }
                 }
@@ -70,7 +80,6 @@ export default {
           })
       },
       deleteComment(comment) {
-                alert("댓글을 삭제하시겠습니까?")
                 axios({
                     method: 'delete',
                     url: `${API_URL}/api/v1/movies/delete_comment/${comment.id}/`,
@@ -81,9 +90,9 @@ export default {
                 })
                 .then((res) => {
                     this.$store.commit('ADD_REFRESH_DC')
-                    console.log(res)
+                    //console.log(res)
                
-                    window.alert("댓글 삭제 완료!")
+                    window.alert("댓글이 삭제 되었습니다!")
            
                     this.$router.push({ name: 'ReviewDetailView', params: {reviewId: this.review.id} })
                 })

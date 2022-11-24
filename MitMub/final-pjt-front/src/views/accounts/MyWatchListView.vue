@@ -56,7 +56,7 @@ export default {
   watch: {
     profile: {
         handler: function (val) {
-            console.log("val", val)
+            //console.log("val", val)
             //this.watchList = []
             this.getWatchlist()
         },

@@ -7,70 +7,70 @@
           <div>
             <div class="container-fluid">
               <div class="row">
-
                 <div class="col-4 p-0" id="detail-div">
                   <img id="detail-img-profile" :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" />
                 </div>
-                <div class="col-8">
-                  <div id="detailTitle">
+                <div class="col-8 row">
+                  <div id="col-id" class="col">
+
+                    <div id="detailTitle">
                     <div class="row">
                       <h2 class="movie-detail-title col-5 text-end mr-2" style="height:50px; margin:0px 0px;">
                         Title
                       </h2>
-                      <h2 class=" col text-start" style="height:50px; margin:0px 0px;">
+                      <h2 class="col text-start" style="height:50px; margin:0px 0px;">
                         {{ movie?.title }}
                       </h2>
                     </div>
-                    <span id="detail-absoulute">
-                      <PickMovieView :movie="movie" @refreshMovie="refreshMovie" />
-                      <router-link :to="{ name: 'CreateReviewView', params: { movieId: movie?.id } }" id="review-router-link">&nbsp;리뷰쓰러 가기✍</router-link>
-                    </span>
-                  </div>
-                  <div id="개봉 정보" v-if="movie?.release_date" class="row">
-                    <div class="col-5 text-end mr-2">
-                      개봉
-                    </div>
-                    <div class="col text-start">
-                      {{ movie?.release_date }}
-                    </div>
-                  </div>
-                  <div id="장르 정보" class="row" v-if="movie?.genres">
-                    <div class="col-5 text-end mr-2">
-                      장르
-                    </div>
-                    <div class="col text-start">
-                      <span v-for="(gen, idx) in now_genre" :key="idx"> # {{ gen }} </span>
-                    </div>
-                  </div>
-                  <div id="평점">
-                    <div class="row" v-if="movie?.vote_average !== 0">
-                      <div class="movie-vote col-5 text-end mr-2">
-                        평점
+                    <br>
+                    <div id="개봉 정보" v-if="movie?.release_date" class="row">
+                      <div class="col-5 text-end mr-2">
+                        개봉
                       </div>
-                      <div class="movie-vote col text-start">
-                        {{ movie?.vote_average }}
+                      <div class="col text-start">
+                        {{ movie?.release_date }}
                       </div>
                     </div>
-                    <div v-if="movie?.vote_average == 0" class="movie-vote">
-                      아직 평점이 없는 영화입니다.
+                    <div id="장르 정보" class="row" v-if="movie?.genres">
+                      <div class="col-5 text-end mr-2">
+                        장르
+                      </div>
+                      <div class="col text-start">
+                        <span v-for="(gen, idx) in now_genre" :key="idx"> # {{ gen }} </span>
+                      </div>
+                    </div>
+                    <div id="평점">
+                      <div class="row" v-if="movie?.vote_average !== 0">
+                        <div class="movie-vote col-5 text-end mr-2">
+                          평점
+                        </div>
+                        <div class="movie-vote col text-start">
+                          {{ movie?.vote_average }}
+                        </div>
+                      </div>
+                      <div v-if="movie?.vote_average == 0" class="movie-vote">
+                        아직 평점이 없는 영화입니다.
+                      </div>
+                    </div>
+                    <div v-if="movie?.vote_average !== 0" class="star-ratings">
+                      <div 
+                        class="star-ratings-fill text-lg"
+                        :style="{ width: ratingToPercent + '%' }"
+                      >
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                      </div>
+                      <div class="star-ratings-base text-lg">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                      </div>
+                    </div>
                     </div>
                   </div>
-                  <div v-if="movie?.vote_average !== 0" class="star-ratings">
-                    <div 
-                      class="star-ratings-fill text-lg"
-                      :style="{ width: ratingToPercent + '%' }"
-                    >
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                    <div class="star-ratings-base text-lg">
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-                  </div>
-                  <div class="movie-vote">
-                    <!-- 인기지수 : {{ movie?.popularity }} -->
-                  </div>
+                  <span id="detail-absoulute" class="col-3">
+                    <PickMovieView :movie="movie" @refreshMovie="refreshMovie" />
+                    <router-link :to="{ name: 'CreateReviewView', params: { movieId: movie?.id } }" id="review-router-link">&nbsp;리뷰쓰러 가기✍</router-link>
+                  </span>
+                
                   <hr>
-                  <!-- info over view -->
                   <div class="movie-detail-overview-header mb-3" @click="toggleOnOff">
                     줄거리 보기 🔽
                   </div>
@@ -106,7 +106,7 @@ import YoutubeDetail from '@/components/YoutubeDetail'
 import PickMovieView from '@/views/movies/PickMovieView'
 // const API_KEY = 'AIzaSyCzV5aiqbmMpV8r7Xwdi8yGjm3MFD-MDok'
 
-const API_KEY = 'AIzaSyCzV5aiqbmMpV8r7Xwdi8yGjm3MFD-MDok'
+const API_KEY = 'AIzaSyDuvPIf-TDC2fzov6I904vrJq32bB6vltA'
 
 const API_URL = 'https://www.googleapis.com/youtube/v3/search'
 
@@ -175,18 +175,14 @@ export default {
 
 
     getGenre() {
-
         for(const genre of this.movie.genres) {
             this.now_genre.push(this.genre[Number(genre)])
    
-            console.log(this.now_genre)
+            // console.log(this.now_genre)
         
             break
         }
       },
-      
-    
-
 
     searchYoutube(){
       this.inputValue = this.movie.title + ' ' + this.searchText
@@ -292,13 +288,12 @@ div {
 }
 
 #detail-img-profile {
-  min-width: 530px;
-  width: 530px;
-  height: 760px;
+  width: 450px;
+  height: 680px;
 }
 
 #detail-absoulute {
-  position: absolute;
+  /* position: absolute; */
   right: 1%;
   top: 10%;
   height: 110px;
@@ -316,5 +311,14 @@ div {
 #review-router-link {
   text-decoration: none;
   color: #eeeeee;
+}
+
+#col-id {
+  color: rgb(255, 236, 236)ee;
+  text-shadow: -1px 0px #103300, 0px 1px #103300, 1px 0px #103300, 0px -1px #103300;
+}
+
+#col-id h2{
+  font: bold;
 }
 </style>

@@ -141,7 +141,7 @@ export default {
           },
         })
           .then(res => {
-            console.log(res.data)
+            //console.log(res.data)
             // acounts serializers에 정의된 프로필 데이터 받아옴.
             this.$store.dispatch('getProfile', res.data)
             this.profile = this.$store.state.profile
@@ -290,6 +290,8 @@ export default {
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
+
+  display: block;
 }
 
 nav {
@@ -330,22 +332,28 @@ nav a.router-link-exact-active {
 }
 
 footer {
+  font-family: 'Abel', sans-serif;
   width: 100%;
   height: 60px;
   bottom: 0px;
   position: absolute;
   margin-top: 5px;
+  color: #eeeeee;
 }
 
 #footer-nav {
+  font-family: 'Abel', sans-serif;
   padding: 0;
   margin: 0;
+  color: #eeeeee;
 }
 
 #footer-nav * {
   font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'Abel', sans-serif;
   padding: 0;
   margin: 0;
+  color: #eeeeee;
 }
 
 #nav-div-a {

@@ -16,6 +16,7 @@ import CommunityView from '@/views/accounts/CommunityView'
 import YourProfileView from '@/views/accounts/YourProfileView'
 import YourDetailProfileView from '@/views/accounts/YourDetailProfileView'
 import SearchView from '@/views/SearchView'
+import WatchList from '@/views/movies/WatchList'
 
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -96,6 +97,12 @@ const routes = [
     path: '/search/:text/',
     name: 'SearchView',
     component: SearchView,
+    props: true
+  },
+  {
+    path: '/my-watch-list/',
+    name: 'WatchList',
+    component: WatchList,
     props: true
   },
 

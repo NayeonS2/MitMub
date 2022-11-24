@@ -121,6 +121,9 @@ export default new Vuex.Store({
     },
     searchMovies(state) {
       return state.search_movies
+    },
+    watchList(state) {
+      return state.watch_list
     }
   },
   mutations: {
@@ -204,7 +207,7 @@ export default new Vuex.Store({
           
         }
       }
-      console.log(33333,state.movies)
+      //console.log(33333,state.movies)
     },
 
     PUSH_WATCH(state, newMovie) {
@@ -228,7 +231,7 @@ export default new Vuex.Store({
           
         }
       }
-      console.log(33333,state.movies)
+      //console.log(33333,state.movies)
     },
 
 
@@ -347,7 +350,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
 
-          console.log(res)
+          //console.log(res)
           context.commit('SAVE_TOKEN_SIGNUP', res.data.key)
 
           context.commit('ADD_REFRESH_H')
@@ -373,7 +376,7 @@ export default new Vuex.Store({
 
       })
         .then((res) => {
-          console.log(res)
+          //console.log(res)
           alert("로그인이 완료되었습니다!")
           success = true
   
@@ -406,7 +409,7 @@ export default new Vuex.Store({
 
       })
         .then((res) => {
-          console.log(res)
+          //console.log(res)
   
           context.commit('LOGOUT')
           
@@ -430,7 +433,7 @@ export default new Vuex.Store({
         })
           .then(res => {
             context.commit('GET_MOVIES', res.data)
-            console.log('popular')
+            //console.log('popular')
           })
           .catch(err => {
             console.error(err)
@@ -451,7 +454,7 @@ export default new Vuex.Store({
       })
         .then(res => {
           context.commit('HIGH_RATE_MOVIES', res.data)
-          console.log('highrate')
+          //console.log('highrate')
         })
         .catch(err => {
           console.error(err)
@@ -473,7 +476,7 @@ export default new Vuex.Store({
         })
           .then(res => {
             context.commit('NEW_MOVIES', res.data)
-            console.log('new')
+            //console.log('new')
           })
           .catch(err => {
             console.error(err)
@@ -494,7 +497,7 @@ export default new Vuex.Store({
         })
           .then(res => {
             context.commit('UPCOMING_MOVIES', res.data)
-            console.log('upcoming')
+            //console.log('upcoming')
           })
           .catch(err => {
             console.error(err)
@@ -516,7 +519,7 @@ export default new Vuex.Store({
         })
           .then(res => {
             context.commit('LONG_MOVIES', res.data)
-            console.log('long')
+            //console.log('long')
           })
           .catch(err => {
             console.error(err)

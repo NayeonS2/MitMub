@@ -49,7 +49,7 @@ export default {
             }
             })
             .then((res) => {
-                console.log(res)
+                //console.log(res)
                 //this.isLike = !this.isLike
                 // if (this.isLike) {
                 //     this.like_review_len += 1
@@ -82,7 +82,7 @@ export default {
             }
             })
             .then((res) => {
-                console.log(res)
+                //console.log(res)
                 // this.isLike = !this.isLike
                 // if (this.isLike) {
                 //     this.like_review_len += 1
@@ -143,8 +143,8 @@ export default {
   watch: {
     likeUsers: {
        
-      handler: function (val) {
-        console.log("val", val); // {title: '', contens: '변경'}
+      handler: function () {
+        //console.log("val", val); // {title: '', contens: '변경'}
         //this.$router.push({name:'HomeView'})
         //this.update_like()
         this.like_review = this.review.like_users,

@@ -93,9 +93,9 @@ export default {
             //this.$store.dispatch('refreshProfile', profile)
             //this.nowProfile()
             this.$emit('refreshProfile', profile)
-            console.log(33333333333,profile)
+            //console.log(33333333333,profile)
             this.profile = profile
-            console.log(33333333333,this.profile)
+            //console.log(33333333333,this.profile)
 
         },
 
@@ -130,7 +130,7 @@ export default {
         refreshProfileCnt() {
             this.nowProfile()
             this.$router.push({name:'CommunityView'})
-            console.log(this.profile)
+            //console.log(this.profile)
             
         }
     }

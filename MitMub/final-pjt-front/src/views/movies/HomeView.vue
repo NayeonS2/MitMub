@@ -87,9 +87,11 @@
       </carousel>
     </div>
     <div class="p-0 col">
-      <div class="popular-list row d-flex justify-content-center">
+      <div class="popular-list row d-flex justify-content-center" style="right:10px;">
         <MovieCard2
-          v-for="(movie, idx) in nowMovies.slice(0,270)"
+
+          v-for="(movie, idx) in nowMovies.slice(0,180)"
+
           :key="idx"
           :movie="movie"
           class="col-1"

@@ -61,7 +61,7 @@ export default {
             })
             .then((res) => {
                 this.$store.commit('REFRESH_PROFILE', res.data)
-                console.log(res.data)
+                //console.log(res.data)
                 //console.log(res.data.detail)
                 if (res.data.detail !== '본인을 팔로우 할 수 없습니다.'){
                         //this.isFollow = !this.isFollow
@@ -248,8 +248,8 @@ export default {
      
         // }
 
-        console.log(this.profile)
-        console.log(this.isFollow)
+        //console.log(this.profile)
+        //console.log(this.isFollow)
     },
     watch: {
         isFollow() {
