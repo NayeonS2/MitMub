@@ -1,13 +1,17 @@
 <template>
   <div id="app" style="margin: auto;">
     <!-- offcanvas == 옆에 뭐 띄우는 거 -->
-    <div v-if="isLogin === true" class="offcanvas offcanvas-end" style=" background: linear-gradient(45deg, pink, white 1px,violet,darkviolet,navy 90%, black);" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div v-if="isLogin === true" class="offcanvas offcanvas-end"
+      tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header">
-        <div class="card-header" style="color:#141414;"><h5 style="color: lightgrey;">Signed in as <b style="color: #eeeeee;">{{profile?.username}}</b></h5></div>
-        <button type="button" class="btn btn-close btn-outline-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="card-header" style="color:#141414;">
+          <h5 style="color: lightgrey;">Signed in as <b style="color: #eeeeee;">{{ profile?.username }}</b></h5>
+        </div>
+        <h5 type="button" data-bs-dismiss="offcanvas"
+          aria-label="Close">✖</h5>
       </div>
       <div class="offcanvas-body">
-        <ProfileView :user="user"/>
+        <ProfileView :user="user" />
         <a href="#" @click.prevent="logOut" v-if="isLogin === true" class="text-decoration-none">LogOut</a>
       </div>
     </div>
@@ -15,35 +19,39 @@
     <nav class="navbar">
 
       <div id="nav-div" class="container justify-content-between">
-        <a href="http://localhost:8080/"><img id="logo-image" 
-          src="@/assets/images/RowLogo.png" 
-          style="width:170px; height:80px;"
-        />
+        <a href="http://localhost:8080/"><img id="logo-image" src="@/assets/images/RowLogo.png"
+            style="width:170px; height:80px;" />
         </a>
 
         <div>
           <!-- 로그인 안 된 사용자 용 ui -->
-          <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'LogInView' }">Sign in </router-link><span v-if="isLogin === false"> | </span> 
-          <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'SignUpView' }">Sign up </router-link><span v-if="isLogin === false"> | </span>  
+          <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'LogInView' }">Sign in
+          </router-link><span v-if="isLogin === false"> | </span>
+          <router-link v-if="isLogin === false" class="text-decoration-none" :to="{ name: 'SignUpView' }">Sign up
+          </router-link><span v-if="isLogin === false"> | </span>
           <!-- 로그인 된 사용자 용 ui -->
-          <router-link v-if="isLogin === true" class="text-decoration-none me-4 fs-5" :to="{ name: 'ReviewView' }">Reviews </router-link>
+          <router-link v-if="isLogin === true" class="text-decoration-none me-4 fs-5" :to="{ name: 'ReviewView' }">
+            Reviews </router-link>
 
-          <router-link v-if="isLogin === true" class="text-decoration-none me-4 fs-5" :to="{ name: 'CommunityView' }">Community </router-link>
-          <button v-if="isLogin === true" class="btn btn-outline-secondary mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Signed in as <b style="color: #eeeeee;">{{profile?.username}}</b> 🚀</button>
+          <router-link v-if="isLogin === true" class="text-decoration-none me-4 fs-5" :to="{ name: 'CommunityView' }">
+            Community </router-link>
+          <button v-if="isLogin === true" class="btn btn-outline-secondary mb-2" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Signed in
+            as <b style="color: #eeeeee;">{{ profile?.username }}</b> 🚀</button>
 
 
         </div>
       </div>
     </nav>
     <transition name="slide-fade" mode="out-in">
-      <router-view :key="$route.fullPath"/>
+      <router-view :key="$route.fullPath" />
     </transition>
     <footer>
       <nav id="footer-nav">
         <a href='https://github.com/NayeonS2' target='_blank'>NayeonS2</a> |
         <a href='https://github.com/recorror' target='_blank'>recorror</a>
         <p>
-          <span>Copyright 2020. cocoder. All Rights Reserved.</span>
+          <span>Copyright 2022. 중요한 것은 꺾이지 않는 마음. All Rights Reserved.</span>
         </p>
       </nav>
     </footer>
@@ -98,16 +106,16 @@ export default {
     },
 
     getUserName() {
-      
-        this.$store.dispatch('getUserName')
-      
-      },
+
+      this.$store.dispatch('getUserName')
+
+    },
     getUser() {
       axios({
         method: 'get',
-        url: `${API_URL}/api/v1/accounts/get_user/`, 
+        url: `${API_URL}/api/v1/accounts/get_user/`,
         headers: {
-          Authorization: `Token ${ this.$store.state.token }`,
+          Authorization: `Token ${this.$store.state.token}`,
         },
       })
         .then(res => {
@@ -118,25 +126,25 @@ export default {
           console.error(err)
         })
     },
-    
+
     getProfile() {
-      
+
       if (this.user) {
         axios({
           method: 'get',
           // username 경로로 토큰 요청
-          url: `${API_URL}/api/v1/accounts/${this.user}/`, 
+          url: `${API_URL}/api/v1/accounts/${this.user}/`,
           headers: {
-            Authorization: `Token ${ this.$store.state.token }`,
+            Authorization: `Token ${this.$store.state.token}`,
           },
         })
           .then(res => {
-            console.log(res.data) 
+            console.log(res.data)
             // acounts serializers에 정의된 프로필 데이터 받아옴.
             this.$store.dispatch('getProfile', res.data)
             this.profile = this.$store.state.profile
-            
-            
+
+
           })
           .catch(err => {
             console.error(err)
@@ -147,52 +155,52 @@ export default {
 
     profileList() {
       axios({
-          method: 'get',
-          // username 경로로 토큰 요청
-          url: `${API_URL}/api/v1/accounts/profile_list/`, 
-          headers: {
-            Authorization: `Token ${ this.$store.state.token }`,
-          },
+        method: 'get',
+        // username 경로로 토큰 요청
+        url: `${API_URL}/api/v1/accounts/profile_list/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`,
+        },
+      })
+        .then(res => {
+          // console.log(res.data) 
+          // acounts serializers에 정의된 프로필 데이터 받아옴.
+          this.$store.dispatch('profileList', res.data)
+          this.profile_list = this.$store.state.profile_list
+
+
         })
-          .then(res => {
-            // console.log(res.data) 
-            // acounts serializers에 정의된 프로필 데이터 받아옴.
-            this.$store.dispatch('profileList', res.data)
-            this.profile_list = this.$store.state.profile_list
-            
-            
-          })
-          .catch(err => {
-            console.error(err)
-          })
+        .catch(err => {
+          console.error(err)
+        })
     },
 
     getMovies() {
-              this.$store.dispatch('getMovies')
-        },
+      this.$store.dispatch('getMovies')
+    },
     highRateMovies() {
-          this.$store.dispatch('highRateMovies')
+      this.$store.dispatch('highRateMovies')
     },
     newMovies() {
-        this.$store.dispatch('newMovies')
+      this.$store.dispatch('newMovies')
     },
     upcomingMovies() {
-        this.$store.dispatch('upcomingMovies')
+      this.$store.dispatch('upcomingMovies')
     },
     longMovies() {
-        this.$store.dispatch('longMovies')
+      this.$store.dispatch('longMovies')
     },
 
     getReviews() {
       this.$store.dispatch('getReviews')
     },
-    
+
 
   },
 
   // 인스턴스 생성 시에 로그인 된 상태면 불러올 메서드들 정의
   created() {
-    
+
     if (this.isLogin) {
       this.login = true
       this.getUserName()
@@ -201,7 +209,7 @@ export default {
       this.getProfile()
       this.profileList()
 
-      
+
 
       // this.getMovies()
       // this.highRateMovies()
@@ -213,8 +221,8 @@ export default {
       this.login = false
     }
     if (this.popularLen === 0) {
-        this.getMovies()
-      }
+      this.getMovies()
+    }
     if (this.highRateLen === 0) {
       this.highRateMovies()
     }
@@ -236,14 +244,14 @@ export default {
     //this.$router.push({name:'HomeView'})
   },
   mounted() {
-    
+
 
   },
 
   // login 할 때  
   watch: {
-    login: function() {
-      
+    login: function () {
+
       this.getProfile()
       this.getUser()
       this.profileList()
@@ -251,7 +259,7 @@ export default {
       this.user = this.$store.state.username
       this.profile_list = this.$store.state.profile_list
 
-      
+
     },
 
   }
@@ -264,6 +272,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
 #app {
   font-family: 'Nanum Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -280,14 +289,11 @@ export default {
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
-#app *{
-  font-family: 'Nanum Gothic', sans-serif;
-}
 
 nav {
   margin: 0;
   padding: 30px;
-  min-width: 992px;
+  min-width: 997px;
   max-width: 1920px;
 }
 
@@ -295,8 +301,9 @@ nav a {
   font-weight: bold;
   color: #eeeeee;
 }
+
 #nav-div {
-  min-width: 992px;
+  min-width: 997px;
   max-width: 1860px;
 }
 
@@ -321,17 +328,19 @@ nav a.router-link-exact-active {
 }
 
 footer {
-	width: 100%;
-	height: 60px;
-	bottom: 0px;
-	position: absolute;
+  width: 100%;
+  height: 60px;
+  bottom: 0px;
+  position: absolute;
+  margin-top: 5px;
 }
 
 #footer-nav {
   padding: 0;
   margin: 0;
 }
-#footer-nav *{
+
+#footer-nav * {
   padding: 0;
   margin: 0;
 }
@@ -345,4 +354,11 @@ footer {
   color: #eeeeee;
 }
 
+#offcanvasScrolling {
+  background-image: url(@/assets/images/profileback.jpg);
+  background-repeat: no-repeat;
+  height: 960px;
+  width: 380px;
+  background-size: cover;
+}
 </style>
