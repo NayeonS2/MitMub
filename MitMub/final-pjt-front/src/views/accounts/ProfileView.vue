@@ -56,8 +56,8 @@ export default {
                         this.$store.dispatch('getProfile', res.data)
                         this.$router.go(this.$router.currentRoute)
                       
-                        console.log(this.user)
-                        console.log(this.profile)
+                        // console.log(this.user)
+                        // console.log(this.profile)
                     })
                     .catch(err => {
                         console.error(err)

@@ -52,9 +52,6 @@ export default {
                 })
                 .then(() => {
                     this.$store.commit('ADD_REFRESH_CC')
-                    //this.$store.state.refresh ++
-                    //this.$emit('refresh')
-                    alert("댓글 작성 완료!")
                     this.comment = ''
                 })
                 .catch((err) => { 
@@ -72,5 +69,7 @@ export default {
 </script>
 
 <style>
-
+#comment {
+    color: #141414;
+}
 </style>
