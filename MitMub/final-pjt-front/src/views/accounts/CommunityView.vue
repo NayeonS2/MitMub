@@ -1,14 +1,17 @@
 <template>
         
-
+        <div id="back">
+            <span id="profile">
+                <YourProfileView v-for="(other,idx) in others" :key="idx"
+                :other="other"
+                :idx="idx"
+                @refreshProfile="refreshProfile"
+                
+                />
+            </span>
+        </div>
         
-       <div>
-        <YourProfileView v-for="(other,idx) in others" :key="idx"
-        :other="other"
-        :idx="idx"
-        @refreshProfile="refreshProfile"
-        />
-       </div>
+       
         
  
 
@@ -17,6 +20,7 @@
 </template>
 
 <script>
+
 import YourProfileView from '@/views/accounts/YourProfileView'
 
 export default {
@@ -27,16 +31,25 @@ export default {
     },
     data() {
         return {
-           
+            
+            
             others: [],
             profileList: [],
             users: [],
         }
     },
     computed: {
+
+        htmlInput() {
+            return `{position:relative, top:${this.randomY}px, left:${this.randomX}px}`
+        },
+
         refreshProfileCnt() {
             return this.$store.state.refresh_profile
-        }
+        },
+
+       
+
         // users() {
         //     return this.$store.state.users
         // },
@@ -125,14 +138,16 @@ export default {
 </script>
 
 <style>
-   
-    /* #dung{
-            position:absolute; top:150px;
-    left:300px;
-    animation:ani 1s infinite alternate;  
+    #back {
+        position: relative;
     }
+   
+    /* #profile{
+            
+    animation:ani 1s infinite alternate;  
+    } */
     @keyframes ani{
     0%{transform:translate(0,0);}
     100%{transform:translate(0,50px);}
-    }   */
+    }  
 </style>

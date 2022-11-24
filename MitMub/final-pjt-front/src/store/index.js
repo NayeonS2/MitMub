@@ -151,7 +151,7 @@ export default new Vuex.Store({
 
     LOGOUT(state) {
       state.token = null  
-      state.username = ''
+      state.username = null
       state.profile = []
       router.push({name:'LogInView'})
     },

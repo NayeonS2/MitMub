@@ -56,18 +56,31 @@ export default {
         // }
     },
     created() {
-        this.Myprofile = this.$store.state.profile
-        this.followers_len = this.Myprofile.followers.length
-        this.followings_len = this.Myprofile.followings.length
+        console.log(this.$store.state.token)
+        if (this.$store.state.token) {
+            if (this.$store.state.profile.length > 0) {
+                this.Myprofile = this.$store.state.profile
+                this.followers_len = this.Myprofile.followers.length
+                this.followings_len = this.Myprofile.followings.length
+            }
+            
+        }
+        
         //this.checkFollow()
         //this.followNum()
         console.log()
 
     },
     mounted() {
-        this.Myprofile = this.$store.state.profile
-        this.followers_len = this.Myprofile.followers.length
-        this.followings_len = this.Myprofile.followings.length
+        if (this.$store.state.token) {
+            if (this.$store.state.profile.length > 0) {
+                this.Myprofile = this.$store.state.profile
+                this.followers_len = this.Myprofile.followers.length
+                this.followings_len = this.Myprofile.followings.length
+            }
+            
+        }
+        
        //this.checkFollow()
         //this.followNum() 
 

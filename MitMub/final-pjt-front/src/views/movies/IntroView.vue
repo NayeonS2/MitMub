@@ -7,7 +7,7 @@
 
         <v-typical
         class="blink"
-        :steps="[2000,'Welcome', 500,'Welcome to MitMub !', 1000]"
+        :steps="[1900,'Welcome', 500,'Welcome to MitMub !', 1000]"
         :wrapper="'h2'"
         @animationend="event"
     ></v-typical>
@@ -87,10 +87,10 @@ export default {
 
 <style>
     .rocket {text-align: center; margin-top: 20px;}
-    .rocketImg{animation: motion 4s linear 0s alternate forwards; margin-top: 0;}
+    .rocketImg{animation: motion 2.8s linear 0s alternate forwards; margin-top: 0;}
 
     @keyframes motion {
-        0% {margin-top: 0px;}
+        0% {margin-top: 500px;}
         100% {margin-top: -1000px;}
     }
     

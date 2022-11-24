@@ -4,7 +4,7 @@
       <li v-for="(comment, idx) in comments" :key="idx" style="text-align: left;">
         <div class="row">
            <div class="col-auto">
-            {{ user }} : {{ comment.content }}
+            {{ comment.user }} : {{ comment.content }}
           </div>
           <div class="col-auto d-grid gap-2 d-md-flex justify-content-md-end text-center">
             <button v-if="comment.user === user" @click="deleteComment(comment)" class="btn btn-light form-control me-md-5">❌</button>

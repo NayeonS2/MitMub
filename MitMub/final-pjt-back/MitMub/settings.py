@@ -188,7 +188,9 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'accounts.User'
 
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
+ACCOUNT_EMAIL_VERIFICATION = 'none' # 회원가입 과정에서 이메일 인증 사용 X
 # import datetime
 
 # JWT_AUTH = {

@@ -1,24 +1,28 @@
 <template>
   <div>
-    <ul>
-      <li v-for="(movie, idx) in watchList" :key="idx">
-        {{ movie.title }}  
-      </li>
-    </ul>
+ 
+        <MovieCard3 v-for="(movie, idx) in watchList" :key="idx" :movie="movie"/>
+        <!-- {{ movie.title }}   -->
+
   </div>
 </template>
 
 <script>
+import MovieCard3 from '@/components/movies/MovieCard3'
 export default {
     name: 'YourWatchListView',
     data() {
         return {
             movies: this.$store.state.movies,
-            watchList: []
+            watchList: [],
+            
         }
     },
     props: {
         profile: {}
+    },
+    components: {
+      MovieCard3
     },
     methods: {
         getWatchList () {

@@ -1,7 +1,7 @@
 <template>
   <div id="app" style="margin: auto;">
     <!-- offcanvas == 옆에 뭐 띄우는 거 -->
-    <div v-if="isLogin === true" class="offcanvas offcanvas-end" style=" background: linear-gradient(45deg, pink, white 1px,violet,darkviolet,navy 90%, black);" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div v-if="isLogin === true" class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
       <div class="offcanvas-header">
         <div class="card-header" style="color:#141414;"><h5 style="color: lightgrey;">Signed in as <b style="color: #eeeeee;">{{profile?.username}}</b></h5></div>
         <button type="button" class="btn btn-close btn-outline-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -343,6 +343,14 @@ footer {
 #search-input {
   background: none;
   color: #eeeeee;
+}
+
+#offcanvasScrolling {
+  background-image:url(@/assets/images/profileback.jpg);
+  background-repeat: no-repeat;
+  height:960px;
+  width:380px;
+  background-size: cover;
 }
 
 </style>
