@@ -96,6 +96,9 @@ export default new Vuex.Store({
     },
     searchMovies(state) {
       return state.search_movies
+    },
+    watchList(state) {
+      return state.watch_list
     }
   },
   mutations: {

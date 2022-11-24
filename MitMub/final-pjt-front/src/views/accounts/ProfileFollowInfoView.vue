@@ -56,7 +56,7 @@ export default {
         // }
     },
     created() {
-        console.log(this.$store.state.token)
+        // console.log(this.$store.state.token)
        
           
                 this.Myprofile = this.$store.state.profile
@@ -68,7 +68,7 @@ export default {
         
         //this.checkFollow()
         //this.followNum()
-        console.log()
+        // console.log()
 
     },
     mounted() {
@@ -83,8 +83,8 @@ export default {
         //this.followings_len = this.profile.followings.length
 
 
-        console.log(this.profile)
-        console.log(this.isFollow)
+        // console.log(this.profile)
+        // console.log(this.isFollow)
     },
 
 }

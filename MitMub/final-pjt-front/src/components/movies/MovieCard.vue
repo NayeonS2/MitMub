@@ -5,7 +5,7 @@
         @click="toDetail(movie.id)" />
       <h1 id="fingerP" @click="toDetail(movie.id)">$ mit status</h1>
       <!-- <p class="d-flex justify-content-start">평점 : {{this.movie.vote_average}}</p> -->
-      <p class="detail fs-1 text-white text-start"
+      <p id="card-p" class="detail fs-1 text-white text-start"
         style="text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;">{{ idSrc }}</p>
     </div>
   </div>
@@ -55,7 +55,7 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
-p {
+#card-p {
   font-family: 'Black Ops One', cursive;
 }
 

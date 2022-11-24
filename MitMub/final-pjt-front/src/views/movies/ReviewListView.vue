@@ -1,19 +1,28 @@
 <template>
   <div id="reviewList">
-    <div class="card mb-3 ms-5" style="max-width: 540px;">
+    <div class="card mb-3 ms-5" style="width: 700px; height: 350px;">
       <div class="row g-0">
         <div class="col-md-4">
-          <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 318px; height: 450px;" />
+          <img :src="imgSrc" alt="포스터 없음" class="img-fluid rounded" style="width: 318px; height: 349px;" />
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">영화 : {{ movie.title }}</h5><br>
-            <h5 class="card-title">리뷰제목 : {{ title }}</h5>
-            <p class="card-text"><p>작성자 : {{ this.review.user }}</p>
-            <p class="card-text"><p>평점 : {{ rank }}</p>
-            <p class="card-text">내용 : {{ content }}</p>
-            <p class="card-text"><small class="text-muted">Created at {{created_at}}</small></p>
-            <p class="card-text"><small class="text-muted">Last updated at {{updated_at}}</small></p>
+            <div class="row">
+              <div class="col text-center">
+                <h5 class="card-title">영화 제목</h5>
+                <h5 class="card-title">리뷰 제목</h5>
+                <p class="card-text m-0">리뷰 작성자</p>
+                <p class="card-text mb-1">작성자 평점</p>
+              </div>
+              <div class="col text-start">
+                <h5 class="card-title">{{ movie.title }}</h5>
+                <h5 class="card-title">{{ title }}</h5>
+                <p class="card-text m-0">{{ this.review.user }}</p>
+                <p class="card-text mb-1">{{ rank }}</p>
+              </div>
+            </div>
+            <p class="card-text mb-1"><small class="text-muted">Created at {{created_at}}</small></p>
+            <p class="card-text mb-1"><small class="text-muted">Last updated at {{updated_at}}</small></p>
             <router-link :to="{ name: 'ReviewDetailView', params: { reviewId: review.id } }"><p @click="refreshDetail">[DETAIL]</p></router-link>
           </div>
         </div>

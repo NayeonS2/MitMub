@@ -8,42 +8,51 @@
         </div>
         <div class="col-4">
           <div class="card-body">
-            <h5 class="card-title">영화 : {{ movie?.title }}</h5><br>
-            <h5 class="card-title">리뷰제목 : {{ nowReview?.title }}</h5>
-            <p class="card-text">작성자 : {{ user }}</p>
-            <p class="card-text"><p>평점 : {{ nowReview?.rank }}</p>
-            <p class="card-text">내용 : {{ nowReview?.content }}</p>
-            <p class="card-text"><small class="text-muted">Created at {{created_at}}</small></p>
-            <p class="card-text"><small class="text-muted">Last updated at {{updated_at}}</small></p>
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-3 text-start">
+                <h5 class="card-title">Title</h5>
+                <br>
+                <p class="card-title">리뷰제목</p>
+                <p class="card-text m-0 p-0">작성자</p>
+                <p class="card-text m-0 p-0">평점</p>
+                <p class="card-text m-0 p-0">내용</p>
+                <br>
+              </div>
+              <div class="col text-start">
+                <h5 class="card-title">{{ movie?.title }}</h5>
+                <br>
+                <p class="card-title">{{ nowReview?.title }}</p>
+                <p class="card-text m-0 p-0">{{ user }}</p>
+                <p class="card-text m-0 p-0">{{ nowReview?.rank }}</p>
+                <p class="card-text m-0 p-0">{{ nowReview?.content }}</p>
+                <br>
+              </div>
+            </div>
+            <div style="margin:0px 0px 16px 0px;">
+              <p class="card-text text-center"><small class="text-muted">Created at {{created_at}}</small></p>
+              <p class="card-text text-center"><small class="text-muted">Last updated at {{updated_at}}</small></p>
+            </div>
 
             <span class="row ms-4"><CommentListView :review="review"/></span>
-            <span class="row ms-4"><ReviewLikeView :review="review" @refreshReview="refreshReview"/></span>
-            
             <span class="row ms-4"><CreateCommentView :review="review"/></span>
+            <br>
           </div>
-
-          
-        </div>
-        <div class="col-2 position-relative">
-            <div class="position-absolute bottom-0 end-5">
-                
-                    <div class="row">
-                        <router-link v-if="this.review.user === this.$store.state.profile.username" :to="{ name: 'UpdateReviewView', params: { reviewId: review.id } }">수정하기</router-link>
-                    </div>
-                    <div class="row">
-                        <a href="#" v-if="this.review.user === this.$store.state.profile.username" @click.prevent="deleteReview">삭제하기</a>
-                    </div>
-            
+          <div class="row">
+            <span class="col row ms-4 pt-2"><ReviewLikeView :review="review" @refreshReview="refreshReview"/></span>
+            <div id="review-dom" class="col">
+              <div class="row">
+                <router-link v-if="this.review.user === this.$store.state.profile.username" :to="{ name: 'UpdateReviewView', params: { reviewId: review.id } }">🌵 리뷰 수정하기</router-link>
+              </div>
+              <div class="row">
+                <a href="#" v-if="this.review.user === this.$store.state.profile.username" @click.prevent="deleteReview">✨ 리뷰 삭제하기</a>
+              </div>
             </div>
-
-            
-                    
+          </div> 
         </div>
-                
-            </div>
-            
-        </div>
-      
+        <div class="col-2"></div>   
+      </div>   
+    </div>
   </div>
 </template>
 
@@ -72,10 +81,6 @@ export default {
 
             profile: [],
 
-            // user: this.review.user,
-            // rank: this.review.rank,
-            // title: this.review.title,
-            // content: this.review.content,
             poster: null,
           
             created_at: null,
@@ -308,8 +313,12 @@ export default {
 </script>
 
 <style>
-    #reviewDetail *{
-        color: white;
-        font-family: 'Nanum Gothic', sans-serif;
-    }
+  #reviewDetail *{
+    color: white;
+    font-family: 'Nanum Gothic', sans-serif;
+  }
+
+  #review-dom *{
+    text-decoration: none;
+  }
 </style>

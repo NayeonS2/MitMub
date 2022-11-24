@@ -1,15 +1,9 @@
 <template>
-  <div>
-
-    
-    <h3><b>All Reviews 📝</b></h3><br>
-
-    <div v-for="(review, idx) in movie_reviews" :key="idx" style="margin: 2% 20%;">
-        <div class="ms-5">
-            <ReviewListView :review="review"/>
-        
-        </div>
-      
+  <div id="re-view">
+    <h3><b>All Reviews 📝</b></h3>
+    <br>
+    <div v-for="(review, idx) in movie_reviews" :key="idx">
+        <ReviewListView :review="review"/>
     </div>
     <div v-if="movie_reviews.length === 0" style="height: 200px;" class="d-flex justify-content-center align-items-center">
       <h3>작성된 리뷰가 없습니다.</h3>
@@ -146,5 +140,7 @@ export default {
 </script>
 
 <style>
-
+#re-view {
+    padding-bottom: 80px;
+}
 </style>
