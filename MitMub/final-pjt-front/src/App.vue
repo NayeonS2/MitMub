@@ -341,6 +341,7 @@ footer {
 }
 
 #footer-nav * {
+  font-family: 'Nanum Gothic', sans-serif;
   padding: 0;
   margin: 0;
 }

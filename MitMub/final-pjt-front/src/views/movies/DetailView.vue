@@ -14,20 +14,20 @@
                 <div class="col-8">
                   <div id="타이틀">
                     <div class="row">
-                      <h2 class="movie-detail-title col-5 text-end" style="height:50px; margin:0px 8px 0px;">
+                      <h2 class="movie-detail-title col-5 text-end mr-2" style="height:50px; margin:0px 0px;">
                         Title
                       </h2>
-                      <h2 class="movie-detail-title col text-start" style="height:50px; margin:0px 8px 0px;">
+                      <h2 class=" col text-start" style="height:50px; margin:0px 0px;">
                         {{ movie?.title }}
                       </h2>
                     </div>
                     <span id="detail-absoulute">
                       <PickMovieView :movie="movie" @refreshMovie="refreshMovie" />
-                      <router-link :to="{ name: 'CreateReviewView', params: { movieId: movie?.id } }">리뷰쓰러 가기✏</router-link>
+                      <router-link :to="{ name: 'CreateReviewView', params: { movieId: movie?.id } }" id="review-router-link">리뷰쓰러 가기✏</router-link>
                     </span>
                   </div>
                   <div id="개봉 정보" v-if="movie?.release_date" class="row">
-                    <div class="col-5 text-end">
+                    <div class="col-5 text-end mr-2">
                       개봉
                     </div>
                     <div class="col text-start">
@@ -35,7 +35,7 @@
                     </div>
                   </div>
                   <div id="장르 정보" class="row" v-if="movie?.genres">
-                    <div class="col-5 text-end">
+                    <div class="col-5 text-end mr-2">
                       장르
                     </div>
                     <div class="col text-start">
@@ -44,7 +44,7 @@
                   </div>
                   <div id="평점">
                     <div class="row" v-if="movie?.vote_average !== 0">
-                      <div class="movie-vote col-5 text-end">
+                      <div class="movie-vote col-5 text-end mr-2">
                         평점
                       </div>
                       <div class="movie-vote col text-start">
@@ -252,6 +252,10 @@ div {
   font-family: 'Nanum Gothic', sans-serif;
 }
 
+#movie-detail-title {
+  right: 20px;
+}
+
 .star-ratings {
   color: #aaa9a9; 
   position: relative;
@@ -296,12 +300,19 @@ div {
   position: absolute;
   right: 1%;
   top: 100px;
+  height: 110px;
   border: #9dfffa solid 0.4px;
   border-radius: 10px;
-  background: #f16d56;
+  background: #b348405d;
+  /* background-color: rgba(255, 103, 103, 0.5); */
 }
 
 #detail-view-main {
   min-width: 1500px;
+}
+
+#review-router-link {
+  text-decoration: none;
+  color: #eeeeee;
 }
 </style>
