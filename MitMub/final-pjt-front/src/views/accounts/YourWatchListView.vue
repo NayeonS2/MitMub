@@ -1,7 +1,10 @@
 <template>
-  <div>
- 
-        <MovieCard3 v-for="(movie, idx) in watchList" :key="idx" :movie="movie"/>
+  <div class="p-0 col">
+      <div class="popular-list row d-flex justify-content-center">
+        
+        <MovieCard3 v-for="(movie, idx) in watchList" :key="idx" :movie="movie" class="col-2"/>
+      </div>
+        
         <!-- {{ movie.title }}   -->
 
   </div>

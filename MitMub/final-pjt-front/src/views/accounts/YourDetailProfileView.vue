@@ -1,20 +1,28 @@
 <template>
-  <div id="Allprofile">
-    
-     <h1>🛸</h1>
-    <div class="mb-3">
-            
-        <img :src=this.imgUrl alt="" style="width:300px; height:20  0px; background-color: #ffffff; border-style: solid;" class="rounded-circle"><br>
-    </div>
-    
-    
-    <div @click="toggleOnOff" class="mb-3"><h4 style="color: #FFEBF0;"><b style="color: #7ee787;">{{ profile?.username }}</b></h4></div>
-    <YourProfileFollowView :profile="profile" @refreshProfile="refreshProfile"/><br>
-    <div v-if="isStatusOn">
+  <div id="Allprofile" class="" style="margin-top:60px;">
+    <div class="row">
         
-        <h5><b>[WatchList]</b></h5>
-        <YourWatchListView :profile="profile"/>
+        <div class="col-4">
+            <h1>🛸</h1>
+            <div class="mb-3">
+                    
+                <img :src=this.imgUrl alt="" style="width:300px; height:20  0px; background-color: #ffffff; border-style: solid;" class="rounded-circle"><br>
+            </div>
+            
+            
+            <div class="mb-3"><h4 style="color: #FFEBF0;"><b style="color: #7ee787;">{{ profile?.username }}</b></h4></div>
+            <YourProfileFollowView :profile="profile" @refreshProfile="refreshProfile" class="ms-5"/><br>
+          
+            </div>
+        
+        <div class="col-8">
+            <h3 style="margin-right:83px; margin-bottom:30px;"><b>WatchList 🎬</b></h3>
+            <YourWatchListView :profile="profile"/>
+        </div>
+
     </div>
+     
+    
 
     
 

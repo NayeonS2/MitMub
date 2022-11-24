@@ -5,7 +5,8 @@
       <div @click="toggleOnOff"><h5 style="color: #FFEBF0; font-family: 'Abel', sans-serif;" class="ms-3"><b>My WatchList 🎬</b><hr></h5></div>
       <div v-if="isStatusOn">
         <li v-for="(movie, idx) in watchList" :key="idx" id="watch">
-          <p id="myWatch">{{ movie.title }} </p> 
+          
+          <p id="myWatch" @click="toDetail(movie.id)">{{ movie.title }} </p> 
         </li>
       </div>
       
@@ -29,11 +30,15 @@ export default {
         profile: {}
     },
     methods: {
+      toDetail(id){
+      this.$router.push({name:'DetailView', params: {id}})
+      },
         getWatchList () {
             for (const movie of this.movies) {
                 for (const user of movie.users_playlist) {
                 if (this.profile.id === user) {
                     this.watchList.push(movie)
+                    
                     break
                 }
                 }

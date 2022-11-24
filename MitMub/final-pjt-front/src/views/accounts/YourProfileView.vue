@@ -8,7 +8,7 @@
     </div>
     
     
-    <div><p style="color: #FFEBF0;"><b><p><b style="color: #7ee787;">{{ profile?.username }}</b></p></b></p></div>
+    <div><p style="color: #FFEBF0;"><b><p><b style="color: #7ee787; font-family: 'Abel', sans-serif;">{{ profile?.username }}</b></p></b></p></div>
     <!-- <div v-if="isStatusOn">
         <YourProfileFollowView :profile="profile" @refreshProfile="refreshProfile"/><br>
         <h5><b>[WatchList]</b></h5>

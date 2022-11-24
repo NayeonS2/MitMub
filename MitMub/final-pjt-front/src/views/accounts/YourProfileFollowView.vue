@@ -1,14 +1,15 @@
 <template>
   <div> 
-        <span class="row me-3">
+        <span class="row" style="margin-end:73px;">
         
-        <div class="col text-end mt-2 me-0">
-            <span v-if="isFollow===false" @click="[follow(),checkFollow(),followNum()]" class="material-symbols-outlined"><i class="bi bi-person-plus-fill" style="font-size: 2rem; color: #7ee787;"></i></span>
+        <div class="col text-end mt-2 me-0;">
+            <span v-if="isFollow===false" @click="[follow(),checkFollow(),followNum()]" class="material-symbols-outlined"><i class="bi bi-person-plus-fill" style="font-size: 43px; color: #7ee787;"></i></span>
             <span v-else @click="follow" class="material-symbols-outlined"><i class="bi bi-person-check-fill" style="font-size: 2rem; color: #7ee787;"></i></span>
         </div>
         <div class="col text-start me-3 ms-0">
-             <p style="color: #eeeeee; font-size:17px;" class="p-0 m-0"><b>followers: {{ followers_len }}</b></p>
-             <p style="color: #eeeeee; font-size:17px;"><b>follwings: {{ followings_len }}</b></p>
+            
+             <p id="FollowInfo" class="m-0 pe-2" style="color: #FFEBF0; font-size:21px;"><b>followers: {{ followers_len }}</b></p>
+             <p id="FollowInfo" class="mt-1 pe-2" style="color: #FFEBF0; font-size:21px;"><b>follwings: {{ followings_len }}</b></p>
         </div>  
        
         </span>
@@ -262,5 +263,7 @@ export default {
 </script>
 
 <style>
-
+    #FollowInfo {
+        font-family: 'Abel', sans-serif;
+    }
 </style>

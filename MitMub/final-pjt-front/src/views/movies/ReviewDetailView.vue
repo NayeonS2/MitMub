@@ -10,13 +10,13 @@
           <div class="card-body">
             <h5 class="card-title">영화 : {{ movie?.title }}</h5><br>
             <h5 class="card-title">리뷰제목 : {{ nowReview?.title }}</h5>
-            <p class="card-text">작성자 : {{ user }}</p>
+            <p class="card-text" @click="toDetail(Number(userId))">작성자 : {{ user }}</p>
             <p class="card-text"><p>평점 : {{ nowReview?.rank }}</p>
             <p class="card-text">내용 : {{ nowReview?.content }}</p>
             <p class="card-text"><small class="text-muted">Created at {{created_at}}</small></p>
             <p class="card-text"><small class="text-muted">Last updated at {{updated_at}}</small></p>
 
-            <span class="row ms-4"><CommentListView :review="review"/></span>
+            <span class="row ms-4"><CommentListView :review="review" :userId="Number(userId)"/></span>
             <span class="row ms-4"><ReviewLikeView :review="review" @refreshReview="refreshReview"/></span>
             
             <span class="row ms-4"><CreateCommentView :review="review"/></span>
@@ -128,6 +128,9 @@ export default {
 
     },
     methods: {
+        toDetail(userId){
+        this.$router.push({name:'YourDetailProfileView', params: {'userId':Number(userId)}})
+            },
       getMovieById(){
             const id = this.review.movie
             //console.log(id)
@@ -163,7 +166,7 @@ export default {
                 for (var profile of this.profileList) {
                     if (this.review.user=== profile.username) {
                         this.userId = profile.id
-                        this.user = profile.username
+                        
                         break
                     }
                 
@@ -177,7 +180,7 @@ export default {
         
                 for (var profile of this.profileList) {
                     if (this.review.user== profile.username || this.review.user == profile.id) {
-                    
+                        this.userId = profile.id
                         this.user = profile.username
                         break
                     }
@@ -243,14 +246,14 @@ export default {
       this.getReviewById()
       this.getMovieById()
       this.getReviews()
- 
+      this.nowProfile()
       
     },
     mounted() {
     this.getReviewById()
     this.getMovieById()
     //this.nowUser()
-
+    this.nowProfile()
     this.user = this.review.user
 
     console.log(this.user, this.review.user)

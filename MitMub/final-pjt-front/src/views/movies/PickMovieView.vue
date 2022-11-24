@@ -54,6 +54,8 @@ export default {
             })
             .then((res) => {
                 this.$store.commit('REFRESH_MOVIE', res.data)
+                //this.$store.commit('PUSH_WATCH', res.data)
+                this.$store.dispatch('recommendMovies')
                 this.$emit('refreshMovie', res.data)
                 this.nowMovie = res.data
                 

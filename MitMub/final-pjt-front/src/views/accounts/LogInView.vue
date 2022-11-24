@@ -21,6 +21,8 @@
 </template>
 
 <script>
+const API_URL = 'http://127.0.0.1:8000'
+import axios from 'axios'
 export default {
     name: 'LogInView',
     data() {
@@ -40,11 +42,23 @@ export default {
             const username = this.username
             const password = this.password
 
-            const payload = {
-                username, password
+            let Userexist = false
+            for (let user of this.$store.state.users) {
+                if (user.username === username) {
+                    Userexist = true
+                }
             }
-            
+
+
+          const payload = {
+              username, password
+          }
+          if (Userexist === true) {
             this.$store.dispatch('logIn', payload)
+          } else {
+            alert('아이디와 비밀번호를 확인해주세요!')
+          }
+            
         }
     },
     created() {

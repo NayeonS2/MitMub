@@ -38,9 +38,34 @@ export default new Vuex.Store({
       37: "서부"
     },
 
+    genre_recom: {
+      28: 0,
+      12: 0,
+      16: 0,
+      35: 0,
+      80: 0,
+      99: 0,
+      18: 0,
+      10751: 0,
+      14: 0,
+      36: 0,
+      27: 0,
+      10402: 0,
+      9648: 0,
+      10749: 0,
+      878: 0,
+      10770: 0,
+      53: 0,
+      10752: 0,
+      37: 0
+    },
+
     users: [],
     profile: [],
     watch_list : [],
+
+    recommend_genre: '',
+    recommend_movies : [],
   
 
     profile_list: [],
@@ -182,6 +207,20 @@ export default new Vuex.Store({
       console.log(33333,state.movies)
     },
 
+    PUSH_WATCH(state, newMovie) {
+      
+      for (let movie of state.watch_list) {
+        if (movie.id === newMovie.id) {
+          state.watch_list = state.watch_list.filter(o => o.id != newMovie.id)
+        } else {
+          state.watch_list.push(newMovie)
+        }
+        break
+      }
+    
+      
+    },
+
     REFRESH_REVIEW(state, newReview) {
       for (let review of state.reviews) {
         if (newReview.id === review.id) {
@@ -247,10 +286,35 @@ export default new Vuex.Store({
     },
     DELETE_SEARCH(state) { 
       state.search_movies = []
+    },
+
+    BEST_GENRE(state, genre) {
+      state.recommend_genre = genre
     }
 
   },
   actions: {
+    recommendMovies(context) {
+      const genres = context.state.genre_recom
+      for (let movie of context.state.watch_list) {
+        for (let genre of movie.genres) {
+            genres[genre] = genres[genre] + 1
+        }
+      }
+
+      var sortable = [];
+      for (var number of Object.keys(genres)) {
+        sortable.push([number, genres[number]]);
+      }
+
+      sortable.sort(function(a, b) {
+        return b[1] - a[1];
+      });
+
+      context.commit('BEST_GENRE', sortable[0][0])
+        
+      
+    },
 
     getUserName(context) {
       axios({

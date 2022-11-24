@@ -2,10 +2,10 @@
   <div>
 
     
-    <h3><b>All Reviews 📝</b></h3><br>
+    <h2><b>All Reviews 📝</b></h2><br>
 
-    <div v-for="(review, idx) in movie_reviews" :key="idx" style="margin: 2% 20%;">
-        <div class="ms-5">
+    <div v-for="(review, idx) in movie_reviews" :key="idx" style="" class="d-flex col justify-content-center me-3">
+        <div class="row me-5 mb-4">
             <ReviewListView :review="review"/>
         
         </div>

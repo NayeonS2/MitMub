@@ -16,7 +16,9 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from urllib.request import urlopen
 from urllib.parse import quote_plus
 import random
+from django.http import HttpResponse
 
+from django.contrib.auth.hashers import check_password
 # @api_view(['POST'])
 # def signup(request):
 #     password = request.data.get('password')

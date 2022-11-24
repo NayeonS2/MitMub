@@ -225,8 +225,6 @@ def check_like(request, review_pk):
 
 
 
-
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def pick_movie(request, movie_pk):
@@ -237,3 +235,6 @@ def pick_movie(request, movie_pk):
         movie.users_playlist.add(request.user)
     serializer = MovieSerializer(movie)
     return Response(serializer.data,status=status.HTTP_201_CREATED)
+
+
+

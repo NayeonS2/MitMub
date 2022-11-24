@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(comment, idx) in comments" :key="idx" style="text-align: left;">
         <div class="row">
-           <div class="col-auto">
+           <div class="col-auto" @click="toDetail(Number(userId))">
             {{ comment.user }} : {{ comment.content }}
           </div>
           <div class="col-auto d-grid gap-2 d-md-flex justify-content-md-end text-center">
@@ -26,6 +26,7 @@ export default {
     name: 'CommentListView',
     props: {
       review: Object,
+      userId: Number,
     },
     data() {
       return {
@@ -38,6 +39,9 @@ export default {
     
     },
     methods: {
+      toDetail(userId){
+        this.$router.push({name:'YourDetailProfileView', params: {'userId':Number(userId)}})
+      },
 
       getComments() {
         axios({
