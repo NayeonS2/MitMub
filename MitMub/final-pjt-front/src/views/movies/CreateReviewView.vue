@@ -50,7 +50,7 @@
               <button class="col-1 btn btn-outline-danger form-control" style="width: 100px; justify-content: end;" @click="backDetail">뒤로가기</button>
               <button class="col-1 btn btn-outline-warning form-control" type="reset" style="width: 100px; margin-left: 8px;">초기화</button>
             </div>
-            <button class="col-1 btn btn-outline-primary form-control" type="submit" style="width: 100px; margin-left: 100px;" @click="createReview">제출</button>
+            <button class="col-1 btn btn-outline-primary form-control" type="submit" style="width: 100px; margin-left: 100px;" @click.prevent="createReview">제출</button>
           </div>
         </form>
 
