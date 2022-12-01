@@ -74,13 +74,13 @@
 
 1. 로그인 회원가입 및 인트로
    
-   <img src="./READMEimg/1.%20로그인%20회원가입%20인트로.gif">
+   [<img src="./READMEimg/1.%20로그인%20회원가입%20인트로.gif">](https://github.com/recorror/MitMub/issues/1#issue-1471493327)
    
    - 로그인 페이지입니다. 회원가입을 진행하면 즉시 로그인 처리가 완료되며 인트로 페이지로 넘어가게 됩니다.
 
 2. 검색
    
-   <img src="./READMEimg/2.%20검색.gif">
+   ![2  검색](https://user-images.githubusercontent.com/109323632/205090410-54689e6c-9d8f-4b4c-8d44-3b1794596efb.gif)
    
    - 우선 메인페이지는 owl carousel을 이용한 캐러셀 기능과 검색 기능 등으로 구현이 되어있습니다.
    
@@ -90,7 +90,7 @@
 
 3. 디테일
    
-   <img src="./READMEimg/3.%20디테일.gif">
+   ![3  디테일](https://user-images.githubusercontent.com/109323632/205090423-5569aaa7-23e3-4070-81f8-cd54e17f2bd4.gif)
    
    - 디테일 페이지에서 Pick this movie 버튼을 누르면 내 WatchList에 내용이 담기게 됩니다. 이 때 WatchList를 누르면 해당 영화의 디테일 페이지로 이동하게 됩니다.
    
@@ -98,7 +98,7 @@
 
 4. 리뷰, 리뷰디테일
    
-   <img src="./READMEimg/4.%20리뷰,%20리뷰%20디테일.gif">
+   ![4  리뷰, 리뷰 디테일](https://user-images.githubusercontent.com/109323632/205090429-545a05
    
    - 리뷰 페이지에서는 해당 리뷰에 대한 간단한 댓글을 작성할 수 있으며 좋아요 기능을 이용할 수 있습니다.
    
@@ -106,13 +106,14 @@
 
 5. 커뮤니티
    
-   <img src="./READMEimg/5.%20커뮤니티.gif">
+   ![5  커뮤니티](https://user-images.githubusercontent.com/109323632/205090436-01ac4eb1-ae1f-4eda-a592-c24e0641b0ee.gif)
+fd-c12b-48be-b1a2-4562b146e899.gif)
    
    - 커뮤니티 기능에서는 나 이외의 다른 사용자에 대한 정보를 볼 수 있습니다. 해당 이용자들은 임의의 랜덤한 값을 통해 나타나게 됩니다.
 
 6. 프로필 디테일
    
-   <img src="./READMEimg/6.%20프로필%20디테일.gif">
+   ![6  프로필 디테일](https://user-images.githubusercontent.com/109323632/205090444-48012553-9336-4a26-a6d4-5192ab2e649b.gif)
    
    - 상대 유저의 WatchList가 마음에 든다면 해당 영화를 눌러 해당 영화의 디테일로 이동 할 수 있습니다.
    
