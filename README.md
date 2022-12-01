@@ -98,7 +98,7 @@
 
 4. 리뷰, 리뷰디테일
    
-   ![4  리뷰, 리뷰 디테일](https://user-images.githubusercontent.com/109323632/205090429-545a05
+   ![4  리뷰, 리뷰 디테일](https://user-images.githubusercontent.com/109323632/205090429-545a05fd-c12b-48be-b1a2-4562b146e899.gif)
    
    - 리뷰 페이지에서는 해당 리뷰에 대한 간단한 댓글을 작성할 수 있으며 좋아요 기능을 이용할 수 있습니다.
    
@@ -107,7 +107,6 @@
 5. 커뮤니티
    
    ![5  커뮤니티](https://user-images.githubusercontent.com/109323632/205090436-01ac4eb1-ae1f-4eda-a592-c24e0641b0ee.gif)
-fd-c12b-48be-b1a2-4562b146e899.gif)
    
    - 커뮤니티 기능에서는 나 이외의 다른 사용자에 대한 정보를 볼 수 있습니다. 해당 이용자들은 임의의 랜덤한 값을 통해 나타나게 됩니다.
 
