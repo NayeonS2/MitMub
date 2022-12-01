@@ -44,7 +44,7 @@
 
 ## 1. ERD
 
-<img title="" src="file:///C:/Users/gkwls/OneDrive/바탕%20화면/새%20폴더/MitMub/READMEimg/MitMub_erd.png" alt="MitMub_erd.png" width="669">
+![MitMub_erd](https://user-images.githubusercontent.com/109323632/205089871-4e1ee5ee-d0c3-45f9-991a-4ca13777be79.png)
 
 ****
 
